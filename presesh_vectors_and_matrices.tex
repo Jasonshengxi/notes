@@ -1,0 +1,65 @@
+\documentclass[12pt]{article}
+\input{common.tex}
+
+\begin{document}
+Let a linear map $\mathcal{T}$ map from $n$ dimensional vectors to $m$ dimensional vectors.
+Let $\{\undertilde{e_i}\}$ be a basis of $n$ dimensional space and 
+$\{\undertilde{f_i}\}$ be basis of $m$ dimensional space.
+Thus, there exists $a_i,b_i$ such that
+
+\[\undertilde{a} = a_{i} \undertilde{e_{i}}\]
+\[\undertilde{b} = b_{i} \undertilde{f_{i}}\]
+
+There must exist matrix $T$ corresponding to $\mathcal{T}$ such that $b_i = T_{ij}a_j$.
+We claim that $T$ sends basis to basis.
+
+\[ \begin{aligned}
+        \mathcal{T}(\undertilde{a}) &= \undertilde{b} = b_j \undertilde{f_j}\\
+        \mathcal{T}(a_j\undertilde{e_j}) &= T_{ji}a_i\undertilde{f_j}\\
+        a_i\mathcal{T}(\undertilde{e_i}) &= T_{ji}a_i\undertilde{f_j}\\
+\end{aligned} \]
+From here, there are two ways to continue. 
+Since $a_i$ are the components of arbitrary vector $\undertilde{a}$,
+it is okay to divide by $a_i$ on both sides and yield
+\[\mathcal{T}(\undertilde{e_i}) = T_{ji}\undertilde{f_j}\]
+Thus proving the result. Alternatively, more directly,
+let $a_i = \delta_{ik}$. Then,
+\[\delta_{ik}\mathcal{T}(\undertilde{e_i}) = T_{ji}\delta_{ik}\undertilde{f_j}\]
+\[\mathcal{T}(\undertilde{e_k}) = T_{jk}\undertilde{f_j}\]
+which is the same conclusion.
+
+Now consider new sets of basis $\{\undertilde{e'_{i}}\}$ and $\{\undertilde{f'_{j}}\}$, so that we have
+
+\[\undertilde{a} = a'_{i}\undertilde{e'_{i}}\]
+\[\undertilde{b} = b'_{i}\undertilde{e'_{i}}\]
+
+Since $e_j$ and $f_j$ are bases, there exist matrices $P,Q$ such that
+\[\undertilde{e'_{i}} = P_{ji}\undertilde{e_{j}}\]
+\[\undertilde{f'_{j}} = Q_{kj}\undertilde{f_{k}}\]
+
+Define matrix $T'$ corresponding to $\mathcal{T}$ under the new basis, i.e. such that
+\[b'_{i} = T'_{ji}a'_{i}\]
+
+We claim that it is possible to express $T'$ in terms of $T$, $P$, and $Q$.
+
+By the previous part, we have
+
+\[\mathcal{T}(\undertilde{e'_{i}}) = T'_{ji}\undertilde{f'_{j}}\]
+
+substituting yields
+
+\[\mathcal{T}(P_{ji}\undertilde{e_{j}}) = T'_{ji}Q_{kj}\undertilde{f_{k}}\]
+\[P_{ji}\mathcal{T}(\undertilde{e_{j}}) = T'_{ji}Q_{kj}\undertilde{f_{k}}\]
+
+and by the previous part again we have
+
+\[P_{ji}T_{kj}\undertilde{f_k} = T'_{ji}Q_{kj}\undertilde{f_{k}}\]
+
+Here we have that since $\undertilde{f_j}$ are a set of basis, they are linearly independent. Thus,
+
+\[P_{ji}T_{kj} = T'_{ji}Q_{kj}\]
+\[(TP)_{ik} = (QT')_{ik}\]
+\[TP = QT'\]
+\[T' = Q^{-1}TP\]
+
+\end{document}

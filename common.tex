@@ -1,0 +1,41 @@
+\usepackage[left = 1in, right = 1in, top = 1in, bottom = 1in]{geometry}
+\usepackage{paralist}
+\usepackage{cancel}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tkz-euclide}
+\usepackage{hyperref}
+\usepackage{esdiff}
+\usepackage{parskip}
+\usepackage{accents}
+\usepackage{xcolor}
+
+\usetikzlibrary{arrows.meta,positioning}
+
+\newtheoremstyle{customstyle}
+  {8pt} % Space above (adjust as needed)
+  {0} % Space below (adjust as needed)
+  {} % Body font
+  {} % Indent amount
+  {\bfseries} % Theorem head font
+  {. } % Punctuation after theorem head
+  {0pt} % Space after theorem head
+  {} % Theorem head spec
+\theoremstyle{customstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+
+\def\definitionautorefname{Definition}
+\def\corollaryautorefname{Corollary}
+
+\newenvironment{nonproof}{\par \textit{Nonproof:}}{\hfill$\cancel\square$}
+
+\def\contra{\tikz[baseline, x=0.22em, y=0.22em, line width=0.032em]\draw (0,2.83)--(2.83,0) (0.71,3.54)--(3.54,0.71) (0,0.71)--(2.83,3.54) (0.71,0)--(3.54,2.83);}
+
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\renewcommand{\bar}{\overline}

@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+\input{common.tex}
+
+\begin{document}
+% Lectured by Angela Capel Gueras (ac2722)
+% Office: BO.14, Department of Applied Mathematics and Theoretical Physics
+
+\section{Complex Numbers}
+
+\subsection{Definition}
+
+We construct $\mathbb{C}$ by adding $i$ to $\mathbb{R}$, where $i^{2} = -1$.
+Then, any $z \in \mathbb{C}$ has the form $z = x + iy$, where $x,y \in \mathbb{R}$.
+We define the real part, $x = \Re(z)$, and the imaginary part, $y = \Im(z)$.
+
+\subsection{Properties}
+
+\begin{compactenum}[i)]
+\item Addition: $z_{1} \pm z_{2} = (x_{1} \pm x_{2}) + i(y_{1} \pm y_{2})$.
+\item Multiplication: $z_{1}z_{2} = (x_{1}y_{1} - x_{2}y_{2}) + i(x_{1}y_{2} + x_{2}y_{1})$.
+\end{compactenum}
+Note that both addition and multiplication are associative and commutative.
+\begin{compactenum}[i)]
+\setcounter{enumi}{2}
+\item Identity: The group $(\mathbb{C},+)$ is an abelian group with identity $0$.
+\item Inverse: The \emph{inverse of $z$} is given by
+    \[
+    z^{-1} = \frac{x - iy}{x^{2} + y^{2}}
+    \]
+    and it satisfies $z \cdot z^{-1} = 1$.
+\end{compactenum}
+
+Thus, $(\mathbb{C}^{*}, \cdot)$ is an abelian group with identity $1$,
+where $\mathbb{C}^{*} = \mathbb{C} - \{0\}$.
+
+Note that the distributive property is also satisifed, where
+\[
+    (z_{1}+z_{2})z_{3} = z_{1}z_{2} + z_{2}z_{3}
+\]
+\begin{compactenum}[i)]
+\setcounter{enumi}{4}
+\item Complex Conjugate: For any $z = x + iy$, 
+    the \emph{complex conjugate of $z$}, denoted $\bar z$, or $z^{*}$, is equal to $x - iy$.
+\end{compactenum}
+Thus, we also have $\Re(z) = (z + \bar z) / 2$, and $\Im(z) = (z - \bar z) / 2i$.
+We have rules
+\begin{compactitem}
+\item $\bar {\bar z} = z$
+\item $\bar{z_{1} + z_{2}} = \bar z_{1} + \bar z_{2}$
+\item $\bar {z_{1}z_{2}} = \bar z_{1} \bar z_{2}$
+\end{compactitem}
+
+\begin{compactenum}[i)]
+\setcounter{enumi}{5}
+\item Modulus: For any $z = x + iy$, we define the \emph{modulus of $z$} by $|z|$, or $r$, by
+    a real and non-negative number such that
+    \[
+    |z|^{2} = x^{2} + y^{2}
+    \]
+\item Argument: The \emph{argument} of a complex number $z = x + iy \ne 0$
+    is a real number, denoted by $\theta = \arg(z)$, such that
+    \[
+        z = r(\cos \theta + i \sin \theta)
+    \]
+    Which is the \emph{polar form} of $z$. We can verify
+    that $\tan\theta = y/x$.
+\end{compactenum}
+
+Note that if $\theta$ is an argument of $z$, so is $\theta + 2\pi n$ for $n \in \mathbb{Z}$.
+To make it unique, we restrict $-\pi < \theta \le \pi$.
+This value of $\theta$ is the \emph{principal value}.
+
+Remarks:
+\begin{compactenum}[(1)]
+\item $\mathbb{R} \subset \mathbb{C}$, since for $a \in \mathbb{R}$ we have
+    $a = a + i 0 \in \mathbb{C}$.
+\item A complex number $0 + ib$ is said to be a \emph{pure imaginary number}.
+\item The representation of a complex number in terms
+    of its real and imaginary parts is unique.
+\end{compactenum}
+
+\subsubsection*{More Properties / Consequences}
+\begin{compactenum}[(i)]
+\setlength{\parskip}{4pt}
+\item $(\mathbb{C},+,\cdot)$ is a field.
+\item \emph{Fundamental Theorem of Algebra}
+
+    A polynomial of degree $n$ with coefficients in $\mathbb{C}$
+    can be written as the product of $n$ linear factors:
+
+    \[
+        \begin{aligned}
+            p(z) &= c_n z^{n} + \cdots + c_{0} \\
+                &= c_n (z - \alpha _1)\cdots(z - \alpha_2)
+        \end{aligned}
+    \]
+    
+    where $c_i \in \mathbb{C}$, and $c_n \ne 0$, with roots $\alpha_i \in \mathbb{C}$.
+    Thus, $p(z) = 0$ has at least one root,
+    and $n$ roots counted with multiplicity.
+\item The modulus satisifes the following properties:
+    \begin{itemize}
+        \item $|z_{1}z_{2}| = |z_{1}||z_{2}|$
+        \item $|z_{1}| + |z_{2}| \le |z_{1}| + |z_{2}|$
+        \item $|z_{1} - z_{2}| \ge \left||z_{1}| - |z_{2}|\right|$
+    \end{itemize}
+\end{compactenum}
+
+\subsection{Argand Diagram}
+
+\begin{tikzpicture}
+    \tkzInit[xmin=-1,ymin=-1,xmax=5,ymax=4]
+    \tkzDrawX\tkzDrawY
+    \tkzDefPoint(0,0){O}
+    \tkzDefPoint(4,3){A}
+
+    \tkzDrawSegment[arrows={-Latex}](O,A)
+\end{tikzpicture}
+
+\subsection{Exponential and Trigonometric Functions}
+
+\subsection{Logarithm and Complex Powers}
+
+\subsection{Lines and Circles}
+
+\end{document}

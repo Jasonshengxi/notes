@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\input{common.tex}
+
+\begin{document}
+% Lectured by Dr Zoe Wyatt (zw253)
+
+\section{Introduction}
+
+Expect:
+\begin{compactitem}
+    \item precise definitions
+    \item rigorous proofs
+    \item foundational questions
+\end{compactitem}
+
+We start with assumptions called \emph{axioms}.
+
+A \emph{statement} is a sentence that can have a true or false value.
+A \emph{proof} is a sequence of true statements without logical gaps
+establishing some conclusion.
+
+\begin{compactitem}
+\item show they are true
+\item gain insight into why they are true
+\item the proof might be cool
+\end{compactitem}
+
+\subsection{Number Systems}
+
+Define $\mathbb{N}$ as the set of natural numbers, $\{1,2,3,\cdots\}$ (note the lack of $0$).
+Define $\mathbb{Z},\mathbb{Q},\mathbb{R}$ to be 
+integer, rational, and real sets respectively.
+
+A real number is \emph{algebraic} if it is the
+root of some polynomial with integer coefficients.
+Non-algebraic numbers are called \emph{transcendental}.
+
+The existence of a transcendental number was shown in 1844.
+
+\subsection{Some Proofs and Nonproofs}
+
+\begin{theorem}
+    For all positive integers $n$, $n^{3} - n$ is always a multiple of $3$.
+\end{theorem}
+\begin{proof}
+    Let $n \in \mathbb{N}$, we have $n^{3} - n = n(n^{2} - 1) = (n - 1) \times n \times (n+1)$.
+    One of the three consecutive integers $n-1,n,n+1$ must be a multiple of $3$.
+    Thus, the product $n^{3} - n$ must also be a multiple of $3$.
+\end{proof}
+
+Note the little box given for free by \LaTeX, on the right side of the page.
+That denotes the end of the proof.
+
+\begin{theorem}
+    For any positive integer $n$, if $n^{2}$ is even then so is $n$.
+\end{theorem}
+\begin{nonproof}
+    Given $n \in \mathbb{N}$, we can write $n = 2k$ where $k \in \mathbb{N}$.
+    We have $n^{2} = 4k^{2} = 2(2k^{2})$, which is even.
+\end{nonproof}
+
+\begin{proof}
+    Suppose on the contrary that $n^{2}$ is even so $n = 2k+1$ for some $k \in \mathbb{N}$.
+    Then we have,
+    \[
+    \begin{aligned}
+        n^{2} = (2k+1)^{2} &= 4k^{2} + 4k + 1 \\
+                     &= 4(k^{2} + k) + 1.
+    \end{aligned}
+    \]
+    which is odd, contradicting the assumption that $n^{2}$ is even.
+    \contra
+\end{proof}
+
+\section{Sets, Functions, and Relations}
+\section{Integers and Counting}
+\section{Elementary Number Theory}
+\section{Real Numbers}
+\section{(Un)Countability}
+
+\end{document}

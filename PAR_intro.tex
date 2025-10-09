@@ -1,0 +1,421 @@
+\documentclass[12pt]{article}
+\usepackage[left = 1in, right = 1in, top = 1in, bottom = 1in]{geometry}
+\usepackage{paralist}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tkz-euclide}
+\usepackage{hyperref}
+\usepackage{esdiff}
+\usepackage{parskip}
+
+
+% Define a custom style
+\newtheoremstyle{customstyle}
+  {8pt} % Space above (adjust as needed)
+  {3pt} % Space below (adjust as needed)
+  {} % Body font
+  {} % Indent amount
+  {\bfseries} % Theorem head font
+  {. } % Punctuation after theorem head
+  {0pt} % Space after theorem head
+  {} % Theorem head spec
+\theoremstyle{customstyle}
+
+\newtheorem{question}{Question}
+\newtheorem{subquestion}{Part}[question]
+
+\begin{document}
+
+\begin{question}
+    Complete exercise 3.2 part (i) from p14.
+\end{question}
+
+
+\begin{proof}
+    {}\ 
+
+    \begin{tikzpicture}
+        \def\width{3}
+        \def\xoff{1}
+        \def\yoff{4}
+        \def\angr{0.7}
+        \def\ra{0.2}
+
+        \tkzInit[xmin=-3,xmax=3,ymin=-3,ymax=3]
+        \tkzDefPoints{-\width/0/A,\width/0/C,\xoff/\yoff/B}
+        \tkzDefLine[altitude](A,B,C) \tkzGetPoint{M}
+        \tkzDefLine[altitude](B,A,C) \tkzGetPoint{N}
+
+        \tkzDrawSegments[dashed](B,M A,N)
+        \tkzLabelSegment[pos=0.7, right](B,M){$h_{1}$}
+        \tkzLabelSegment(A,N){$h_{2}$}
+        \tkzMarkRightAngles[size=\ra](B,M,A A,N,B)
+        \tkzLabelPoints[below left](A)
+        \tkzLabelPoints[below right](C)
+        \tkzLabelPoints[below](M)
+        \tkzLabelPoints[above right](N)
+        \tkzLabelPoints[above](B)
+
+        \tkzDrawSegments(A,B B,C C,A)
+        \tkzLabelSegment(A,C){$b$}
+        \tkzLabelSegment[above left](A,B){$c$}
+        \tkzLabelSegment[above right, pos=0.4](C,B){$a$}
+
+        \tkzLabelAngle[pos={0.25+\angr}](B,C,A){$\gamma$}
+        \tkzLabelAngle[pos={0.25+\angr}, left](A,B,C){$\beta$}
+        \tkzLabelAngle[pos={0.3+\angr}, fill=white, inner sep=1.7pt](C,A,B){$\alpha$}
+        \tkzMarkAngles[size=\angr](B,C,A A,B,C C,A,B)
+    \end{tikzpicture}
+
+    Let triangle $\triangle ABC$ be an arbitrary triangle.
+    Define $c$ by the length $|AB|$,
+    and similarly $a$ by $|BC|$, and $b$ by $|AC|$.
+    Drop an altitude of the $\triangle ABC$ through $A$,
+    intersecting line $BC$ at $N$. Define $h_{2}$ by $|AN|$.
+    Similarly, drop altitude through $B$,
+    intersecting $AC$ at $M$. Define $h_{1}$ by $|BM|$.
+
+    Considering $\triangle BCM$, we have $\sin\gamma = h_{1}/a$.
+    Repeating this in $\triangle ABM$, we have $\sin\alpha = h_{1}/c$.
+    Rearranging for $h_{1}$ in each equation and equating,
+    we have $c\sin\alpha = a\sin\gamma $. 
+    Dividing by $ac$ on boths sides yields
+    \begin{equation}
+    \frac{\sin\alpha }{a} = \frac{\sin\gamma }{c}.
+    \end{equation}
+    Now, similarly,
+    in $\triangle ANC$, we have $\sin\gamma = h_{2}/b$.
+    In $\triangle ANB$, we have $\sin\beta = h_{2}/c$.
+    Similar algebraic manipulation yields
+    \begin{equation}
+    \frac{\sin\gamma }{c} = \frac{\sin\beta }{b}.
+    \end{equation}
+    Equating the RHS of $(1)$ with the LHS of $(2)$ yields
+    \[
+    \frac{\sin\alpha }{a} = \frac{\sin\beta }{b} = \frac{\sin\gamma }{c}.
+    \]
+\end{proof}
+
+\begin{question}
+    If $f: A \to B$ is injective and $g: B \to C$ is injective,
+    then the composition $g \circ f : A \to C$ is also injective.
+\end{question}
+\begin{proof}
+    % Aim: if gf(a1) = gf(a2), then a1 = a2.
+    Let $a_{1},a_{2} \in A$ such that $g \circ f(a_{1}) = g \circ f(a_{2})$,
+    which by definition means $g(f(a_{1})) = g(f(a_{2}))$.
+    Since $g$ is injective, $f(a_{1}) = f(a_{2})$.
+    Since $f$ is injective, $a_{1} = a_{2}$.
+\end{proof}
+
+\begin{question}
+    A sequence $(x_n)$ is \emph{convergent} if 
+    there is some $l \in \mathbb{R}$ such that for all $\varepsilon > 0$
+    there is a positive integer $N$ such that
+    for all $n \ge N$ we have $|x_n - l| < \varepsilon $.
+\end{question}
+
+\begin{subquestion}
+    Use quantifier notation to write this definition.
+\end{subquestion}
+
+Writing down the quantifier corresponding to each part in the definition yields
+\[
+\exists l\in \mathbb{R},\forall \varepsilon > 0,\exists N \in \mathbb{N},\forall n \ge N, |x_n - l| < \varepsilon.
+\]
+\begin{subquestion}
+    Describe the 'demon game' associated with the previous statement.
+\end{subquestion}
+
+\noindent In each round of the game, we do the following in order:
+\begin{enumerate}[noitemsep]
+    \item I pick a $l \in \mathbb{R}$, and then
+    \item the demon picks a $\varepsilon > 0$, and then
+    \item I pick a $N \in \mathbb{N}$, and finally
+    \item the demon picks some $n \ge N$.
+\end{enumerate}
+After these moves, if the statement $|x_n - l| < \varepsilon$ is true, 
+then I win. Otherwise, the demon wins.
+
+\begin{subquestion}
+    Let $(x_n)$ be the sequence defined by $x_n = 0$ if $n$ is composite,
+    and $x_n = 1/n$ if $n$ is prime, and $x_1 = 17$.
+    Prove that $(x_n)$ converges.
+\end{subquestion}
+\begin{proof}
+    We define $l = 0$. Let arbitrary $\varepsilon > 0$.
+
+    If $\epsilon > 1/2$, then let $N = 2$.
+    Let arbitrary $n \ge N$.
+    If $n$ is composite, then $|x_n - l| = |x_n| = |0| = 0 < \varepsilon$.
+    If $n$ is prime, then $|x_n - l| = |x_n| = |n^{-1}| = n^{-1} \le N^{-1} = 1/2 < \varepsilon$.
+    Since $n \ge N = 2$, all $n$ is either composite or prime.
+    
+    If $\epsilon \le 1/2$, then define $N=(\varepsilon/2)^{-1}$.
+    Let arbitrary $n \ge N$.
+    if $n$ is composite, then $|x_n - l| = |x_n| = |0| = 0 < \varepsilon$.
+    If $n$ is prime, then $|x_n - l| = |x_n| = |n^{-1}| = n^{-1} \le N^{-1} = \varepsilon/2 < \varepsilon$.
+    Since $N = (\varepsilon/2)^{-1} \ge (1/4)^{-1} = 4$, all
+    $n \ge N \ge 4$ must be composite or prime.
+\end{proof}
+
+\begin{subquestion}
+    Write in quantifier notation a definition of
+    "the sequence $y_n$ does not converge."
+\end{subquestion}
+
+Negating each quantifier and then the final statement yields
+\[
+\forall l \in \mathbb{R}, \exists \varepsilon > 0, \forall N \in \mathbb{N}, \exists n \ge N, |y_n - l| \ge \varepsilon.
+\]
+
+\begin{subquestion}
+    Let $(y_n)$ be the sequence defined by $y_n = 1$ if $n$ is odd and
+    $y_n = 0$ if $n$ is even. Prove that $(y_n)$ does not converge.
+\end{subquestion}
+
+\begin{proof}
+    Letting arbitrary $l \in \mathbb{R}$, we define $\varepsilon = 1/4$.
+    Let arbitrary $N \in \mathbb{N}$, 
+    we consider two values for $n$, that being $N$ and $N+1$.
+
+    Since $N$ and $N+1$ are consecutive, one of them must be even, let that be $a$.
+    By definition, we have $y_a = 0$.
+    If $|y_n - l| \ge \varepsilon$, then the proof is finished.
+    Otherwise, we have $|y_n - l| < \varepsilon$, so $|l| < 1/4$, 
+    which means $-1/4 < l < 1/4$.
+
+    Since $N$ and $N+1$ are consecutive, one of them must be odd. Let that be $b$.
+    By definition, we have $y_b = 1$.
+    Assuming $|y_b - l| < \varepsilon$, we have $|1 - l| < 1/4$.
+    Thus, $-1/4 < 1 - l < 1/4$, so $3/4 < l < 5/4$.
+    This contradicts with our previous result that $-1/4 < l < 1/4$,
+    so $|y_b - l| \ge \varepsilon$.
+
+    Thus, we have shown that one of $N$ and $N+1$ as a value of $n$
+    shows that $|y_n -l| \ge \varepsilon$.
+\end{proof}
+
+\begin{question}
+    Solve as much of problem 10 of the introductory problems sheet as possible:
+    $n$ people each hold one piece of unique information.
+    Calls are to be made between pairs of people, where
+    the two people are both informed of any pieces of information
+    the other knows.
+    What is the least number of calls required to inform
+    all people of all information?
+\end{question}
+
+First, we say that a person $A$ \emph{knows} $B$ iff
+$A$ knows the piece of information that only $B$ knew initially.
+
+A \emph{sequence of calls}, or just a \emph{sequence},
+is defined as a tuple $(\Omega, S)$,
+where $\Omega$ is a set, and an element of $\Omega$ is a person,
+and $S$ is a sequence of pairs of people.
+We denote $s_n$ for the $n$th element of $S$, where $s_{1}$ is the first element.
+The \emph{degree} of a sequence is the size of $\Omega$.
+The \emph{length} of a sequence is the length of $S$.
+
+A \emph{state} is a function $f : \Omega \to \Omega^{*}$,
+where $\Omega^{*}$ denotes the set of subsets, or power set, of $\Omega$,
+and $f(a)$ for a person $a$ is equal to the set of people $a$ knows.
+The intial state $f_{0}$ is defined by $f_{0}(a) = \{a\}$ for all $a \in \Omega$.
+
+In this formulation, the application of a call to a state
+is a function $g$ that maps a state and a call to a state,
+defined by $g(f,(a,b))(x) = f(x)$ if $x \notin \{a,b\}$,
+and $g(f,(a,b))(x) = f(a) \cup f(b)$ otherwise.
+
+A sequence a \emph{solution of degree $n$} iff
+after applying all calls in $S$ in order,
+the final state $f$ has $f(a) = \Omega$ for all $a \in \Omega$.
+A solution is \emph{optimal} iff there does not exist
+a solution of the same degree with a lower length.
+
+All optimal solutions have the same length.
+Let $f(n)$ denote the length of an optimal solution of degree $n$.
+
+We have $f(4) \le 4$, since for four people,
+say labeled $A,B,C,D$, the following solution exists: $AB, CD, AC, BD$.
+
+Consider $f(k+1)$.
+Notice that $AB$, followed by the optimal solution
+for $n=k$, which is $f(k)$ calls long, then followed by $BA$,
+is a $n+2$ calls long sequence that informs everyone of everything.
+Thus, $f(k+1) \le f(k) + 2$.
+Applying trivial induction from $f(4) \le 4$ yields $f(n) \le 2n - 4$.
+
+Consider information $a$ known initially only by $A$.
+Let $N_a$ be the number of people knowing $a$.
+In each call, one of three things must be true:
+\begin{compactitem}
+\item Both parties know $a$. 
+    Then, no exchange of $a$ occurs and $N_a$ has not increased.
+\item No parties know $a$. 
+    Then, no exchange of a occurs and $N_a$ has not increased.
+\item Exactly one party knows $a$.
+    Then, the other party is informed of $a$ and $N_a$ has increased by $1$.
+\end{compactitem}
+Thus, $N_a$ can increase by at most $1$ in each call. 
+After all calls, $N_a = n$, and it must take at least $n-1$ moves
+for that to happen. Thus, $f(n) \ge n - 1$.
+
+Let the \emph{degree} of a person be the number of calls they make.
+Every call increases the total degree of everybody by $2$,
+since both parties gain $1$ to their degree.
+Thus, the minimum total degree is $2f(n) \ge 2n - 2$.
+Thus, for any possible solution,
+we have total degree greater than or equal to $2n - 2$.
+Since there are only $n$ people, there must exist
+someone with degree greater than or equal to $2$.
+
+Consider the following operation: 
+Given a solution $(\Omega, S)$ and $a,b \in \Omega$,
+let $\Omega' = \Omega - \{a\}$, and
+let $S'$ be $S$ with all occurences of $a$ replaced by $b$.
+It is obvious that $(\Omega', S')$ forms a sequence.
+We claim that it is a solution.
+
+Define $f_n$ to be $f_{0}$ after application
+of the first $n$ calls of $S$.
+Similarly, define $f_n'$ to be $f_{0}$ after application
+of the first $n$ calls of $S'$.
+Let $P(n)$ be the proposition that 
+$f_n(a) \subseteq f_n'(b)$ and
+for any $u \in \Omega'$,
+we have $f_n(u) \subseteq f_n'(u)$.
+We claim that $P(n)$ is true for any $n \ge 0$.
+As a base case, $P(0)$ is clearly true since $f_{0}=f_{0}'$.
+
+If $P(n)$ is true, for any $u \in \Omega$, we have $f_n(u) \subseteq f_n'(u)$ and $f_n(a) \subseteq f_n'(b)$.
+Consider $s _{n+1}$, say equal to $(x,y)$.
+If neither $x$ nor $y$ is equal to $a$,
+then by definition $s'_{n+1} = s_{n+1}$.
+Thus, $f_{n+1}(a) = f_n(a)$.
+If $b=x$ or $b=y$, then wlog let $b=y$ and we have
+$f_{n+1}'(b) = f_{n}'(b) \cup f_n'(x) \supseteq f_n'(b) \supseteq f_n(a) = f_{n+1}(a)$, 
+showing half of $P(n+1)$.
+
+For any $u \in \Omega'$, if $u \ne x$ and $u \ne y$,
+then $f_{n+1}(u) = f_n(u) \subseteq f_n'(u) = f_{n+1}'(u)$.
+Otherwise, $f_{n+1}(u) = f_n(x) \cup f_n(y)$,
+and since $f_n(a) \subseteq f_n'(a)$ and $f_n(b) \subseteq f_n'(b)$,
+we have $f_n(a) \cup f_n(b) \subseteq f_n'(a) \cup f_n'(b) = f_{n+1}'(u)$.
+Thus, $P(n+1)$ is true if $a \ne x$ and $a \ne y$.
+
+Otherwise, since $x \ne y$, we can wlog let $x = a$, $y \ne a$.
+In this case, $s_{n+1} = (a,y)$.
+By definition, $s _{n+1}' = (b,y)$.
+For any $u \in \Omega' = \Omega - \{a\}$, if $u \ne a$ (always true) and $u \ne y$ and $u \ne b$,
+then $f_{n+1}(u) = f_n(u) \subseteq f_n'(u) = f_{n+1}'(u)$.
+If $u = y$, then
+$f_{n+1}(u) = f_n($
+
+\begin{question}
+    Comment on two induction proofs:
+\end{question}
+
+\begin{subquestion}
+    All horses in a given field have the same color.
+\end{subquestion}
+
+The induction doesn't hold as the inductive argument fails to hold
+when $P(1)$ is true. $P(2)$ isn't true since a central part of the
+argument is that $h_{1},h_{2},\cdots h_n$ have the same color
+and so must $h_{2},h_{3},\cdots h_{n+1}$. For $n=1$, this says
+that $h_{1}$ have the same color and $h_{2}$ have the same color.
+There is no overlap, so $P(2)$ cannot be proven and
+the induction cannot continue.
+
+\begin{subquestion}
+    Given $n$ fence posts and fences connecting those fence posts,
+    if all regions bounded by fences are triangles, there must be $3n-6$ fences.
+\end{subquestion}
+
+The claim fails to mention that the proposition is
+only true when $n \ge 3$, since the base case of the
+induction is $n = 3$, and in each step $P(n+1)$ is proven from $P(n)$.
+
+\begin{question}
+    Let $(G,\circ)$ be a group. Prove the following facts.
+\end{question}
+\begin{subquestion}
+    Define a new binary operation $\star$ on $G$ by $a \star b = b \circ a$.
+    Is $(G,\star)$ a group? If so, is it isomorphic to $(G,\circ)$?
+\end{subquestion}
+
+\begin{proof}
+    Yes. The identity in $(G,\circ)$ remains the identity in $(G,\star)$,
+    since $e \star x = x \circ e = x$ and vice versa.
+    The operation is clearly closed since $a \star b = b \circ a \in G$.
+    The operation is associative, since
+    $(a \star b) \star c = c \circ (b \circ a) = (c \circ b) \circ a = a \star (b \star c)$.
+    The operation is invertible, with the same inverse as $(G,\circ)$,
+    since $a \star a^{-1} = a^{-1} \circ a = e$, and vice versa.
+
+    $(G,\star)$ is isomorphic to $(G,\circ)$. Let $\phi(a) = a^{-1}$. 
+    It is clearly a bijection. we have
+    $\phi(a \circ b) = (a \circ b)^{-1} = b^{-1} \circ a^{-1} = \phi(a) \star \phi(b)$.
+\end{proof}
+
+It is possible to notice the isomorphism $\phi(a) = a^{-1}$
+by thinking about the identity $(ab)^{-1} = b^{-1}a^{-1}$.
+
+\begin{subquestion}
+    Fix an element $u \in G$ and define binary operation $*$ on $G$,
+    by $a * b = a \circ u \circ b$. Is $(G,*)$ a group? If so, is it isomorphic to $(G,\circ)$?
+\end{subquestion}
+
+\begin{proof}
+    For the sake of clarity, $a^{-1}$ always denotes the inverse of $a$ in $(G,\circ)$, not $(G,*)$.
+    The identity is given by $u^{-1}$.
+    We have $a * u^{-1} = a \circ u \circ u^{-1} = a \circ (u \circ u^{-1}) = a \circ e = a$,
+    and similarly vice versa. Closure is obvious.
+    Associativity too is obviously derived from the associativity of $\circ$.
+    For inverse, we have
+    $(u^{-1} \circ a^{-1} \circ u^{-1}) * a = u^{-1} \circ a^{-1} \circ u^{-1} \circ u \circ a = u^{-1}$,
+    $a * (u^{-1} \circ a^{-1} \circ u^{-1}) = a \circ u \circ u^{-1} \circ a^{-1} \circ u^{-1} = a \circ a^{-1} \circ u^{-1} = u^{-1}$, and
+    which is the identity in $(G,*)$. Thus, $(G,*)$ satisfies all group axioms and is a group.
+
+    Define $\phi : G \to G$ by $\phi(a) = u^{-1} \circ a$, which has
+    $\phi(a)*\phi(b) = (u^{-1}\circ a) * (u^{-1} \circ b)
+    = u^{-1} \circ a \circ u \circ u^{-1} \circ b = u^{-1} \circ a \circ b = \phi(ab) $.
+    Thus, $\phi : G \to G$ defined by $\phi(a) = u^{-1} \circ a$ is an isomorphism from $(G,\circ)$ to $(G,*)$.
+\end{proof}
+
+As an aside, the method I used to find the isomorphism in the last part 
+was as follows:
+
+If $\phi : G \to G$ is an isomorphism from $(G,\circ)$ to $(G,*)$, 
+it must send inverses to inverses, so $\phi(a^{-1}) = u^{-1} \circ \phi(a)^{-1} \circ u^{-1}$,
+Rearranging gives $(u \circ \phi(a^{-1})) = (u \circ \phi(a))^{-1}$,
+Therefore, $\psi(a) = u \circ \phi(a)$ satisifies $\psi(a^{-1}) = \psi(a)^{-1}$.
+This seems to be an automorphism of $(G,\circ)$?
+If we let $\psi(a) = a$, the trivial automorphism,
+we have $\phi(a) = u^{-1} \circ a$.
+
+\begin{question}
+    Let $G$ be a non-empty set with an associative binary operation,
+    written as multiplication, such that 
+    for all $a \in G$, there exists a unique $a^{*} \in G$ such that $aa^{*}a = a$.
+    Prove that $G$ forms a group under this binary operation.
+\end{question}
+\begin{proof} \textit{(Partial)}
+    With it being an associative binary operation, 
+    closure and associativity are covered.
+    It suffices to show an identity exists and that
+    an inverse exists for all $a \in G$.
+
+    Let $a \in G$.
+    We have unique $a^{*}$ and $aa^{*}a = a$.
+    Applying the equation again yields $aa^{*}aa^{*}a = a(a^{*}aa^{*})a = a$.
+    Thus, since $a^{*}$ is unique, $a^{*}aa^{*} = a^{*}$.
+    Applying uniqueness again yields $a = a^{**}$.
+
+    Let $a,b \in G$. Then we have that if $a \ne b$ then $a^{*} \ne b^{*}$.
+\end{proof}
+
+\end{document}
