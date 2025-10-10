@@ -7,6 +7,74 @@
 
 \section{Equilibrium of a Single Particle}
 
+\emph{Statics} is a branch of mechanics that studies forces in equilibrium.
+We investigate all forces acting on a particle such that it remains in equilibrium,
+which is a part of statics.
 
+There are four fundamental forces: 
+gravity, electromagnetic, weak nuclear, and strong nuclear.
+All other forces are derived from these four forces, i.e. 
+friction, tension, etc.
+
+\def\iangle{35} % Angle of the inclined plane
+\def\down{-90}
+\def\arcr{0.5cm} % Radius of the arc used to indicate angles
+
+\begin{tikzpicture}
+    \draw (0,0) coordinate (O) -- (4,0);
+    \draw (O) -- coordinate[pos=0.5] (mid) ++(\iangle:5) coordinate (A);
+    \draw (mid) node[rotate=\iangle,rectangle,draw,minimum size=0.5cm,yshift=0.25cm] (M) {};
+    \draw[-latex] (M.west) -- ++(\iangle:-1.5) node[left] () {F};
+    \draw[-latex] (M.east) -- ++(\iangle:1.5) node[above right] () {T};
+    \draw[-latex] (M.north) -- ++(\iangle+90:1) node[above left] () {R};
+    \draw[-latex] (M) -- ++(0,-1) node[below] () {W};
+    \draw (O)++(\arcr,0) arc [start angle=0, end angle=\iangle, radius=\arcr];
+    \draw (O)++(\iangle*0.5:\arcr+0.25cm) node {$\alpha$};
+\end{tikzpicture}
+
+Resolving forces along parallel and perpendicular directions yields:
+\begin{align}
+    T &= F + W\sin\alpha \\
+    R &= W\cos\alpha 
+\end{align}
+We can reduce the number of forces in our calculaiton
+by employing an empirical result relating friction and normal reaction:
+\begin{equation}
+F \le \mu R,
+\end{equation}
+where $\mu$ is the coefficient of friction.
+
+Combining (1), (2) and (3), we have
+\begin{equation}
+T \le W(\sin\alpha  + \mu\cos\alpha ),
+\end{equation}
+so $T$ is determined when equality holds.
+
+Now, if the object is sliding \emph{up} the plane as opposed to down,
+we can simply flip $F$ to $-F$, yielding
+\begin{equation}
+T \ge W(\sin\alpha  - \mu\cos\alpha ).
+\end{equation}
+
+Combining (4) and (5) yields a range of possible values of $T$,
+\[
+W(\sin\alpha  - \mu\cos\alpha ) \le T \le W(\sin\alpha  + \mu\cos\alpha ).
+\]
+The equilibrium condition for a particle is that
+the sum of the vector forces are zero:
+\[
+    \sum_{i}^{} \vec{F}_{i} = \vec{0}
+\]
+
+\begin{tikzpicture}[scale=3]
+    \draw (-5,0) coordinate (O) 
+        ++(45:1) coordinate (F1)
+        (O)++(135:1) coordinate (F2)
+        (O)++(250:1) coordinate (F3);
+    \draw[-latex] (O) -- (F1) node[above right] {F1};
+    \draw[-latex] (O) -- (F2) node[above left] {F2};
+    \draw[-latex] (O) -- (F3) node[below] {F3};
+    
+\end{tikzpicture}
 
 \end{document}
