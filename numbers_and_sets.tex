@@ -39,9 +39,9 @@ The existence of a transcendental number was shown in 1844.
 
 \subsection{Some Proofs and Nonproofs}
 
-\begin{theorem}
+\begin{claim}
     For all positive integers $n$, $n^{3} - n$ is always a multiple of $3$.
-\end{theorem}
+\end{claim}
 \begin{proof}
     Let $n \in \mathbb{N}$, we have $n^{3} - n = n(n^{2} - 1) = (n - 1) \times n \times (n+1)$.
     One of the three consecutive integers $n-1,n,n+1$ must be a multiple of $3$.
@@ -51,9 +51,9 @@ The existence of a transcendental number was shown in 1844.
 Note the little box given for free by \LaTeX, on the right side of the page.
 That denotes the end of the proof.
 
-\begin{theorem}
+\begin{claim}
     For any positive integer $n$, if $n^{2}$ is even then so is $n$.
-\end{theorem}
+\end{claim}
 \begin{nonproof}
     Given $n \in \mathbb{N}$, we can write $n = 2k$ where $k \in \mathbb{N}$.
     We have $n^{2} = 4k^{2} = 2(2k^{2})$, which is even.
@@ -72,10 +72,152 @@ That denotes the end of the proof.
     \contra
 \end{proof}
 
+\begin{claim}
+    The \sol{} to $x^{2} - 5x + 6 = 0$ is $x = 2$ or $x = 3$.
+\end{claim}
+\begin{proof}
+    If $x = 2$ or $x = 3$,
+    then $x - 2 = 0$ or $x - 3 = 0$.
+    So $(x-2)(x-3) = x^{2} - 5x + 6 = 0$.
+
+    If $x^{2}-5x+6=0$, then
+    $(x-2)(x-3)=0$,
+    so either $x-2=0$ or $x-3=0$,
+    which yields $x=2$ or $x=3$.
+\end{proof}
+
+Alternatively, we can write
+\begin{proof}
+    \begin{align*}
+        &x=2 \quad \text{or} \quad x=3\\
+        \iff &x-2=0 \quad\text{or}\quad x-3=0 \\
+        \iff &(x-2)(x-3)=0\\
+        \iff &x^{2}-5x+6=0
+    \end{align*}
+\end{proof}
+
+\begin{claim}
+    Every positive real number is greater than or equal to $1$.
+\end{claim}
+\begin{nonproof}
+    Let $r$ be the least positive real.
+    Either $r = 1$ or $r < 1$ or $r > 1$.
+
+    If $r < 1$, then $0 < r^{2} < r$, 
+    so $r^{2}$ is a smaller positive real. \contra
+
+    If $r > 1$, then $0 < \sqrt{r} < r$,
+    so $\sqrt{r}$ is a small positive real. \contra
+    
+    Thus, $r = 1$.
+\end{nonproof}
+
+The problem lies in the nonexistence of a least positive real.
+The moral is that
+\begin{center}
+    \underline{Every claim must be justified}.
+\end{center}
+
+\subsection{Combining Claims}
+
+The truth of assertions like $A \land B$ and $A \lor B$ depend on
+the truth of $A$ and $B$, as summarised in the \emph{truth table}:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ |c|c|c|c|c|c|c| }
+        \hline
+        A & B & $A \land B$ & $A \lor B$ & $\neg A$ & $A \Rightarrow B$ \\
+        \hline
+        F & F & F & F & T & T\\
+        F & T & F & T & T & T\\
+        T & F & F & T & F & F\\
+        T & T & T & T & F & T\\
+        \hline
+    \end{tabular}
+    \caption{The truth table of various logical constructs.}
+\end{table}
+
+Note, for example, that $\neg (A \land B)$ is equivalent to
+$(\neg A) \lor (\neg B)$, by comparing truth tables.
+Similarly, $A \Rightarrow B$ is equivalent to $(\neg A) \lor B$,
+and hence $B \lor (\neg A)$,
+and hence to $(\neg B) \Rightarrow (\neg A)$.
+This is called the \emph{contrapositive}.
+
+\subsubsection*{Negating Quantifiers}
+
+A claim may involve "quantifiers" like $\forall$ or $\exists$.
+$\neg(\forall x, A(x))$ is equivalent to $\exists x, \neg A(x)$.
+Similarly, $\neg(\exists x, A(x)) \iff \forall x, \neg A(x)$.
+
 \section{Sets, Functions, and Relations}
+
+A \emph{set} is a collection of mathematical objects.
+For example, $\mathbb{R}$, $\mathbb{N}$, $\{1,5,9\}$, $(-2,3]$.
+
+Two important facts required for a set are that 
+\begin{compactenum}
+\item the order of elements in the set is immaterial, and
+\item each element in the set occurs only once.
+\end{compactenum}
+
+For instance, $\{1,3,7\} = \{1,7,3\}$, and $\{3,4,4,8\} = \{3,4,8\}$.
+
+Two sets are equal if they have the same elements. 
+That is, $A = B$ iff $\forall x, x \in A \iff x \in B$.
+There is only one \emph{empty set} $\emptyset$ i.e. the set with no elements.
+
+A set $B$ is a \emph{subset} of $A$, written $B \subseteq A$, or $B \subset A$,
+if every element of $B$ is an element of $A$, or equivalently $\forall x \in B, x \in A$.
+$B$ is said to be a \emph{proper subset of A} if $B \subseteq A$ and $B \ne A$,
+sometimes written $B \subsetneq A$.
+
+Note that $A = B$ iff $A \subseteq B$ and $B \subseteq A$.
+
+If $A$ is a set and $P$ is a property of (some) elements of $A$,
+we can write $\{x \in A : P(x)\}$ for the usbset of $A$ comprising
+of the elements $x$ for which $P(x)$ holds true.
+
+For example, $\{u \in \mathbb{N} : n\text{ is prime}\} = \{2,3,5,7,11,\cdots\}$.
+
+If $A,B$ are sets, then their \emph{union} $A \cup B$ is
+given by $\{x : x \in A \lor x \in B\}$.
+Their \emph{intersection} $A \cap B$ is defined to be
+$\{x : x \in A \land x \in B\}$.
+We say $A$ and $B$ are \emph{disjoint} if $A \cap B = \emptyset$.
+
+Note that we can view intersection as a special case of subset selection,
+in that $A \cap B = \{x \in A : x \in B\}$.
+
+Similarly, have \emph{set difference} $A \setminus B = \{x \in A : x \notin B\}$.
+Note that set difference is non-commutative, whereas $\cap$ and $\cup$ 
+are commutative and associative.
+
+Laos $\cup$ and $\cap$ are distributive over each other, in that
+\begin{align*}
+    A \cup (B \cap C) = (A \cup B) \cap (A \cup C),\\
+    A \cap (B \cup C) = (A \cap B) \cup (A \cap C).\\
+\end{align*}
+
 \section{Integers and Counting}
 \section{Elementary Number Theory}
 \section{Real Numbers}
 \section{(Un)Countability}
+
+\appendix
+
+\newpage
+\section{Notation}
+
+We write $A \implies B$ for "if A then B".
+We write \sol{} for a solution, as in the \sol{} of a polynomial, or $3$ is a \sol{}.
+
+If $A$ and $B$ are assertions,
+we can (but usually don't) write $A \land B$ for "A and B",
+and $A \lor B$ for "A or B".
+We can similarly write $\neg A$ for "not A".
+
+We write $x \in A$ if $x$ is an element of the set $A$, and $x \notin A$ if not.
 
 \end{document}

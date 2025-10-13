@@ -83,7 +83,7 @@ Remarks:
 \begin{compactenum}[(i)]
 \setlength{\parskip}{4pt}
 \item $(\mathbb{C},+,\cdot)$ is a field.
-\item \emph{Fundamental Theorem of Algebra}
+\item \emph{Fundamental Theorem of Algebra}:
 
     A polynomial of degree $n$ with coefficients in $\mathbb{C}$
     can be written as the product of $n$ linear factors:
@@ -106,21 +106,173 @@ Remarks:
     \end{itemize}
 \end{compactenum}
 
-\subsection{Argand Diagram}
+\subsubsection*{De Moivre's Theorem}
 
-\begin{tikzpicture}
-    \tkzInit[xmin=-1,ymin=-1,xmax=5,ymax=4]
-    \tkzDrawX\tkzDrawY
-    \tkzDefPoint(0,0){O}
-    \tkzDefPoint(4,3){A}
+\begin{lemma}
+    If $z_{1} = r_{1}(\cos \theta_{1} + i \sin \theta_{1})$,
+    and $z_{2} = r_{2}(\cos \theta_{2} + i \sin \theta_{2})$,
+    then $z_{1}z_{2} = r_{1}r_{2}(\cos (\theta_{1} + \theta_{2}) + i \sin (\theta_{1} + \theta_{2})$.
+\end{lemma}
 
-    \tkzDrawSegment[arrows={-Latex}](O,A)
-\end{tikzpicture}
+\begin{proof}
+    Multiplying naively gives
+    \[
+    z_{1}z_{2} = r_{1}r_{2}(
+        (\cos\theta_{1} \cos\theta_{2} - \sin\theta_{1}\sin\theta_{2})
+        +i(\cos\theta_{1} \sin\theta_{2} + \cos\theta_{2} \sin\theta_{1})
+    )
+    \]
+    Applying the addition rule of $\sin$ and $\cos$, the result is obtained.
+\end{proof}
 
+\begin{theorem}[De Moivre's]
+    \label{thm:de_moivre}
+    For any $\theta \in \mathbb{R}$, $n \in \mathbb{Z}$, we have
+    \[
+        (\cos\theta + i\sin\theta )^{n} = \cos(n\theta ) + i\sin(n\theta ).
+    \]
+\end{theorem}
+\begin{proof}
+    The proof is trivial and left as an exercise to the reader.
+\end{proof}
+
+\setcounter{subsection}{3}
 \subsection{Exponential and Trigonometric Functions}
+
+\subsubsection{Exponential Functions}
+
+We define the exponential function on $z \in \mathbb{C}$ by
+\[
+    \exp(z) = e^{z} = \sum\limits_{n=0}^{\infty}\frac{1}{n!}z^{n}.
+\]
+The function only exists when the series converges,
+and it does for all $z \in \mathbb{C}$.
+A proof will not be provided for that result.
+
+Properties:
+\begin{compactitem}
+\item $e^{z}e^{w} = e^{z+w}$, for all $z,w \in \mathbb{C}$.
+\item If $z \in \mathbb{R}$, then $\exp(z)$ reduces to usual exponential.
+\item $e^{0} = 1$.
+\item $(e^{z})^{n} = e^{nz}$.
+\end{compactitem}
+
+\subsubsection{Trigonometric Functions}
+
+We have
+\begin{align*}
+    \cos(z) &= \frac{1}{2}(e^{iz} + e^{-iz}) \\
+            &= \frac{1}{2}\left(
+            \sum\limits_{n=0}^{\infty}\frac{1}{n!}(iz)^{n}
+            +\sum\limits_{n=0}^{\infty}\frac{1}{n!}(-iz)^{n} \right) \\
+            &= \sum\limits_{n=0}^{\infty}(-1)^{n}\frac{z^{2n}}{(2n)!}
+\end{align*}
+
+Similarly, 
+\begin{align*}
+    \sin(z) &= \frac{1}{2i}(e^{iz} - e^{-iz}) \\
+            &= \frac{1}{2i}\left(
+            \sum\limits_{n=0}^{\infty}\frac{1}{n!}(iz)^{n}
+            -\sum\limits_{n=0}^{\infty}\frac{1}{n!}(-iz)^{n} \right) \\
+            &= \sum\limits_{n=0}^{\infty}(-1)^{n}\frac{z^{2n+1}}{(2n+1)!}
+\end{align*}
+
+If $z \in \mathbb{R}$, this clearly reduces to the usual trigonometric functions.
+
+It is also possible to notice that
+\[
+e^{iz} = \cos z + i\sin z,
+\]
+in particular, if $z = \pi$, then
+\begin{equation*}
+    e^{i\pi} = -1
+\end{equation*}
+which is \emph{Euler's Identity}.
+
+\begin{corollary}
+    $e^{z} = 1 \iff z = 2\pi ni$,
+    where $n \in \mathbb{Z}$.
+\end{corollary}
+\begin{proof}
+    Let $z = x+iy$, then 
+    $e^{z} = e^{x}e^{iy} = e^{x}(\cos y+i\sin y) 
+    = e^{x}\cos y + ie^{x} \sin y = 1$.
+    Then, $e^{x}\sin y = 0$, so $\sin y = 0$, so $y = n\pi$. 
+    Similarly, $e^{x}\cos y = 1$,
+    substituting gives $e^{x}(\pm 1) = 1$, 
+    and since $e^{x}$ is positive, $\cos y = 1$, 
+    so $y = 2n\pi$.
+    Thus, $e^{x} = 1$, so $x = 0$, and $z = 2\pi n i$.
+\end{proof}
+
+Finally, we can write $z = r(\cos\theta + i\sin\theta) = re^{i\theta }$,
+
+\subsubsection{Roots of Unity}
+
+Let $z = re^{i\theta }$, and let for some $N \in \mathbb{N}$ that $z^{N} = 1$.
+Then we have
+\[
+z^{N} = r^{N}e^{i\theta N}.
+\]
+Trivially then we have $r = 1$, $\theta N= 2\pi n$, so
+\[
+    z = e^{\frac{2\pi i}{N}n}
+\]
 
 \subsection{Logarithm and Complex Powers}
 
+We say, if $z \in \mathbb{C}$ and $z \ne 0$, that $w = \log z$ iff $e^{w} = z$.
+By definition, $\log$ is the inverse of $\exp$. 
+Note that $\log$ here means the natural logarithm.
+
+Importantly, this is a many-to-one relationship.
+\[
+r = re^{i\theta } = e^{\log r}e^{i\theta } = e^{\log r + i\theta },
+\]
+so
+\[
+\log z = \log r + i\theta  = \log r + i \arg(z)
+\]
+for any $\theta  \in \Arg(z)$.
+Thus, if $r + i\theta $ is a log of $z$, then so is $r + i(\theta + 2\pi)$.
+To make it unique, we simply use the principal value of $\arg$,
+as in $-\pi < \theta  \le \pi$.
+
+\subsubsection*{Complex Powers}
+
+We define $z$ to the power of $\alpha $ to be
+\[
+z^{\alpha } = e^{\alpha \log z}
+\]
+This is multivalued due to the multi-valued nature of $\log$.
+
+Examples:
+\begin{compactitem}
+\item $\log(i) = \log(e^{i\pi / 2}) = i \left(\frac{\pi}{2} + 2\pi n\right)$.
+\item $\log(1 + i) = \log\sqrt{2} + i\left(\frac{\pi}{4} + 2\pi n\right)$.
+\item $(1 + i)^{1/2} = \sqrt[4]{2} + i\left(\frac{\pi}{8} + \pi n\right)$.
+\end{compactitem}
+
 \subsection{Lines and Circles}
+
+\subsubsection*{Lines}
+
+Lines are defined by a point $z_{0} \in \mathbb{C}$ and a direction $\omega \in \mathbb{C}$,
+and given by
+\[
+z = z_{0} + \lambda \omega
+\]
+where $\lambda \in \mathbb{R}$.
+Taking conjugates, we have $\bar z = \bar z_{0} + \lambda \bar \omega$,
+so $\bar \omega z - \omega \bar z = \bar \omega z_{0} - \omega \bar z_{0}$.
+
+\subsubsection*{Circles}
+
+Circles are defined by a center $c \in \mathbb{C}$ and a radius $\rho > 0$,
+and given by
+\[
+z = c + \rho e^{i\theta}
+\]
+where $\theta \in \mathbb{R}$. Note that $|z - c| = \rho$.
 
 \end{document}
