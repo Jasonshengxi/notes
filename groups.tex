@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\input{common.tex}
+
+\begin{document}
+% Lectured by Henry Wilton (hjrw2)
+
+\section{Examples and Definitions}
+
+You can think of groups in two ways:
+It is either something to do with algebra,
+or something to do with symmetry.
+
+We will begin with the symmetry point of view.
+
+\subsection{Symmetry}
+
+An equilateral triangle has at least two different kinds of symmetry.
+It has \emph{rotational} and \emph{reflective} symmetry,
+and most importantly, the identity symmetry.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[scale=3]
+        \draw (90:1) coordinate (A) 
+            -- (210:1) coordinate (B) -- (330:1) coordinate (C) -- cycle;
+    \end{tikzpicture}
+    \caption{The "identity" symmetry}
+\end{figure}
+
+Combining all symmetries, there are 6 different symmetries 
+on an equilateral triangle:
+\begin{compactenum}
+    \item identity,
+    \item rotate by $120\degree$ anticlockwise,
+    \item rotate by $240\degree$ anticlockwise
+    \item 5. 6. reflections along the three axes.
+\end{compactenum}
+
+\begin{exercise}
+    How many symmetries does a regular $n$-gon have?
+\end{exercise}
+\begin{answer}
+    the number of symmetries of a regular $n$-gon is $2n$.
+\end{answer}
+
+Now we begin to consider the \emph{composition} of symmetries,
+or, from an algebraic standpoint, the \emph{product} of symmetries.
+
+Say we compose a rotation by $120\degree$ anticlockwise and
+a flip around the vertical axis. This is a reflection around 
+the axis of positive slope.
+
+Some important features to notice from this are:
+\begin{compactitem}
+\item Symmetries can be composed, 
+    i.e. symmetries are closed under composition.
+\item There is an identity symmetry that leaves everything the same.
+\item Every symmetry has an inverse. Specifically, in this case:
+    \begin{compactitem}
+    \item the inverse of the identity is itself.
+    \item the inverse of a rotation is the opposite rotation.
+    \item the inverse of a reflection is itself.
+    \end{compactitem}
+\item Composition of symmetries is \emph{associative},
+    as in $a(bc) = (ab)c$, but for symmetries.
+\end{compactitem}
+Additionally, there is one important non-feature: 
+symmetries are not always commutative. 
+It is trivial to check by multiplying a rotation by a reflection,
+then the other way around.
+
+But isn't this whole drawing thing exhausting (especially for me)?
+Let's go to the algebra side.
+
+\subsection{Algebra}
+
+\begin{definition}
+    A binary operation on a set $X$ is
+    a function $f : X \times X \to X$.
+    It is also denoted $\cdot$ for multiplication.
+    We write $a \cdot b$ for $f(a,b)$.
+\end{definition}
+
+Note that this definition includes closure,
+in that for any $x,y \in X$, we have $f(x,y) \in X$.
+
+\begin{definition}
+    A group is a triple $(G,\cdot,e)$ where
+    $G$ is a set, $\cdot$ is a binary operation on $G$,
+    and $e \in G$, which satisfies the following four axioms:
+    \begin{compactenum}[(i)]
+    \item Closure: for all $a,b \in G$, we have $a \cdot b \in G$.
+    \item Associativity: for all $a,b,c \in G$, we have $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+    \item (Right) Identity: for all $a \in G$, we have $a \cdot e = a$.
+    \item (Right) Inverse: for all $a \in G$, there exists $a^{-1} \in G$ s.t. $a \cdot a^{-1} = e$.
+    \end{compactenum}
+\end{definition}
+
+Note that the closure axiom is indeed redundant,
+by the definition of a \emph{binary operation on G}.
+
+Example: Notice that the set of symmetries of 
+the equilateral triangle forms a group.
+
+We can also think of this definition as
+encompassing \emph{algebra with one operation}.
+
+\begin{exercise}
+    $(\mathbb{Z},+,0)$ forms a group.
+\end{exercise}
+\begin{proof}
+    Closure and identity and associativity are trivial.
+    The inverse of $x \in \mathbb{Z}$ is $-x$, in that $x + (-x) = 0$.
+\end{proof}
+
+\begin{theorem}
+    Let $(G,\cdot,e)$ be a group, and $a,b,b'e' \in G$. We have:
+    \begin{compactenum}[(i)]
+    \item If $a \cdot b = e$ then $b \cdot a = e$. \\
+        (i.e. right inverses are left inverses)
+    \item If $e \cdot a = a$. \\
+        (i.e. right identities are left identities)
+    \item If $a,b,b'$ are s.t. $a \cdot b = e = a \cdot b'$,
+        then $b = b'$. \\
+        (i.e. inverses are unique)
+    \item If $a \cdot e' = a$ then $e' = e$.
+        (i.e. the identity is unique).
+    \end{compactenum}
+\end{theorem}
+
+\end{document}
