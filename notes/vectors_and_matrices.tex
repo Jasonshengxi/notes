@@ -1,0 +1,533 @@
+\documentclass[12pt]{article}
+\input{../common.tex}
+
+\begin{document}
+% Lectured by Angela Capel Gueras (ac2722)
+% Office: BO.14, Department of Applied Mathematics and Theoretical Physics
+
+\section{Complex Numbers}
+
+\subsection{Definition}
+
+We construct $\mathbb{C}$ by adding $i$ to $\mathbb{R}$, where $i^{2} = -1$.
+Then, any $z \in \mathbb{C}$ has the form $z = x + iy$, where $x,y \in \mathbb{R}$.
+We define the real part, $x = \Re(z)$, and the imaginary part, $y = \Im(z)$.
+
+\subsection{Properties}
+
+\begin{compactenum}[i)]
+\item Addition: $z_{1} \pm z_{2} = (x_{1} \pm x_{2}) + i(y_{1} \pm y_{2})$.
+\item Multiplication: $z_{1}z_{2} = (x_{1}y_{1} - x_{2}y_{2}) + i(x_{1}y_{2} + x_{2}y_{1})$.
+\end{compactenum}
+Note that both addition and multiplication are associative and commutative.
+\begin{compactenum}[i)]
+\setcounter{enumi}{2}
+\item Identity: The group $(\mathbb{C},+)$ is an abelian group with identity $0$.
+\item Inverse: The \emph{inverse of $z$} is given by
+    \[
+    z^{-1} = \frac{x - iy}{x^{2} + y^{2}}
+    \]
+    and it satisfies $z \cdot z^{-1} = 1$.
+\end{compactenum}
+
+Thus, $(\mathbb{C}^{*}, \cdot)$ is an abelian group with identity $1$,
+where $\mathbb{C}^{*} = \mathbb{C} - \{0\}$.
+
+Note that the distributive property is also satisifed, where
+\[
+    (z_{1}+z_{2})z_{3} = z_{1}z_{2} + z_{2}z_{3}
+\]
+\begin{compactenum}[i)]
+\setcounter{enumi}{4}
+\item Complex Conjugate: For any $z = x + iy$, 
+    the \emph{complex conjugate of $z$}, denoted $\bar z$, or $z^{*}$, is equal to $x - iy$.
+\end{compactenum}
+Thus, we also have $\Re(z) = (z + \bar z) / 2$, and $\Im(z) = (z - \bar z) / 2i$.
+We have rules
+\begin{compactitem}
+\item $\bar {\bar z} = z$
+\item $\bar{z_{1} + z_{2}} = \bar z_{1} + \bar z_{2}$
+\item $\bar {z_{1}z_{2}} = \bar z_{1} \bar z_{2}$
+\end{compactitem}
+
+\begin{compactenum}[i)]
+\setcounter{enumi}{5}
+\item Modulus: For any $z = x + iy$, we define the \emph{modulus of $z$} by $|z|$, or $r$, by
+    a real and non-negative number such that
+    \[
+    |z|^{2} = x^{2} + y^{2}
+    \]
+\item Argument: The \emph{argument} of a complex number $z = x + iy \ne 0$
+    is a real number, denoted by $\theta = \arg(z)$, such that
+    \[
+        z = r(\cos \theta + i \sin \theta)
+    \]
+    Which is the \emph{polar form} of $z$. We can verify
+    that $\tan\theta = y/x$.
+\end{compactenum}
+
+Note that if $\theta$ is an argument of $z$, so is $\theta + 2\pi n$ for $n \in \mathbb{Z}$.
+To make it unique, we restrict $-\pi < \theta \le \pi$.
+This value of $\theta$ is the \emph{principal value}.
+
+Remarks:
+\begin{compactenum}[(1)]
+\item $\mathbb{R} \subset \mathbb{C}$, since for $a \in \mathbb{R}$ we have
+    $a = a + i 0 \in \mathbb{C}$.
+\item A complex number $0 + ib$ is said to be a \emph{pure imaginary number}.
+\item The representation of a complex number in terms
+    of its real and imaginary parts is unique.
+\end{compactenum}
+
+\subsubsection*{More Properties / Consequences}
+\begin{compactenum}[(i)]
+\setlength{\parskip}{4pt}
+\item $(\mathbb{C},+,\cdot)$ is a field.
+\item \emph{Fundamental Theorem of Algebra}:
+
+    A polynomial of degree $n$ with coefficients in $\mathbb{C}$
+    can be written as the product of $n$ linear factors:
+
+    \[
+        \begin{aligned}
+            p(z) &= c_n z^{n} + \cdots + c_{0} \\
+                &= c_n (z - \alpha _1)\cdots(z - \alpha_2)
+        \end{aligned}
+    \]
+    
+    where $c_i \in \mathbb{C}$, and $c_n \ne 0$, with roots $\alpha_i \in \mathbb{C}$.
+    Thus, $p(z) = 0$ has at least one root,
+    and $n$ roots counted with multiplicity.
+\item The modulus satisifes the following properties:
+    \begin{itemize}
+        \item $|z_{1}z_{2}| = |z_{1}||z_{2}|$
+        \item $|z_{1}| + |z_{2}| \le |z_{1}| + |z_{2}|$
+        \item $|z_{1} - z_{2}| \ge \left||z_{1}| - |z_{2}|\right|$
+    \end{itemize}
+\end{compactenum}
+
+\subsubsection*{De Moivre's Theorem}
+
+\begin{lemma}
+    If $z_{1} = r_{1}(\cos \theta_{1} + i \sin \theta_{1})$,
+    and $z_{2} = r_{2}(\cos \theta_{2} + i \sin \theta_{2})$,
+    then $z_{1}z_{2} = r_{1}r_{2}(\cos (\theta_{1} + \theta_{2}) + i \sin (\theta_{1} + \theta_{2})$.
+\end{lemma}
+
+\begin{proof}
+    Multiplying naively gives
+    \[
+    z_{1}z_{2} = r_{1}r_{2}(
+        (\cos\theta_{1} \cos\theta_{2} - \sin\theta_{1}\sin\theta_{2})
+        +i(\cos\theta_{1} \sin\theta_{2} + \cos\theta_{2} \sin\theta_{1})
+    )
+    \]
+    Applying the addition rule of $\sin$ and $\cos$, the result is obtained.
+\end{proof}
+
+\begin{theorem}[De Moivre's]
+    \label{thm:de_moivre}
+    For any $\theta \in \mathbb{R}$, $n \in \mathbb{Z}$, we have
+    \[
+        (\cos\theta + i\sin\theta )^{n} = \cos(n\theta ) + i\sin(n\theta ).
+    \]
+\end{theorem}
+\begin{proof}
+    The proof is trivial and left as an exercise to the reader.
+\end{proof}
+
+\setcounter{subsection}{3}
+\subsection{Exponential and Trigonometric Functions}
+
+\subsubsection{Exponential Functions}
+
+We define the exponential function on $z \in \mathbb{C}$ by
+\[
+    \exp(z) = e^{z} = \sum\limits_{n=0}^{\infty}\frac{1}{n!}z^{n}.
+\]
+The function only exists when the series converges,
+and it does for all $z \in \mathbb{C}$.
+A proof will not be provided for that result.
+
+Properties:
+\begin{compactitem}
+\item $e^{z}e^{w} = e^{z+w}$, for all $z,w \in \mathbb{C}$.
+\item If $z \in \mathbb{R}$, then $\exp(z)$ reduces to usual exponential.
+\item $e^{0} = 1$.
+\item $(e^{z})^{n} = e^{nz}$.
+\end{compactitem}
+
+\subsubsection{Trigonometric Functions}
+
+We have
+\begin{align*}
+    \cos(z) &= \frac{1}{2}(e^{iz} + e^{-iz}) \\
+            &= \frac{1}{2}\left(
+            \sum\limits_{n=0}^{\infty}\frac{1}{n!}(iz)^{n}
+            +\sum\limits_{n=0}^{\infty}\frac{1}{n!}(-iz)^{n} \right) \\
+            &= \sum\limits_{n=0}^{\infty}(-1)^{n}\frac{z^{2n}}{(2n)!}
+\end{align*}
+
+Similarly, 
+\begin{align*}
+    \sin(z) &= \frac{1}{2i}(e^{iz} - e^{-iz}) \\
+            &= \frac{1}{2i}\left(
+            \sum\limits_{n=0}^{\infty}\frac{1}{n!}(iz)^{n}
+            -\sum\limits_{n=0}^{\infty}\frac{1}{n!}(-iz)^{n} \right) \\
+            &= \sum\limits_{n=0}^{\infty}(-1)^{n}\frac{z^{2n+1}}{(2n+1)!}
+\end{align*}
+
+If $z \in \mathbb{R}$, this clearly reduces to the usual trigonometric functions.
+
+It is also possible to notice that
+\[
+e^{iz} = \cos z + i\sin z,
+\]
+in particular, if $z = \pi$, then
+\begin{equation*}
+    e^{i\pi} = -1
+\end{equation*}
+which is \emph{Euler's Identity}.
+
+\begin{corollary}
+    $e^{z} = 1 \iff z = 2\pi ni$,
+    where $n \in \mathbb{Z}$.
+\end{corollary}
+\begin{proof}
+    Let $z = x+iy$, then 
+    $e^{z} = e^{x}e^{iy} = e^{x}(\cos y+i\sin y) 
+    = e^{x}\cos y + ie^{x} \sin y = 1$.
+    Then, $e^{x}\sin y = 0$, so $\sin y = 0$, so $y = n\pi$. 
+    Similarly, $e^{x}\cos y = 1$,
+    substituting gives $e^{x}(\pm 1) = 1$, 
+    and since $e^{x}$ is positive, $\cos y = 1$, 
+    so $y = 2n\pi$.
+    Thus, $e^{x} = 1$, so $x = 0$, and $z = 2\pi n i$.
+\end{proof}
+
+Finally, we can write $z = r(\cos\theta + i\sin\theta) = re^{i\theta }$,
+
+\subsubsection{Roots of Unity}
+
+Let $z = re^{i\theta }$, and let for some $N \in \mathbb{N}$ that $z^{N} = 1$.
+Then we have
+\[
+z^{N} = r^{N}e^{i\theta N}.
+\]
+Trivially then we have $r = 1$, $\theta N= 2\pi n$, so
+\[
+    z = e^{\frac{2\pi i}{N}n}
+\]
+
+\subsection{Logarithm and Complex Powers}
+
+We say, if $z \in \mathbb{C}$ and $z \ne 0$, that $w = \log z$ iff $e^{w} = z$.
+By definition, $\log$ is the inverse of $\exp$. 
+Note that $\log$ here means the natural logarithm.
+
+Importantly, this is a many-to-one relationship.
+\[
+r = re^{i\theta } = e^{\log r}e^{i\theta } = e^{\log r + i\theta },
+\]
+so
+\[
+\log z = \log r + i\theta  = \log r + i \arg(z)
+\]
+for any $\theta  \in \Arg(z)$.
+Thus, if $r + i\theta $ is a log of $z$, then so is $r + i(\theta + 2\pi)$.
+To make it unique, we simply use the principal value of $\arg$,
+as in $-\pi < \theta  \le \pi$. 
+In contexts where we use all values, we write $\Log(z)$.
+
+\subsubsection*{Complex Powers}
+
+We define $z$ to the power of $\alpha $ to be
+\begin{align*}
+    z^{\alpha } &= e^{\alpha \Log z}\\
+                &= e^{\alpha(\log r + i\theta + i 2n\pi)}
+\end{align*}
+This is multivalued due to the multi-valued nature of $\Log$.
+
+Examples:
+\begin{compactitem}
+\item $\log(i) = \log(e^{i\pi / 2}) = i \left(\frac{\pi}{2} + 2\pi n\right)$.
+\item $\log(1 + i) = \log\sqrt{2} + i\left(\frac{\pi}{4} + 2\pi n\right)$.
+\item $(1 + i)^{1/2} = \sqrt[4]{2} + i\left(\frac{\pi}{8} + \pi n\right)$.
+\end{compactitem}
+
+Note that $(e^{a})^{b}$ is not necessarily equal to $e^{ab}$.
+
+\subsection{Lines and Circles}
+
+\subsubsection*{Lines}
+
+Lines are defined by a point $z_{0} \in \mathbb{C}$ and a direction $\omega \in \mathbb{C}$,
+and given by
+\[
+z = z_{0} + \lambda \omega
+\]
+where $\lambda \in \mathbb{R}$.
+Taking conjugates, we have $\bar z = \bar z_{0} + \lambda \bar \omega$,
+so $\bar \omega z - \omega \bar z = \bar \omega z_{0} - \omega \bar z_{0}$.
+
+\subsubsection*{Circles}
+
+Circles are defined by a center $c \in \mathbb{C}$ and a radius $\rho > 0$,
+and given by
+\[
+z = c + \rho e^{i\theta}
+\]
+where $\theta \in \mathbb{R}$. Note that $|z - c| = \rho$.
+
+\section{Vectors}
+
+A vector is specified by a positive magnitude and a direction in a space.
+We can represent a vector as a directed line segment between two points $A$ and $B$,
+denoted $\vec v = \overrightarrow{AB}$.
+Of we choose $O$ as origin, then point $A$ has \emph{position vector}
+$\vec a = \overrightarrow{OA}$.
+
+\subsection{Vector Spaces}
+
+\begin{definition}[Vector Space]
+    A vector space over a field $F$ is a set $V$
+    together with two binary operations:
+    vector addition $+ : V \times V \to V$,
+    and scalar multiplication $\times : F \times V \to V$,
+    satisfying the following axioms:
+    \begin{compactitem}
+    \item $V$ forms an abelian group under vector addition.
+        we write $\vec{0}$ for the identity in this group.
+    \item Compatibility of vector addition and scalar multiplication:
+        $a(b\vec{v}) = (ab)\vec{v}$.
+    \item Write $1$ for the multiplicative identity in $F$, we need $1\vec{v} = \vec{v}$.
+    \item Scalar multiplication distributes over vector addition: $a(\vec{u} + \vec{v}) = a\vec{u} + a\vec{v}$.
+    \item and vice versa: $(a + b)\vec{v} = a\vec{v} + b\vec{v}$.
+    \end{compactitem}
+\end{definition}
+
+If $F = \mathbb{R}$, the vector space is \emph{real}.
+
+% \begin{definition}[Vector Space]
+%     A vector space over $\mathbb{R}$ or $\mathbb{C}$
+%     is a collection of vectors $\vec v \in V$,
+%     together with two operations:
+%     addition of two vectors, and multiplication by a scalar (from $\mathbb{R}$ or $\mathbb{C}$, respectively).
+% \end{definition}
+
+% To add vectors, join vectors end-to-end.
+
+\begin{center}
+    \begin{tikzpicture}[scale=1.5]
+        \draw (0,0) coordinate (O) node[below left] {O};
+        \draw[->] (O) -- node[pos=0.5, below] {$\vec a$} (0:3) coordinate (A) node[below right] {A};
+        \draw[->] (O) -- node[pos=0.5, above left] {$\vec b$} (60:2) coordinate (B) node[above left] {B};
+        \draw[dashed] (A) -- ++(B) coordinate (C) node [above right] {C};
+        \draw[dashed] (B) -- ++(A);
+        \draw[->] (O) -- node[pos=0.5, above] {$\vec c$} (C);
+    \end{tikzpicture}
+\end{center}
+
+% Note that this definition is close, commutative, associative, 
+% has an identity and has an inverse.
+% Thus, $(V,+)$ forms an abelian group.
+
+% Scalar multiplication distributes over vector addition, over scalar addition,
+% is associative with scalar multiplication, and has an identity of $1$.
+
+\begin{definition}
+    A \emph{unit vector} has length $1$.
+    We may denote it $\unitvec v$.
+\end{definition}
+
+\begin{definition}
+    Given vectors $\vec a, \vec b$ and scalars $\alpha ,\beta \in \mathbb{R}$,
+    then $\alpha \vec a + \beta \vec b$ is a \emph{linear combination} of $\vec a$ and $\vec b$.
+\end{definition}
+
+This definition trivially applies to linear combinations of more than two vectors.
+
+\begin{definition}
+    The \emph{span} of a collection of vectors
+    is the set formed by their linear combinations,
+    $\vecspan\{\vec a, \vec b\}=\{\alpha \vec a + \beta \vec b : \alpha,\beta \in \mathbb{R}\}$
+\end{definition}
+
+We say $\vec{a}$ and $\vec{b}$ are parallel,
+denoted $\vec{a}\parallel\vec{b}$, if there exists non-zero scalar $\lambda $
+such that $a = \lambda b$.
+We write $\vec a \nparallel \vec b$ otherwise.
+If $\vec a \nparallel \vec b$, then $\vecspan\{\vec a, \vec b\}$ is a plane.
+
+Under these definitions, $\mathbb{R}^{n}$ is a vector space,
+where addition is addition by component, and scalar multiplication.
+
+\subsection{Dot Product}
+
+The dot / scalar / inner product,
+$\vec{a}\cdot\vec{b}$,
+is a binary operation from the vectors
+to the scalar space ($\mathbb{R}$ or $\mathbb{C}$).
+
+It is "defined by" $\vec{a}\cdot\vec{b} = |\vec{a}||\vec{b}|\cos\theta$.
+If either $\vec{a}$ or $\vec{b}$ is zero, we define $\vec{a}\cdot\vec{b}=0$.
+
+Properties:
+\begin{compactitem}
+\item The dot product has $\vec{a}\cdot\vec{a}=|\vec{a}|^{2}\ge 0$,
+    with equality iff $\vec{a}=\vec{0}$,
+\item Associative with scalar multiplication, as in
+    $(\lambda \vec{a})\cdot\vec{b}=\lambda (\vec{a}\cdot\vec{b}) = \vec{a}\cdot(\lambda \vec{b})$,
+\item Commutative,
+\item Distributive over vector addition.
+\end{compactitem}
+
+We say that $\vec{a}$ and $\vec{b}$ are \emph{orthogonal},
+denoted $\vec{a}\perp\vec{b}$, iff $\vec{a}\cdot\vec{b}=0$.
+Note that $\vec{0}$ is thus orthogonal to every vector.
+
+\begin{definition}
+    In a real vector space $\mathcal{V}$,
+    an inner product is a map $\cdot : V \times V \to \mathbb{R}$
+    that satisfies:
+    \begin{compactenum}[(i)]
+    \item Commutativity: $\vec{a}\cdot\vec{b} = \vec{b}\cdot\vec{a}$.
+    \item Linearity in the second argument: $\vec{x}(\lambda \vec{y}+\mu \vec{z}) = \lambda \vec{x}\cdot\vec{y}+\mu \vec{x}\cdot\vec{z}$.
+    \item Positive definiteness: $\vec{x}\cdot\vec{x} \ge 0$ with equality iff $\vec{x}=\vec{0}$.
+    \end{compactenum}
+    It is denoted $\vec{x}\cdot\vec{y}$ or $\langle\vec{x}|\vec{y}\rangle$.
+\end{definition}
+
+\begin{definition}
+    In a real vector space with an inner product,
+    the norm of a vector $\vec{a}$ is $|\vec{a}| = \sqrt{\vec{a}\cdot\vec{a}}$.
+\end{definition}
+
+\begin{theorem}[Cauchy-Schwarz Inequality]
+    For all $\vec{x},\vec{y} \in \mathbb{R}^{n}$, we have $|\vec{x}\cdot \vec{y}| \le |\vec{x}||\vec{y}|$.
+    \begin{proof}
+        Consider the expression $|\vec{x} - \lambda \vec{y}|^{2}$, where $\lambda \in \mathbb{R}$.
+        Then, mlearly, we have
+        \begin{align*}
+            |\vec{x} - \lambda \vec{y}|^{2} &\ge 0 \\
+            (\vec{x} - \lambda \vec{y})\cdot(\vec{x} - \lambda \vec{y}) &\ge 0\\
+            |\vec{x}|^{2} + \lambda^{2}|\vec{y}|^{2} - 2\lambda \vec{x}\cdot\vec{y} &\ge 0\\
+            (|\vec{y}|^{2})\lambda ^{2} + (-2\vec{x}\cdot\vec{y})\lambda + |\vec{x}|^{2} & \ge 0\\
+        \end{align*}
+        Hence we have a quadratic inequality in $\lambda $, with a positive first coefficient.
+        Solving for the roots we have
+        \[
+        \lambda = \frac{2\vec{x}\cdot\vec{y} \pm \sqrt{4(\vec{x}\cdot\vec{y})^{2} - 
+        4|\vec{x}|^{2}|\vec{y}|^{2}}}
+        {2|\vec{y}|^{2}}.
+        \]
+        Since the equality holds for all $\vec{x},\vec{y}$, there can
+        never be two roots, so by consider the discriminant we have
+        \[
+        4(\vec{x}\cdot\vec{y})^{2} - 4|\vec{x}|^{2}|\vec{y}|^{2} \le 0.
+        \]
+        Trivially rearranging we have
+        \[
+        |\vec{x}\cdot\vec{y}|^{2} \le \left(|\vec{x}||\vec{y}|\right)^{2},
+        \]
+        so taking square roots on both sides we have $|\vec{x}\cdot\vec{y}| \le |\vec{x}||\vec{y}|$.
+    \end{proof}
+\end{theorem}
+Thus, the inequality holds for all possible scalar products
+on any real vector space.
+
+Note that equality holds iff $\vec{x} = \lambda \vec{y}$ or 
+$\vec{y} = \lambda \vec{x}$ for some $\lambda  \in \mathbb{R}$.
+
+We can now define $\theta $ by $\vec{x}\cdot\vec{y} = |\vec{x}||\vec{y}|\cos\theta $,
+since Cauchy-Schwarz guarantees that $-1 \le \cos\theta \le 1$.
+Note that this technically has multivalued $\theta $,
+which shouldn't matter since $\theta $ only interacts through trig.
+
+\begin{theorem}[Triangle Inequality]
+    $|\vec{x} + \vec{y}| \le |\vec{x}| + |\vec{y}|$
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        |\vec{x}+\vec{y}|^{2} &= (\vec{x} + \vec{y})\cdot(\vec{x} + \vec{y})\\
+                              &= |\vec{x}|^{2} + |\vec{y}|^{2} + 2\vec{x}\cdot\vec{y}\\
+                              &\le |\vec{x}|^{2}+|\vec{y}|^{2}+2|\vec{x}||\vec{y}|\\
+                              &= (|\vec{x}| + |\vec{y}|)^{2}
+    \end{align*}
+    Thus, $|\vec{x}+\vec{y}| \le |\vec{x}| + |\vec{y}|$.
+\end{proof}
+
+\subsection{Orthonormal Bases}
+
+\begin{definition}
+    For any set of vectors $\{\vec{e}_i\}$, they are orthonormal iff
+    we have $e_i \cdot e_j = \delta _{ij}$. 
+\end{definition}
+This immediately implies $|e_i| = 1$ and $e_i \cdot e_j = 0$ if $i \ne j$,
+i.e. every vector is normalized and they are pairwise orthogonal.
+
+\begin{definition}
+    A set of vectors $\{e_i\}$ is a basis of a vector space
+    if every vector can be written as a unique linear combination of $\{e_i\}$.
+    A basis that is orthonormal is an orthonormal basis.
+\end{definition}
+
+Consider $\mathbb{R}^{3}$, and consider vectors $\vec{e}_1, \vec{e}_2, \vec{e}_3$ 
+orthonormal to each other. 
+This is equivalent to a cartesian axes along these directions.
+
+This forms a basis of $\mathbb{R}^{3}$, specifically an orthonormal basis.
+
+By definition, for any $\vec{a} \in \mathbb{R}^{3}$, we have $\vec{a} = a_i \vec{e}_i$.
+We will use row vector and 
+column vector notation to write $\vec{a}$ using its components.
+
+Using the inner product in $\mathbb{R}^{3}$, we have
+\begin{align*}
+    \vec{a}\cdot\vec{b} &= (a_i \vec{e}_i) \cdot (b_j \vec{e}_j)\\
+                    &= a_i b_j (\vec{e}_i \cdot \vec{e}_j)\\
+                    &= a_i b_j \delta _{ij}\\
+                    &= a_i b_i
+\end{align*}
+In particular, we have $\vec{a}\cdot\vec{a} = |\vec{a}|^{2} = a_i a_i$, 
+which is the Pythagorean theorem.
+
+Specifically in $\mathbb{R}^{3}$, we define the 
+canonical basis by have any orthonormal basis,
+and denoting them $\vec{i}, \vec{j}, \vec{k}$. By definition,
+$\vec{i} = (1,0,0)$, $\vec{j} = (0,1,0)$, and $\vec{k} = (0,0,1)$.
+
+\subsection{Vector Product}
+
+The vector product is a product between vectors,
+only on $\mathbb{R}^{3}$.
+
+It is defined geometrically by 
+$\vec{a}\times\vec{b} = |\vec{a}||\vec{b}|\sin(\theta) \unitvec{n}$,
+where $\unitvec{n}$ is a unit vector perpendicular to both $\vec{a}$ and $\vec{b}$.
+Note that two such vectors exist, and we will use the right-handed convention.
+We may also write $\vec{a}\wedge\vec{b}$ for $\vec{a}\times\vec{b}$.
+
+When $\vec{a}$ and $\vec{b}$ are parallel,
+$\unitvec{n}$ is not defined, but
+$\sin\theta = 0$, so we define $\vec{a}\times\vec{b} = \vec{0}$.
+If $\vec{a}$ or $\vec{b}$ are zero,
+then $\theta $ is not defined, but $|\vec{a}|$ or $|\vec{b}|$ is zero,
+so we define $\vec{a}\times\vec{b} = \vec{0}$.
+
+Properties:
+\begin{compactitem}
+\item $\vec{a}\times\vec{b} = -\vec{b}\times\vec{a}$.
+\item $\vec{a}\times\vec{a} = \vec{0}$.
+\item the only cases when $\vec{a}\times\vec{b} = \vec{0}$ are the special cases.
+\item $(\lambda \vec{a})\times\vec{b} = \lambda (\vec{a}\times\vec{b}) = \vec{a}\times(\lambda \vec{b})$.
+\item $\vec{a}\times(\vec{b}+\vec{c}) = \vec{a}\times\vec{b} + \vec{a}\times\vec{c}$.
+\item $\vec{a}\cdot(\vec{a}\times\vec{b}) = \vec{b}\cdot(\vec{a}\times\vec{b}) = 0$.
+\end{compactitem}
+
+Geometrically, the product $\vec{a}\times\vec{b}$ is the
+vector area of the parallelogram defined by 
+$\vec{0}$, $\vec{a}$, $\vec{a}+\vec{b}$, and $\vec{b}$,
+since $|\vec{a}\times\vec{b}| = |\vec{a}||\vec{b}|\sin\theta $.
+
+\end{document}

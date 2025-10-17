@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\input{../common.tex}
+
+\begin{document}
+
+\begin{question}
+    Let group $G$, show that the identity $e$ is the only element $g \in G$
+    such that $g^{2} = g$.
+\end{question}
+\begin{proof}
+    Let $g \in G$ such that $g^{2} = g$. We have
+    $g = (g^{-1}g)g = g^{-1}(gg) = g^{-1}g^{2} = g^{-1}g = e$.
+\end{proof}
+
+\begin{question}
+    Let $H$ and $K$ be two subgroups of a group $G$.
+    Show that $H \cap K$ is a subgroup of $G$.
+\end{question}
+\begin{proof} 
+    Since $H,K$ are both subgroups, we have $e \in H$ and $e \in K$,
+    so $e \in H \cap K$.
+    Similarly, let $a \in H \cap K$, we have $a \in H$ and $a \in K$,
+    and since $H,K$ are groups, $a^{-1} \in H$ and $a^{-1} \in K$,
+    so $a^{-1} \in H \cap K$.
+    Finally, let $a,b \in H \cap K$, then
+    $ab \in H$ and $ab \in K$, so $ab \in H \cap K$.
+\end{proof}
+
+\begin{subquestion}
+    Show that $H \cup K$ is a subgroup of $G$
+    iff $H \subseteq K$ or $K \subseteq H$.
+\end{subquestion}
+\begin{proof}
+    If $H \subseteq K$ or $K \subseteq H$,
+    let $A$ be the larger subgroup, then clearly $H \cup K = A$ is a subgroup.
+
+    If $H \cup K$ is a subgroup, 
+    and $H \nsubseteq K$ and $K \nsubseteq H$,
+    there exists both $a \in H \setminus K$ and $b \in K \setminus H$.
+    Clearly we have $a,b \in H \cup K$.
+    Then $ab \in H \cup K$, so $ab \in H$ or $ab \in K$.
+    \item If $ab \in H$, then $b = (a^{-1}a)b = a^{-1}(ab) \in H$.
+    \item Otherwise, $ab \in K$, then $a = a(bb^{-1}) = (ab)b^{-1} \in K$.
+\end{proof}
+
+\begin{question}
+    Let $G = \mathbb{R} \setminus \{-1\}$, 
+    and let $x * y = x + y + xy$, where $xy$ is usual product.
+    Show that $(G,*,0)$ is a group.
+\end{question}
+\begin{proof}
+    For identity, $0$ trivially satisfies $x * 0 = x + 0 + 0x = x$.
+    For inverse, let $x^{-1} = -\dfrac{x}{x+1}$. Then we have
+    \begin{align*}
+        x * x^{-1} &= x - \frac{x}{x + 1} - \frac{x^{2}}{x + 1} \\
+                       &= \frac{x(x+1) - x - x^{2}}{x+1} \\
+                       &= \frac{x^{2} + x - x - x^{2}}{x + 1}\\
+                       &= 0.
+    \end{align*}
+    Thus, inverse is satisfied. Let $a,b,c \in \mathbb{R} \setminus \{-1\}$, then we have
+    \begin{align*}
+        a * b * c &= (a + b + ab) * c\\
+                  &= (a + b + ab) + c + (a + b + ab)c\\
+                  &= a + b + c + ab + ac + bc + abc\\
+                  &= a + (b + c + bc) + a(b + c + bc)\\
+                  &= a * (b + c + bc)\\
+                  &= a * (b * c).
+    \end{align*}
+    Thus, associativity is satisfied. Last, closure is needed.
+    Assume there exists $a,b \in \mathbb{R} \setminus \{-1\}$ such that $a*b = -1$, and we have
+    \begin{align*}
+        a*b &= a + b + ab\\
+            &= (a + 1)(b + 1) - 1
+    \end{align*}
+    substituting we have $(a + 1)(b + 1) = 0$,
+    so we must have $a = -1$ or $b = -1$, which is a contradiction.
+    Thus, no such $a,b$ exists, and closure is satisfied.
+\end{proof}
+
+\begin{question}
+    Let $G$ be a finite group.
+    Let $g \in G$, show that there exists $n \in \mathbb{N}$ such that $g^{n} = e$.
+\end{question}
+\begin{proof}
+    Let $a > b$ both naturals, and assume $g^{a} = g^{b}$.
+    Then, we have by right multiplying by $g^{-b}$ that $g^{a - b} = e$.
+    Since $a > b$, we have $n = a - b$.
+    Otherwise, if no such $a,b$ exists, then all $g^{a}$ where $a \in \mathbb{N}$
+    are distinct. 
+    That makes $\{g^{a} \mid a \in \mathbb{N}\}$ an infinite set,
+    but $g^{a} \in G$ for all $a \in \mathbb{N}$, 
+    so an infinite set is a subset of a finite one, which is a contradiction.
+\end{proof}
+
+\begin{subquestion}
+    Show that there exists $N \in \mathbb{N}$ such that $g^{N} = e$
+    for all $g \in G$.
+\end{subquestion}
+\begin{proof}
+    Take $N = \prod\limits_{g \in G} \text{order of }g$.
+    Thus, for any $g \in G$, let $n$ be the order of $g$,
+    there exists $k$ such that $N = nk$.
+    Then $g^{N} = g^{nk} = (g^{n})^{k} = e^{k} = e$.
+\end{proof}
+
+\begin{question}
+    Let $S$ be a finite non-empty set of non-zero complex number
+    which are closed under multiplication.
+    Show that $S$ is a subset of the set $\{z \in \mathbb{C} : |z| = 1\}$.
+\end{question}
+\begin{proof}
+    Let arbitrary $z \in S$. Assume $|z| \ne 1$.
+    Since $z \ne 0$, we have $|z| > 0$.
+    If $0 < |z| < 1$, 
+    we have $|z|^{n} \ne |z|^{m}$ if $n \ne m$,
+    so $z^{n} \ne z^{m}$ if $n \ne m$,
+    so the set $\{z^{n} \mid n \in \mathbb{N}\}$
+    is infinite, but also a subset of finite set $S$ 
+    since $S$ is closed under multiplication,
+    which is a contradiction.
+    Similarly, if $|z| > 1$, the same argument holds.
+    Thus, $|z| = 1$ for all $z \in S$.
+\end{proof}
+
+\begin{subquestion}
+    Show that $S$ is a group with respect to multiplication.
+\end{subquestion}
+\begin{proof}
+    Closure and associativity are trivially given.
+
+\end{proof}
+
+\end{document}

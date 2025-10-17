@@ -1,5 +1,5 @@
-\documentclass[12pt]{article}
-\input{common.tex}
+\documentclass[11pt]{article}
+\input{../common.tex}
 
 \begin{document}
 
@@ -85,6 +85,7 @@
     Since $f$ is injective, $a_{1} = a_{2}$.
 \end{proof}
 
+\newpage
 \begin{question}
     A sequence $(x_n)$ is \emph{convergent} if 
     there is some $l \in \mathbb{R}$ such that for all $\varepsilon > 0$
@@ -95,8 +96,6 @@
 \begin{subquestion}
     Use quantifier notation to write this definition.
 \end{subquestion}
-
-Writing down the quantifier corresponding to each part in the definition yields
 \[
 \exists l\in \mathbb{R},\forall \varepsilon > 0,\exists N \in \mathbb{N},\forall n \ge N, |x_n - l| < \varepsilon.
 \]
@@ -111,7 +110,7 @@ Writing down the quantifier corresponding to each part in the definition yields
     \item I pick a $N \in \mathbb{N}$, and finally
     \item the demon picks some $n \ge N$.
 \end{enumerate}
-After these moves, if the statement $|x_n - l| < \varepsilon$ is true, 
+Then, if the statement $|x_n - l| < \varepsilon$ is true, 
 then I win. Otherwise, the demon wins.
 
 \begin{subquestion}
@@ -140,8 +139,6 @@ then I win. Otherwise, the demon wins.
     Write in quantifier notation a definition of
     "the sequence $y_n$ does not converge."
 \end{subquestion}
-
-Negating each quantifier and then the final statement yields
 \[
 \forall l \in \mathbb{R}, \exists \varepsilon > 0, \forall N \in \mathbb{N}, \exists n \ge N, |y_n - l| \ge \varepsilon.
 \]
@@ -173,6 +170,7 @@ Negating each quantifier and then the final statement yields
     shows that $|y_n -l| \ge \varepsilon$.
 \end{proof}
 
+\newpage
 \begin{question}
     Solve as much of problem 10 of the introductory problems sheet as possible:
     $n$ people each hold one piece of unique information.
@@ -254,6 +252,14 @@ let $S'$ be $S$ with all occurences of $a$ replaced by $b$.
 It is obvious that $(\Omega', S')$ forms a sequence.
 We claim that it is a solution.
 
+\textbf{The following section is incomplete,
+because it doesn't work.
+The original idea was to show that if $n+1$ has
+a solution of $f(n+1)$, then we must have $f(n) \le f(n+1) + 2$,
+but $f(4) = 4$, so all $f(n) \ge 2n - 4$ where $n \ge 4$.
+However, the method can only show $f(n) \le f(n+1) + 1$.
+}
+
 Define $f_n$ to be $f_{0}$ after application
 of the first $n$ calls of $S$.
 Similarly, define $f_n'$ to be $f_{0}$ after application
@@ -287,8 +293,9 @@ By definition, $s _{n+1}' = (b,y)$.
 For any $u \in \Omega' = \Omega - \{a\}$, if $u \ne a$ (always true) and $u \ne y$ and $u \ne b$,
 then $f_{n+1}(u) = f_n(u) \subseteq f_n'(u) = f_{n+1}'(u)$.
 If $u = y$, then
-$f_{n+1}(u) = f_n($
+$f_{n+1}(u) = f_n(a) \cup f_n(y)$.
 
+\newpage
 \begin{question}
     Comment on two induction proofs:
 \end{question}
@@ -313,14 +320,14 @@ the induction cannot continue.
 The claim fails to mention that the proposition is
 only true when $n \ge 3$, since the base case of the
 induction is $n = 3$, and in each step $P(n+1)$ is proven from $P(n)$.
+Other than that, the proof is sound.
 
+\newpage
 \begin{question}
-    Let $(G,\circ)$ be a group. Prove the following facts.
-\end{question}
-\begin{subquestion}
+    Let $(G,\circ)$ be a group.
     Define a new binary operation $\star$ on $G$ by $a \star b = b \circ a$.
     Is $(G,\star)$ a group? If so, is it isomorphic to $(G,\circ)$?
-\end{subquestion}
+\end{question}
 
 \begin{proof}
     Yes. The identity in $(G,\circ)$ remains the identity in $(G,\star)$,
@@ -372,13 +379,15 @@ This seems to be an automorphism of $(G,\circ)$?
 If we let $\psi(a) = a$, the trivial automorphism,
 we have $\phi(a) = u^{-1} \circ a$.
 
+\newpage
 \begin{question}
     Let $G$ be a non-empty set with an associative binary operation,
     written as multiplication, such that 
     for all $a \in G$, there exists a unique $a^{*} \in G$ such that $aa^{*}a = a$.
     Prove that $G$ forms a group under this binary operation.
 \end{question}
-\begin{nonproof} \textit{(Partial)}
+\begin{proof}
+    \textit{(Breakthrough done by Jerry)}
     With it being an associative binary operation, 
     closure and associativity are covered.
     It suffices to show an identity exists and that
@@ -390,22 +399,129 @@ we have $\phi(a) = u^{-1} \circ a$.
     Thus, since $a^{*}$ is unique, $a^{*}aa^{*} = a^{*}$.
     Applying uniqueness again yields $a = a^{**}$.
 
-    Let $a,b \in G$. Then we have that if $a^{*} = b^{*}$,
-    then $a^{**} = b^{**}$, so $a = b$.
-    Therefore, $f(a) = a^{*}$ is injective.
-    For any $a$, we have $(a^{*})^{*} = a$, so $f$ is also surjective.
-    Thus, $f$ is a bijection.
+    % Let $a,b \in G$. Then we have that if $a^{*} = b^{*}$,
+    % then $a^{**} = b^{**}$, so $a = b$.
+    % Therefore, $f(a) = a^{*}$ is injective.
+    % For any $a$, we have $(a^{*})^{*} = a$, so $f$ is also surjective.
+    % Thus, $f$ is a bijection.
 
     Consider the sequence $aa^{*}aa^{*}aa^{*}$.
     Using $a^{*}aa^{*} = a^{*}$ yields $aa^{*}(aa^{*})aa^{*} = aa^{*}$.
     By uniqueness, we have $(aa^{*})^{*} = aa^{*}$.
     By a similar argument, $(a^{*}a)^{*} = a^{*}a$.
 
-    Define $R_{a} = a^{*}a$ and $L_{a} = aa^{*}$.
-    Rewriting things from before gives
-    $L_{a}a = a$, $aR_{a} = a$.
-    $L_a L_a = L_a$, and $R_a R_a = R_a$.
-    $L_a^{*} = L_a$, and $R_a^{*} = R_a$.
-\end{nonproof}
+    We will now prove left division.
+    Assume $ab = ac$ and let $g = ab = ac$.
+    We have $g^{*} = g^{*}gg^{*}$,
+    right multiplying by $a$
+    and substituting definitions yields
+    $g^{*}a = g^{*}a(b)g^{*}a$ and $g^{*}a = g^{*}a(c)g^{*}a$.
+    By the uniqueness of $(g^{*}a)^{*}$, we have $b = (g^{*}a)^{*} = c$.
+    Thus, $ab = ac$ implies $b = c$.
+    Similarly, by considering $g = ba = ca$, we can show right division.
+    
+    Now, we have $aa^{*}ab = ab$, and left dividing by $a$ yields $a^{*}ab = b$.
+    Similarly, $baa^{*}a = ba$ yields $baa^{*} = b$.
+    Thus, $a^{*}a$ is a left identity and $aa^{*}$ is a right identity,
+    for any $a$.
+
+    We have $aa^{*}a = a = a^{*}aa$, since $a^{*}a$ is a left identity.
+    Right dividing by $a$ yields $aa^{*} = a^{*}a$. Let $e_a = aa^{*} = a^{*}a$,
+    we have $e_a$ identity for all $a$.
+    Then, $e_a a = a = e_b a$, right dividing by $a$ yields $e_a = e_b$, so let
+    the identity be $e = e_a = e_b$.
+
+    By definition, $aa^{*} = a^{*}a = e_a = e$, 
+    so $a^{-1} = a^{*}$ satisfies the inverse axioms.
+    Thus, $G$ forms a group.
+\end{proof}
+
+\newpage
+\section{Supervision Results}
+
+Let $G$ be a non-empty set
+equipped with an associative multiplication
+that has for any $a$ unique $a^{*}$ 
+satisfying $aa^{*}a = a$.
+
+\begin{lemma}
+    For any $a \in G$, $a = a^{**}$.
+\end{lemma}
+\begin{proof}
+    Consider
+    \[
+        aa^{*}aa^{*}a = aa^{*}a = a.
+    \]
+    Rebracketing yields
+    \[
+        a(a^{*}aa^{*})a = a,
+    \]
+    so by the uniqueness of $a^{*}$ we have $a^{*} = a^{*}aa^{*}$.
+    By the uniqueness of $a^{**}$, we have $a^{**} = a$.
+\end{proof}
+
+\begin{definition}
+    We say an element $g \in G$ is \emph{idempotent}
+    if $g^{2} = g$.
+\end{definition}
+
+\begin{lemma}
+    Idempotent elements are left identities.
+\end{lemma}
+\begin{proof}
+    Let $g \in G$ such that $g^{2} = g$,
+    and let arbitrary $h \in G$.
+    Then, we have
+    \begin{align*}
+        gh &= gh(gh)^{*}gh\\
+            &= gh(gh)^{*}ggh\\
+            &= (gh)((gh)^{*}g)(gh)
+    \end{align*}
+    so by the uniqueness of $(gh)^{*}$ we have
+    \[
+        (gh)^{*} = (gh)^{*}g
+    \]
+    Now, right-multiply by $h(gh)^{*}$ on both sides, yielding
+    \begin{align*}
+        (gh)^{*}h(gh)^{*} &= (gh)^{*}gh(gh)^{*}\\
+                          &= (gh)^{*}(gh)^{**}(gh)^{*}\\
+                          &= (gh)^{*}
+    \end{align*}
+    so by the unqiueness of $(gh)^{**}$ we have $h = (gh)^{**} = gh$.
+    Thus, $g$ is a left identity.
+\end{proof}
+
+By a very similar argument, idempotent elements are also right identities.
+
+\begin{corollary}
+    For any $a \in G$, $aa^{*}$ and $a^{*}a$ are both identities.
+\end{corollary}
+\begin{proof}
+    $aa^{*}aa^{*} = a(a^{*}aa^{*}) = aa^{*}$, so $aa^{*}$ is idempotent.
+    Similarly, $a^{*}aa^{*}a = a^{*}(aa^{*}a) = a^{*}a$, so $a^{*}a$ is idempotent.
+    By the previous lemma, it is thus also a left and right identity.
+\end{proof}
+
+\begin{corollary}
+    For any $e_{1},e_{2}$ identities, $e_{1}=e_{2}$.
+\end{corollary}
+\begin{proof}
+    $e_{1} = e_{1}e_{2} = e_{2}$.
+\end{proof}
+
+\begin{corollary}
+    For any $a,b \in G$, $aa^{*} = a^{*}a = bb^{*} = b^{*}b$.
+\end{corollary}
+
+\begin{prop}
+    $G$ is a group.
+\end{prop}
+\begin{proof}
+    The identity is given by $e = aa^{*}$ for any $a \in G$.
+    By definition, $aa^{*} = a^{*}a = e$ for all $a$,
+    so $a^{*}$ is the inverse.
+    Associativity and closure are given.
+    Thus, $G$ satisfies all group axioms.
+\end{proof}
 
 \end{document}

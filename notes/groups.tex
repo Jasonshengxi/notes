@@ -1,0 +1,547 @@
+\documentclass[12pt]{article}
+\input{../common.tex}
+
+\begin{document}
+% Lectured by Henry Wilton (hjrw2)
+
+\section{Examples and Definitions}
+
+You can think of groups in two ways:
+It is either something to do with algebra,
+or something to do with symmetry.
+
+We will begin with the symmetry point of view.
+
+\subsection{Symmetry}
+
+An equilateral triangle has at least two different kinds of symmetry.
+It has \emph{rotational} and \emph{reflective} symmetry,
+and most importantly, the identity symmetry.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[scale=3]
+        \draw (90:1) coordinate (A) 
+            -- (210:1) coordinate (B) -- (330:1) coordinate (C) -- cycle;
+    \end{tikzpicture}
+    \caption{The "identity" symmetry}
+\end{figure}
+
+Combining all symmetries, there are 6 different symmetries 
+on an equilateral triangle:
+\begin{compactenum}
+    \item identity,
+    \item rotate by $120\degree$ anticlockwise,
+    \item rotate by $240\degree$ anticlockwise
+    \item 5. 6. reflections along the three axes.
+\end{compactenum}
+
+\begin{exercise}
+    How many symmetries does a regular $n$-gon have?
+\end{exercise}
+\begin{answer}
+    the number of symmetries of a regular $n$-gon is $2n$.
+\end{answer}
+
+Now we begin to consider the \emph{composition} of symmetries,
+or, from an algebraic standpoint, the \emph{product} of symmetries.
+
+Say we compose a rotation by $120\degree$ anticlockwise and
+a flip around the vertical axis. This is a reflection around 
+the axis of positive slope.
+
+Some important features to notice from this are:
+\begin{compactitem}
+\item Symmetries can be composed, 
+    i.e. symmetries are closed under composition.
+\item There is an identity symmetry that leaves everything the same.
+\item Every symmetry has an inverse. Specifically, in this case:
+    \begin{compactitem}
+    \item the inverse of the identity is itself.
+    \item the inverse of a rotation is the opposite rotation.
+    \item the inverse of a reflection is itself.
+    \end{compactitem}
+\item Composition of symmetries is \emph{associative},
+    as in $a(bc) = (ab)c$, but for symmetries.
+\end{compactitem}
+Additionally, there is one important non-feature: 
+symmetries are not always commutative. 
+It is trivial to check by multiplying a rotation by a reflection,
+then the other way around.
+
+But isn't this whole drawing thing exhausting (especially for me)?
+Let's go to the algebra side.
+
+\subsection{Algebra}
+
+\begin{definition}
+    A binary operation on a set $X$ is
+    a function $f : X \times X \to X$.
+    It is also denoted $\cdot$ for multiplication.
+    We write $a \cdot b$ for $f(a,b)$.
+\end{definition}
+
+Note that this definition includes closure,
+in that for any $x,y \in X$, we have $f(x,y) \in X$.
+
+\begin{definition}
+    A group is a triple $(G,\cdot,e)$ where
+    $G$ is a set, $\cdot$ is a binary operation on $G$,
+    and $e \in G$, which satisfies the following four axioms:
+    \begin{compactenum}[(i)]
+    \item Closure: for all $a,b \in G$, we have $a \cdot b \in G$.
+    \item Associativity: for all $a,b,c \in G$, we have $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+    \item (Right) Identity: for all $a \in G$, we have $a \cdot e = a$.
+    \item (Right) Inverse: for all $a \in G$, there exists $a^{-1} \in G$ s.t. $a \cdot a^{-1} = e$.
+    \end{compactenum}
+\end{definition}
+
+Note that the closure axiom is indeed redundant,
+by the definition of a \emph{binary operation on G}.
+
+Example: Notice that the set of symmetries of 
+the equilateral triangle forms a group.
+
+We can also think of this definition as
+encompassing \emph{algebra with one operation}.
+
+\begin{exercise}
+    $(\mathbb{Z},+,0)$ forms a group.
+\end{exercise}
+\begin{proof}
+    Closure and identity and associativity are trivial.
+    The inverse of $x \in \mathbb{Z}$ is $-x$, in that $x + (-x) = 0$.
+\end{proof}
+
+\begin{theorem}
+    \label{thm:right_is_left}
+    Let $(G,\cdot,e)$ be a group, and $a,b,b'e' \in G$. We have:
+    \begin{compactenum}[(i)]
+    \item If $a \cdot b = e$ then $b \cdot a = e$. \\
+        (i.e. right inverses are left inverses)
+    \item If $e \cdot a = a$. \\
+        (i.e. right identities are left identities)
+    \item If $a,b,b'$ are s.t. $a \cdot b = e = a \cdot b'$,
+        then $b = b'$. \\
+        (i.e. inverses are unique)
+    \item If $a \cdot e' = a$ then $e' = e$.\\
+        (i.e. the identity is unique).
+    \end{compactenum}
+\end{theorem}
+
+The proof is given in \autoref{sec:proof_of_right_is_left}.
+Since the inverse is unique, we denote $b \in G$ s.t. $a \cdot b = e$ as $a^{-1} = b$.
+We have then that
+\[
+    a \cdot a^{-1} = e = a^{-1} \cdot a.
+\]
+It is also clear from that equation that $a = (a^{-1})^{-1}$.
+Now the "to the power of $-1$" is defined, let us also define the rest.
+\begin{definition}
+    We define the powers of $a$, such that
+    \begin{compactitem}
+    \item $a^{0} = e$,
+    \item $a^{n} = a^{n-1} \cdot a$ for any $n \in \mathbb{N}$.
+    \item $a^{-n} = (a^{-1})^{n}$ for any $n \in \mathbb{N}$.
+    \end{compactitem}
+\end{definition}
+Thus, we have defined $a^{n}$ for all $n \in \mathbb{Z}$.
+
+\begin{exercise}
+    Show that, for all $a \in G$ and $m,n \in \mathbb{Z}$, we have
+    \[
+        a^{m+n} = a^{m}\cdot a^{n} 
+        \quad \text{and} \quad
+        (a^{m})^{n} = a^{mn}
+    \]
+\end{exercise}
+\begin{nonproof}
+    TODO
+\end{nonproof}
+
+Note that much alike how it is not necessarily true that
+$a \cdot b = b \cdot a$, it is also not necessarily true that
+$(a \cdot b)^{-1} = a^{-1} \cdot b^{-1}$. Instead, it is always true that
+\begin{align*}
+    (a \cdot b) \cdot (b^{-1} \cdot a^{-1})
+    &= a \cdot b \cdot b^{-1} \cdot a^{-1}\\
+    &= a \cdot e \cdot a^{-1}\\
+    &= a \cdot a^{-1}\\
+    &= e.
+\end{align*}
+Thus, we have
+\[
+    (a \cdot b)^{-1} = b^{-1} \cdot a^{-1}.
+\]
+\begin{definition}
+    An \emph{abelian} group $(G,\cdot,e)$ is such that
+    for any $a,b \in G$, we have
+    $a \cdot b = b \cdot a$.
+\end{definition}
+
+For example, let $G = \{e\}$, define $\cdot$ by $e \cdot e = e$,
+then $(G,\cdot,e)$ is an abelian group, and 
+is generally known as the \emph{trivial} group.
+
+For some less trivial examples,
+the groups $(\mathbb{Z},+,0)$, $(\mathbb{Q},+,0)$, $(\mathbb{R},+,0)$, $(\mathbb{C},+,0)$
+are all abelian groups, and $x^{-1}$ is defined by $-x$.
+
+Things that are not groups include:
+$(\mathbb{Z},\times,1),(\mathbb{N},\times,1),(\mathbb{Q},\times,1)$, 
+but for differing reasons.
+Specifically, $(\mathbb{Q} \setminus \{0\}, \times, 1)$ is an abelian group,
+and remains a group if $\mathbb{Q}$ is replaced by $\mathbb{R}$ or $\mathbb{C}$.
+
+\begin{definition}
+    The \emph{order} of a group $(G,\cdot,e)$ is the 
+    number of elements in $G$,
+    denoted by $|G|$ or $\#G$.
+    If $|G|$ is finite then $(G,\cdot,e)$ is a \emph{finite group}.
+\end{definition}
+
+For any $n \in \mathbb{N}$, define $C_n = \{z \in \mathbb{C} : z^{n} = 1\}$, then $(C_n,\times,1)$ is an abelian group.
+
+Let $Z_n = \{0,1,\cdots,n-1\}$, define $a +_{n} b$ to be the remainder
+of $a + b$ when divided by $n$.
+
+\begin{exercise}
+    Show that $(Z_n, +_{n}, 0)$ is an abelian group.
+\end{exercise}
+\begin{proof}
+    TODO
+\end{proof}
+
+\subsection*{Symmetric Groups}
+
+\begin{definition}
+    Let $X,Y$ be sets. A \emph{bijection} is a
+    map $f:X\to Y$ that has an \emph{inverse} $g:Y\to X$,
+    such that $f \circ g = \id Y$ , and $g \circ f = \id X$.
+    A bijection from $X$ to itself is called a \emph{permutation}.
+\end{definition}
+
+\begin{definition}
+    $\Sym(X)$ is defined to be the set of permutations of a set $X$.
+\end{definition}
+
+\begin{lemma}[Composition is associative]
+    Consider the following maps: $W \stackrel f{\to} X \stackrel g\to Y \stackrel h\to Z$. Then $(h \circ g) \circ f = h \circ (g \circ f)$.
+\end{lemma}
+\begin{proof}
+    Let arbitrary $w \in W$,
+    $(h\circ g)\circ f (w) = (h\circ g)(f(w)) = h(g(f(w))) = h(g \circ f(w)) = h\circ(g\circ f)(w)$.
+\end{proof}
+
+\begin{prop}
+    $(\Sym(X),\circ,\id X)$ is a group, 
+    called the symmetric group of $X$, denoted $S_X$.
+\end{prop}
+\begin{proof}
+    Associativity follows from the lemma,
+    inverse follows by definition.
+\end{proof}
+
+\begin{definition}
+    We write $S_n = \Sym(X)$ where $X = \{1,2,\cdots,n\}$.
+\end{definition}
+
+Note that $|S_n| = n!$.
+
+\subsection{Subgroups}
+
+\begin{definition}
+    Let $G$ be a group and $H \subseteq G$, with the following properties:
+    \begin{compactitem}
+    \item $e \in H$,
+    \item $ab \in H$ for all $a,b \in H$,
+    \item $a^{-1} \in H$ for all $a \in H$.
+    \end{compactitem}
+    Then we say $H$ is a \emph{subgroup} of $G$, denoted $H \le G$.
+\end{definition}
+
+Trivially, since $G$ is a group, associativity of
+the operation in $H$ is given, so $H$ forms a group under $\cdot_G$, 
+with the same identity $e$.
+
+For example, trivially, $G$ is a subgroup of itself, and $\{e\}$ is a subgroup of $G$.
+The subgroup $\{e\}$ is called the \emph{trivial subgroup}.
+A subgroup that is not either of those is called a \emph{proper} subgroup.
+Trivially, we also have $\mathbb{Z} \le \mathbb{Q} \le \mathbb{R} \le \mathbb{C}$.
+
+Define $n\mathbb{Z}$ to be $\{nk : k \in \mathbb{Z}\}$. We have $n\mathbb{Z} \le \mathbb{Z}$,
+since the identity element $0 = 0n \in n\mathbb{Z}$,
+the sum of two elements $nk_{1} + nk_{2} = n(k_{1}+k_{2}) \in n\mathbb{Z}$,
+and the inverse of an element $-nk = n(-k) \in n\mathbb{Z}$.
+
+\begin{prop}
+    If $H \le \mathbb{Z}$, then $H = n\mathbb{Z}$ for some $n \in \mathbb{N}_0$.
+\end{prop}
+\begin{proof}
+    If $H = \{0\}$, then $H = 0\mathbb{Z}$, and we are done.
+    If $H \ne \{0\}$, then there exists $a \in H$ such that $a \ne 0$.
+    if $a > 0$, there exists a positive integer in $H$.
+    if $a < 0$, then $-a \in H$ has $-a > 0$, which is a positive integer in $H$.
+    Thus, let $n \in H \setminus \{0\}$ be the smallest positive element of $H$.
+
+    By induction, $nk \in H$ for $k \in \mathbb{N}$.
+    But taking the inverse for each element, we have $(-nk) = n(-k) \in H$ for $k \in \mathbb{N}$.
+    Thus, $n\mathbb{Z} \le H$.
+
+    Suppose $n\mathbb{Z} \ne H$, so there exists $x \in H$ st $x \ne n\mathbb{Z}$.
+    Divide $x$ by $n$ and taking remainders, we have
+    $x = nq + n$ for some $q \in \mathbb{Z}$ and $0 < r < n$.
+    But we have $r = x - nq$, noting that
+    $x \in H$ and $nq \in n\mathbb{Z} \le H$.
+    Thus, $r \in H$. However, $0 < r < n$,
+    which is a smaller positive element of $H$. \contra
+\end{proof}
+
+\begin{prop}
+    For any family of subgroups $H_i \le G$,
+    \[
+        \bigcap_i H_i = \{a \in G : a \in H_i \text{ for all } i\} \le G
+    \]
+\end{prop}
+\begin{proof}
+    For partial proof, see Example Sheet 1, Question 2.
+    The entire proof is trivial after that.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a subset of group $G$. Then
+    we define $\gen X$ to be
+    \[
+        \gen X = \bigcap_{X \le H \le G} H
+    \]
+    And we call this the \emph{subgroup generated by $X$}.
+\end{definition}
+Intuitively, $\gen X$ is the smallest subgroup
+containing $X$.
+If $G = \gen X$, we say that $X$ \emph{generates} $G$,
+or that $X$ is a \emph{generating set} for $G$.
+
+\begin{prop}
+    If $X$ generates $G$, that means that every $g \in G$
+    can be written as
+    \[
+    g = x_{1}^{\pm 1}x_{2}^{\pm 1}\cdots x_{n}^{\pm 1}
+    \]
+    for some $n \ge 0$, where $x_i$ not necessarily distinct have $x_i \in X$.
+\end{prop}
+\begin{proof}
+    See Example Sheet 1, Question 9.
+\end{proof}
+
+\subsection{Geometric Examples}
+
+Let $\mathbb{C}$ be the 2D plane, 
+equipped with the usual notion of distance.
+
+\begin{tikzpicture}
+    \draw[->] (-1,0) -- (6,0) node [right] {Re};
+    \draw[->] (0,-1) -- (0,6) node [above] {Im};
+    \draw (5, 1) coordinate (w) 
+        node[draw, circle, fill=black, inner sep=0.03cm] {} 
+        node[right] {$w = w_{1} + iw_{2}$};
+    \draw (1, 5) coordinate (z) 
+        node[draw, circle, fill=black, inner sep=0.03cm] {}
+        node[above right] {$z = z_{1} + iz_{2}$};
+    \draw (w) -- (z);
+\end{tikzpicture}
+
+\begin{definition}
+    For any subset $X \subseteq \mathbb{C}$,
+    an \emph{isometry} of $X$ is a bijection
+    $f : X \to X$ that preserves distance,
+    in that for any $z,w \in X$,
+    $|z-w| = |f(z)-f(w)|$.
+\end{definition}
+
+Since any isometry is a bijection of a set $X$,
+it is an element of the symmetric group $\Sym(X)$.
+
+\begin{prop}[Isometry Groups in $\mathbb{C}$]
+    Let $X \subseteq \mathbb{C}$, The set of isometries of $X$,
+    $\Isom(X)$, is a subgroup of $\Sym(X)$.
+    In particular, $\Isom(X)$ is a group.
+\end{prop}
+\begin{proof}
+    Let $f,g \in \Isom(X)$, and $x,y \in X$. 
+    We will now check the axioms:
+    \begin{compactenum}
+    \item The identity of $\Sym(X)$ is $\id X$, 
+        which has $|\id X(x) - \id X(y)| = |x - y|$ by definition.
+        Thus, $\id X \in \Isom(X)$.
+    \item Since $f,g$ are isometries, we have
+        $|f \circ g(x) - f\circ g(y)| = |f(g(x)) - f(g(y))| = |g(x) - g(y)| = |x - y|$.
+        Thus, $f\circ g$ is an isometry.
+    \item We have
+        $|f^{-1}(x) - f^{-1}(y)| = |f(f^{-1}(x)) - f(f^{-1}(y))| = |x - y|$,
+        so $f^{-1}$ is an isometry.
+    \end{compactenum}
+    Thus, all axioms of subgroups are satisfied.
+\end{proof}
+
+\begin{definition}[Dihedral Groups]
+    Let $X_n\subseteq \mathbb{C}$, where $n \ge 3$, be the vertices of the
+    regular $n$-gon with vertices $\{\exp(2\pi i k / n) : k = 0,\cdots,n-1\}$.
+    \begin{center}
+        \begin{tikzpicture}[scale=3]
+            \draw[->] (-1.5, 0) -- (1.5, 0) node[below] {Re};
+            \draw[->] (0, -1.5) -- (0, 1.5) node[right] {Im};
+            \draw (0,0) circle[radius=1cm];
+            \foreach \x in {0,...,5}
+            {
+                \draw ({360/6 * \x}:1) -- ({(\x + 1)*360/6}:1);
+                \draw ({360/6 * \x}:1) 
+                    node[draw, fill=black, circle, inner sep=0.04cm] {}
+                    % ({360/6 * \x}:1.2)
+                    % node {$z_\x$}
+                    ;
+            }
+        \end{tikzpicture}
+    \end{center}
+    We define $D_{2n}$ to be $\Isom(X_n)$, the $n$th dihedral group.
+\end{definition}
+
+\begin{theorem}
+    $|D_{2n}| = 2n$
+\end{theorem}
+
+\begin{lemma}[Kite Lemma]
+    Let $x_{1},x_{2},y_{1},y_{2} \in \mathbb{C}$.
+    If $|y_{1} - x_{1}| = |y_{2} - x_{1}|$
+    and $|y_{1} - x_{2}| = |y_{2} - x_{2}|$,
+    then $x_{2} - x_{1}$ is perpendicular to $y_{2} - y_{1}$.
+\end{lemma}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw
+            (-1,0) coordinate (x1)
+            node[circle, draw, fill=black, inner sep=0.04cm] {}
+            node[left] {$x_{1}$};
+        \draw
+            (3,0) coordinate (x2)
+            node[circle, draw, fill=black, inner sep=0.04cm] {}
+            node[right] {$x_{2}$};
+        \draw
+            (0,1) coordinate (y1)
+            node[circle, draw, fill=black, inner sep=0.04cm] {}
+            node[above] {$y_{1}$};
+        \draw
+            (0,-1) coordinate (y2)
+            node[circle, draw, fill=black, inner sep=0.04cm] {}
+            node[below] {$y_{2}$};
+        \draw (x1) -- (y1) -- (x2) -- (y2) -- cycle;
+        \draw (x1) -- (x2);
+        \draw (y1) -- (y2);
+        \draw (0,0) node[below right] {O};
+    \end{tikzpicture}
+\end{center}
+
+\begin{proof}
+    By symmetry, $\angle x_{1}O y_{1} = \angle x_{1} O y_{2}$,
+    but they add to $\pi$, so they must each be $\pi/2$.
+
+    Note that in the degenerate case of $y_{1} = y_{2}$,
+    $y_{2} - y_{1} = 0$, and $0$ is perpendicular to every complex number.
+\end{proof}
+
+\begin{lemma}[3-Point Lemma]
+    Let $X \subseteq \mathbb{C}$ and $f \in \Isom(X)$.
+    If there are $x_{1},x_{2},x_{3} \in X$
+    not colinear, s.t. $f(x_i) = x_i$
+    for $i = 1,2,3$, then $f = \id X$.
+\end{lemma}
+\begin{proof}
+    The proof is by contradiction.
+    Suppose that $f(y) \ne y$ for some $y \in X$.
+    Then,
+    \begin{align*}
+        |f(y) - x_i| = |f(y) - f(x_i)| = |y - x_i|.
+    \end{align*}
+    for $i = 1,2,3$.
+    Applying the kite lemma with $y_{1}=y$, $y_{2}=f(y)$ yields that
+    $x_{2} - x_{1}$ is perpendicular to $f(y) - y$.
+    Applying the kite lemma again for $x_{2},x_{3}$ yields that
+    $x_{3} - x_{2}$ is also perpendicular to $f(y) - y$.
+    Since $f(y) - y$ is non-zero, $x_{3} - x_{2}$ must be parallel to $x_{2} - x_{1}$.
+    This contradicts the assumption that $x_{1},x_{2},x_{3}$ are not colinear. \contra
+\end{proof}
+
+This lemma can be generalized to the $n+1$-point lemma,
+applicable in $\mathbb{R}^{n}$.
+
+\appendix
+\newpage
+
+\section{Notation}
+Let $X$ a set, then we denote the identity map on $X$,
+$\id X : X \to X$, defined by $\id X(x) = x$.
+
+Given functions $f:A\to B$ and $g:B\to C$,
+we defined $g\circ f:A\to C$ by $g\circ f(a) = g(f(a))$.
+
+Since it is somewhat cumbersome to write $(G,\cdot,e)$
+for a group, we will abuse notation and simply write $G$ for the group.
+
+We will then write $e_{G}$ and $\cdot_{G}$ for the operations of the group
+if it is important that they correspond to the group $G$.
+
+\section{Proof of \autoref{thm:right_is_left}}
+\label{sec:proof_of_right_is_left}
+\begin{proof}
+    (i)
+    Assume $a,b \in G$ s.t. $a \cdot b = e$.
+    \begin{align*}
+        b &= b\cdot e &\text{by the identity axiom} \\
+          &= b \cdot (a \cdot b) &\text{by assumption}\\
+          &= (b \cdot a) \cdot b &\text{by associativity}
+    \end{align*}
+    By the inverse axiom, we have $c$ such that $b \cdot c = e$.
+    Right multiplying the above equation by $c$, we have
+    \begin{align*}
+        b \cdot c &= ((b \cdot a) \cdot b) \cdot c\\
+        b \cdot c &= (b \cdot a) \cdot (b \cdot c) & \text{by the associativity axiom}\\
+        e &= (b \cdot a) \cdot e & \text{by assumption (inverse axiom)}\\
+          &= b \cdot a & \text{by the identity axiom}.
+    \end{align*}
+    Thus, $e = b\cdot a$, and we have (i).
+
+    (ii)
+    By the inverse axiom and (i) we have $b \in G$ s.t. $a \cdot b = e = b \cdot a$.
+    Now, we have
+    \begin{align*}
+        e \cdot a &= (a \cdot b) \cdot a &\text{as above}\\
+                  &= a \cdot (b \cdot a) &\text{by the associativity axiom}\\
+                  &= a \cdot e &\text{as above}\\
+                  &= a &\text{by the identity axiom}.
+    \end{align*}
+    Thus, $e \cdot a = a$, and we have (ii).
+
+    (iii)
+    Suppose $b,b' \in G$ s.t. $a\cdot b = e = a \cdot b'$. Then we have
+    \begin{align*}
+        b' &= e \cdot b' &\text{by (ii)}\\
+           &= (b \cdot a) \cdot b' &\text{by above and (i)}\\
+           &= b \cdot (a \cdot b') &\text{by the associativity axiom}\\
+           &= b \cdot e &\text{as above}\\
+           &= b &\text{by the identity axiom}.
+    \end{align*}
+    Thus, $b' = b$, and we have (iii).
+
+    (iv)
+    Suppose $e' \in G$ s.t. $a \cdot e' = a$.
+    By the inverse axiom and (i) we have $b \in G$ s.t. $b \cdot a = e$.
+    Left multiplying by $b$ gives 
+    \begin{align*}
+        b \cdot (a \cdot e') &= b \cdot a\\
+        (b \cdot a) \cdot e'   &= b \cdot a &\text{by the associativity axiom}\\
+        e \cdot e' &= e &\text{as above}\\
+        e' &= e &\text{by (ii)}
+    \end{align*}
+    Thus, we have (iv).
+\end{proof}
+
+\end{document}

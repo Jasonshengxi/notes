@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+\input{../common.tex}
+
+\begin{document}
+\begin{question}
+    If $n^{2}$ is a multiple of $3$, must $n$ be a multiple of $3$?
+\end{question}
+\begin{answer}
+    Yes.
+    The statement can be rephrased as $3 \mid n^{2} \implies 3 \mid n$.
+    We will prove the contrapositive, $3 \nmid n \implies 3 \nmid n^{2}$.
+    Let $n$ such that $3 \nmid n$, we have $n = 3k + r$
+    where $k \in \mathbb{N}_0$ and $r \in \{1,2\}$.
+    Then we have
+    \begin{align*}
+        n^{2} &= (3k + r)^{2}\\
+              &= 9k^{2} + 6kr + r^{2}\\
+              &= 3(3k^{2} + 2kr) + r^{2}
+    \end{align*}
+    Since $r = 1$ or $r = 2$, we have $r^{2} = 1$ or $r^{2} = 4$,
+    neither of which are a multiple of $3$.
+    Thus, $n^{2}$ is not a multiple of $3$.
+\end{answer}
+
+
+\begin{question}
+    Consider the sequence $41,43,47,53,61,\cdots$.
+    Are all these numbers prime?
+\end{question}
+\begin{answer}
+    No.
+    If the starting term is $x_{0}$, The sequence is $x_n = n^{2} + n + 41$.
+    Thus, $x_{41} = 41^{2} + 41 + 41$ is divisible by $41$.
+\end{answer}
+
+\begin{question}
+    
+\end{question}
+
+\begin{question}
+    Suppose we have some positive integers (not necessarily distinct)
+    whos sum is $100$. How large can their product be?
+\end{question}
+
+\begin{answer}
+    If we consider the function
+    \[
+        f(x) = x^{100/x} = \exp(100x^{-1}\ln x),
+    \]
+    then we have
+    \begin{align*}
+        f'(x) &= 100(-x^{-2}\ln x + x^{-2})\exp(100x^{-1}\ln x)\\
+                &= 100x^{-2}(1-\ln x)\exp(100x^{-1}\ln x)
+    \end{align*}
+    Solving for zeros, we have $\ln x = 1$, so $x = e$.
+
+    $(k+a)(k-a) = k^{2} - a^{2}$. 
+    For two numbers,
+    the lower their difference $2a$, the higher their product.
+
+    Consider $(k+a)(k+b)(k+c)$ where $a+b+c=0$,
+    we have
+    \begin{align*}
+        (k+a)(k+b)(k+c) &= (k^{2} + (a+b)k + ab)(k + c)\\
+                        &= k^{3} + (a+b+c)k^{2} + (ab + bc + ac)k + abc\\
+                        &= k^{3} + 1/2((a+b+c)^{2} - a^{2} - b^{2} - c^{2})k + abc\\
+                        &= k^{3} - 1/2(a^{2} + b^{2} + c^{2})k + abc
+    \end{align*}
+
+\end{answer}
+
+\end{document}

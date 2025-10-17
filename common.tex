@@ -18,7 +18,7 @@
 
 \newtheoremstyle{customstyle}
   {8pt} % Space above (adjust as needed)
-  {0} % Space below (adjust as needed)
+  {0pt} % Space below (adjust as needed)
   {} % Body font
   {} % Indent amount
   {\bfseries} % Theorem head font
@@ -26,12 +26,13 @@
   {0pt} % Space after theorem head
   {} % Theorem head spec
 \theoremstyle{customstyle}
-\newtheorem{exercise}{Exercise}[section]
-\newtheorem{claim}{Claim}[section]
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{definition}{Definition}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
 \newtheorem{question}{Question}
 \newtheorem{subquestion}{Part}[question]
 
@@ -47,6 +48,21 @@
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \renewcommand{\bar}{\overline}
-\renewcommand{\vec}{\undertilde}
+% \renewcommand{\vec}[1]{\undertilde{\mathrm{#1}}}
+% \renewcommand{\vec}[1]{\undertilde{#1}}
+% \renewcommand{\vec}[1]{\underline{#1}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\unitvec}[1]{\hat{\vec{#1}}}
 \newcommand{\sol}{$\operatorname{sol}^{\simeq}$}
 \newcommand{\Arg}{\operatorname{Arg}}
+\newcommand{\Log}{\operatorname{Log}}
+\newcommand{\vecspan}{\operatorname{span}}
+\newcommand{\id}[1]{\operatorname{id}_{#1}}
+\newcommand{\indic}[1]{i_{#1}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Isom}{\operatorname{Isom}}
+\newcommand{\di}{\mathrm{d}}
+\newcommand{\gen}[1]{\langle{#1}\rangle}
+
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\definecolor{ufogreen}{rgb}{0.24, 0.82, 0.44}

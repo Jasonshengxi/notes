@@ -1,0 +1,536 @@
+\documentclass[12pt]{article}
+\input{../common.tex}
+
+\begin{document}
+% Lectured by Christopher Thomas
+% Email: c.e.thomas@damtp.cam.ac.uk
+
+\setcounter{section}{-1}
+\section{Introduction}
+
+DEs are cool.
+
+For example, Newton's
+\[
+    m \diff[2]xt = F(x,t)
+\]
+Where $m$ is mass, $F$ is force, and we call
+$x$ the \emph{dependent variable} and $t$ the \emph{independent variable}.
+
+\section{Basic Calculus}
+
+\subsection{Differentiation}
+
+\begin{definition}\label{def:derivative}
+
+    The derivative of a fn $f(x)$ wrt its argument $x$ is
+    the function
+    \[
+        \diff f x = \lim_{h\to 0}\frac{f(x+h) - f(x)}{h}.
+    \]
+    For the derivative to exist, we require the left-handed
+    and right-handed limits to both exist and be equal.
+\end{definition}
+
+For example, $|x|$ is not differentiable at $0$ since
+the right limit is $1$ and the left limit is $-1$.
+(it is however differentiable everywhere else)
+
+\subsubsection*{Order parameters}
+
+Consider the behavior of a function close to a limiting point, $x_{0}$.
+
+\subsubsection*{Big O}
+
+\emph{Big O} roughly means \emph{can be bounded by}.
+
+\begin{definition}
+    For finite $x_{0}$, we say
+    $f(x)$ is $O(g(x))$ as $x \to x_{0}$ if
+    there exists $\delta >0$ and $M > 0$ s.t.
+    for all $x$ with $0 < |x - x_{0}| < \delta $,
+    we have $|f(x)| \le M|g(x)|$.
+\end{definition}
+
+It follows that $\dfrac{f(x)}{g(x)}$ is bounded as $x \to x_{0}$.
+
+Note that this definition is for $x_{0}$ finite,
+whereas most usages of $O$, for instance for time complexity,
+uses it as $x_{0} = \infty$.
+
+Examples:
+\begin{compactitem}
+    \item $x \ne O(x^{2})$ as $x \to 0$.
+    \item $x^{2} = O(x)$ as $x \to 0$.
+    \item $x = O(\sqrt{x})$ as $x \to 0$.
+    \item $\sin(2x) = O(x)$ as $x \to 0$, since $|\sin 2x| \le 2|x|$ for all $x$.
+\end{compactitem}
+
+\begin{definition}
+    For infinite $x_{0}$, we say
+    $f(x)$ is $O(g(x))$ as $x \to \infty$
+    if there exists $x_{1}$ and $M > 0$ s.t.
+    for all $x > x_{1}$, we have
+    $|f(x)| \le M|g(x)|$.
+\end{definition}
+
+For example, $2x^{3}+4x+12 = O(x^{3})$ as $x \to \infty$.
+
+\subsubsection*{Little o}
+\emph{Little o} roughly means \emph{much smaller than}.
+It is written $\underline{o}$ in handwritten math, 
+to distinguish from $O$.
+
+\begin{definition}
+    For finite $x_{0}$, we say
+    $f(x)$ is $o(g(x))$ as $x \to x_{0}$ if,
+    for any $\varepsilon > 0$, there exists $\delta >0$ s.t.
+    for all $0 < |x - x_{0}| < \delta $,
+    we have $|f(x)| \le \varepsilon |g(x)|$.
+\end{definition}
+
+Note that if $g(x) \ne 0$ in the vicinity of $x_{0}$,
+but not necessarily at $x_{0}$, the above definition is equivalent to
+\[
+\lim\limits_{x\to x_{0}} \frac{f(x)}{g(x)} = 0.
+\]
+For example, $x^{2} = o(x)$ as $x \to 0$, since $\lim\limits_{x \to 0} \frac{x^{2}}{x} = 0$.
+
+The infinite definition is similar.
+
+\subsubsection*{Notes}
+
+\textbf{$f(x) = o(g(x))$ is a stronger statement than $f(x) = O(g(x))$}.
+Intuitively, big $O$ means bounded by some given multiple,
+whereas little $o$ means bounded by any multiple.
+
+Thus, $f(x) = o(g(x))$ implies $f(x) = O(g(x))$,
+but the converse does not hold.
+
+\textbf{Constants \emph{don't} matter}. 
+If $f(x) = O(g(x))$, then $af(x) = O(g(x))$ and $f(x) = O(ag(x))$
+for any $a \ne 0$.
+
+\subsubsection*{Usage}
+
+Order parameters are useful to classify remainder terms before taking limits.
+Let $\varepsilon (h)$ in
+\[
+f(x_{0}+h) - f(x_{0}) = hf'(x_0) + \varepsilon (h),
+\]
+for some finite $h$. Then we have,
+by dividing by $h$ on both sides and taking the limit,
+\[
+\lim\limits_{h \to 0}\left[\frac{f(x_{0}+h)-f(x_{0})}{h}\right]
+= f'(x_{0}) + \lim\limits_{h \to 0}\left[\frac{\varepsilon (h)}{h}\right]
+\]
+The limit on the RHS vanishes by the definition of $f'$.
+Therefore, $\varepsilon (h) = o(h)$ as $h \to 0$.
+
+\newpage
+\subsection{Rules for Differentiation}
+
+\begin{theorem}[Chain Rule]
+    Given $f(x) = F(g(x))$, we have
+    \[
+    \diff f x = F'(g(x)) \diff gx = \diff Fg \diff gx,
+    \]
+    where $F'$ denotes the derivative of $F$ wrt to its argument,
+    and $F'(g(x))$ denotes the evaluation of that derivative at $g(x)$.
+\end{theorem}
+
+\begin{theorem}[Product Rule]
+    Given $f(x) = u(x)v(x)$, we have
+    \[
+    \diff f x = v \diff ux + u \diff vx.
+    \]
+\end{theorem}
+
+\begin{theorem}[Leibniz's Rule]
+    Given $f(x) = u(x)v(x)$, we have
+    \[
+    f^{(n)} = \sum\limits_{r=0}^{n}\binom nr \left(u^{(r)} \cdot v^{(n-r)}\right).
+    \]
+\end{theorem}
+
+\subsection{Taylor Series}
+
+For $f(x)$ infinitely differentiable at a point $x = x_{0}$,
+the \emph{Taylor series of $f$ about $x_{0}$} is 
+\[
+T_{f}(x) = \sum\limits_{r=0}^{\infty} \frac{f^{(r)}(x_{0})}{r!}(x - x_{0})^{r}.
+\]
+We define the \emph{Taylor polynomial of degree n}, $P_{n}(x)$, to be
+the truncation of the Taylor series up to the $n$th term, i.e.
+\[
+P_{n}(x) = \sum\limits_{r=0}^{n} \frac{f^{(r)}(x_{0})}{r!}(x - x_{0})^{r}.
+\]
+Note that $P_n(x)$ matches the first $n$ derivatives of $f(x)$
+at $x_{0}$.
+
+\subsubsection*{How good of an approximation is it?}
+
+As $h \to 0$, we have
+\[
+    f(x_{0}+h) = f(x_{0}) + hf'(x_{0}) + o(h).
+\]
+This extends to Taylor's series, in a result called the \emph{Taylor theorem}.
+
+\begin{theorem}[Taylor's Theorem]
+    For $f(x)$ $n$-times differentiable at $x_{0}$, we have
+    \[
+    f(x_{0}+h) = f(x_{0}) + hf'(x_{0}) + \frac{1}{2!}h^{2}f''(x_{0})
+    + \cdots + \frac{h^{n}}{n!}f^{(n)}(x_{0}) + E_n,
+    \]
+    where $E_n$ denotes the error. We have that
+    \[
+    E_n = o(h^{n})
+    \]
+    as $h \to 0$.
+\end{theorem}
+
+We cna attain a stronger result if $f$ is $(n+1)$-times differentiable
+in some interval $(x_{0},x_{0}+h)$ and $f^{(n+1)}$ is continuous in this range, we have
+\[
+E_n = O(h^{n+1})
+\]
+as $h \to 0$. so
+\[
+E_n = f^{(n+1)}(x_{n}) \frac{h^{n+1}}{(n+1)!}
+\]
+for some $x_{n}$ with $x_{0} \le x_n \le x_{0} + h$. (See Analysis I)
+
+Note that $E_n = O(h^{n+1})$ is a stronger statement than $o(h^{n})$.
+For example, $h^{n+\frac{1}{2}}$ is $o(h^{n})$ but \emph{not} $O(h^{n+1})$ as $h \to 0$.
+
+With $x = x_{0} + h$, Taylor's theorem gives
+\[
+f(x) = P_n(x) + E_n,
+\]
+so $P_n(x)$ provides a local approximation to $f(x)$ 
+in the vicinity of $x_{0}$ with error $o(h^{n})$ or $O(h^{n+1})$.
+If $\lim\limits_{n\to\infty}E_{n} = 0$, then the
+Taylor series converges to $f(x)$.
+
+For example, take $f(x) = \exp(x)$ about $x_{0} = 0$,
+then $f(x)$ is infinitely differentiable and continuous everywhere, so
+\[
+E_n = \frac{h^{n+1}}{(n+1)!}\exp(x_n),
+\]
+for some $0 \le x_n \le h$. (note that $h > 0$.)
+Consider the fractional error, we have
+\[
+    \dfrac{E_n}{\exp(h)}= \frac{h^{n+1}}{(n+1)!}\exp(x_n - h).
+\]
+We have $-h \le x_n - h \le 0$, so $0 < \exp(x_n - h) \le 1$, so
+\[
+\frac{E_n}{\exp(h)} \le \frac{h^{n+1}}{(n+1)!}
+\]
+For a given target accuracy at $x=h$, 
+this specifies how large $n$ must be.
+
+\subsection{L'h\^{o}pital's Rule}
+
+\begin{theorem}[L'h\^{o}pital's Rule]
+    Let $f(x)$ and $g(x)$ be differentiable at $x_{0}$ with
+    continuous first derivatives, and
+    \begin{align*}
+    \lim\limits_{x\to x_{0}}f(x) = f(x_{0}) = 0,\\
+    \lim\limits_{x\to x_{0}}g(x) = g(x_{0}) = 0,\\
+    \end{align*}
+    Then if $g'(x_{0}) \ne 0$, 
+    \[
+    \lim\limits_{x\to x_{0}} \frac{f(x)}{g(x)} = 
+    \lim\limits_{x\to x_{0}} \frac{f'(x)}{g'(x)},
+    \]
+    Provided the limit on the RHS exists.
+\end{theorem}
+
+\begin{proof}
+    Using Taylor's theorem, we have
+    \[
+    f(x) = f(x_{0}) + (x - x_{0})f'(x_{0}) + o(x - x_{0}),
+    \]
+    as $x \to x_{0}$ and similarly for $g$. Since $f(x_{0}) = g(x_{0}) = 0$, we have
+    \begin{align*}
+        \lim\limits_{x\to x_{0}}\frac{f(x)}{g(x)} 
+        &= \lim\limits_{x \to x_{0}}
+        \left[\frac{f'(x_{0}) + o(x-x_{0})/(x - x_{0})}{g'(x_{0}) + o(x-x_{0})/(x - x_{0})}\right]\\
+        &= \frac{\lim\limits_{x\to x_{0}} \cdots}{\lim\limits_{x\to x_{0}} \cdots}\\
+        &= \frac{f'(x_{0})}{g'(x_{0})}
+        = \lim\limits_{x\to x_{0}} \frac{f'(x)}{g(x)},
+    \end{align*}
+    by the properties of limits and the continuity of first derivatives.
+\end{proof}
+
+L'h\^{o}pital's Rule can be generalized,
+for instance if $f'(x) = g'(x) = 0$ and 
+$f,g$ have continuous second derivatives,
+we have
+\[
+\lim\limits_{x\to x_{0}}\frac{f(x)}{g(x)} = \lim\limits_{x\to x_{0}}\frac{f''(x)}{g''(x)},
+\]
+and similarly for higher degrees.
+
+
+\section{Integration}
+
+\subsection{Integrals as Riemann Sums}
+
+\begin{definition}
+    The \emph{integral} of a (suitably well defined)
+    function $f(x)$ is the limit of a sum. For example,
+    \[
+        \int_{a}^{b}f(x)dx = \lim_{N\to\infty}\sum_{n=0}^{N-1} f(x_n)\Delta x
+    \]
+    where $\Delta x = (b-a)/N$, $x_n = a + n\Delta x$.
+\end{definition}
+
+\begin{center}
+    \begin{tikzpicture}
+    \draw[->] (0,0) -- (5, 0) node[right] {$x$};
+    \draw[->] (0,0) -- (0, 5) node[above] {$y$};
+    \draw[color=red, domain=1:4] plot (\x, \x*\x/4 + 0.5)
+        node[above right] {$f(x)$};
+    \foreach \x in {1,1.25,...,1.75,3,3.25,...,3.75}
+    \draw (\x, 0) rectangle ++(0.25, {\x*\x/4 + 0.5});
+    \draw (2.5, 0.75) node {$\cdots$};
+\end{tikzpicture}
+\end{center}
+
+$f(x)$ is \emph{Riemann integrable} if generalised sum
+doesn't dpened on exactly how choose the rectangles in the limit
+that all $\Delta x \to 0$, for instance if $\Delta x$ was non-uniform.
+
+Consider one rectangle,
+\begin{center}
+    \begin{tikzpicture}
+    \draw[->] (0,0) -- (5, 0) node[right] {$x$};
+    \draw[->] (0,0) -- (0, 5) node[above] {$y$};
+    \draw[color=red, domain=1:4] plot (\x, \x*\x/6 + 2)
+        node[above right] {$f(x)$};
+    \def\x{1.5}
+    \draw (\x, 0) node[below] {$x_n$} rectangle ++(2, {\x*\x/6 + 2});
+    \draw ({\x + 2}, 0)
+        node[below] {$x_{n+1}$};
+    \draw[dashed] ({\x + 2}, {\x*\x/6 + 2})
+        -- ({\x + 2}, {(\x+2)*(\x+2)/6+2});
+\end{tikzpicture}
+\end{center}
+
+
+The Mean value theorem states that
+for $f(x)$ continuous, the area under the curve from $x_n$ to $x_{n+1}$ is
+\[
+A_n = (x_{n+1}-x_n)f(c_n)
+\]
+for some $x_n \le c_n \le x_{n+1}$.
+If $f(x)$ is differentiable,
+\begin{align*}
+    f(c_n) &= f(x_n) + o(c_n - x_n)\\
+           &= f(x_n) + o(\Delta x)
+\end{align*}
+substituting we get
+\[
+A_n = \Delta x f(x_n) + o((\Delta x)^{2})
+\]
+So the total area from $a$ to $b$ is
+\begin{align*}
+    A &= \lim_{N \to \infty} \sum_{n=0}^{N-1}A_n\\
+      &= \lim_{N\to\infty} \sum_{n=0}^{N-1}f(x_n)\Delta x 
+      + \lim_{N\to\infty} N O \left[\left(\frac{b-a}{N}\right)^{2}\right]\\
+      &= \int_a^b f(x) dx + \lim_{N\to\infty}O(1/N)\\
+      &= \int_a^b f(x) dx
+\end{align*}
+Thus, the integral is the area.
+
+\subsection{Fundamental theorem of Calculus (FTC)}
+
+\begin{theorem}[FTC]
+    Let $F(x) = \int_0^x f(t)dt$. then,
+    \[
+        \diff Fx = \diff{}x \left[\int_a^x f(t)dt\right] = f(x)
+    \]
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        \diff Fx &= \lim_{h\to 0}\frac{1}{h}\left[\int_a^{x+h}f(t)dt
+        - \int_a^x f(t) dt\right]\\
+                 &= \lim_{h\to 0}\frac{1}{h}
+                 \int_x^{x+h}f(t)dt\\
+                 &= \lim_{h\to 0}\frac{1}{h}\biggl[
+                     f(x)h + O(h_{2})\biggr]\\
+                 &= \lim_{h\to 0} f(x) + O(h)\\
+                 &= f(x)
+    \end{align*}
+\end{proof}
+
+Note that this $F(x)$ is a solution to $\diff Fx = f(x)$,
+specifically the solution with $F(a)=0$.
+
+Some corollaries:
+\begin{align*}
+    \diff{}x \int_x^b f(t)dt &= -f(x)\\
+    \diff{}x \int_x^{g(x)} f(t)dt &= \diff{}x F(g(x)) = \diff Fg \diff gx\\
+                                  &= f(g(x)) \diff gx
+\end{align*}
+
+\subsection{Integration Techniques}
+
+\subsubsection*{Substitution}
+
+Substitute.
+
+\subsubsection*{Trigonometric Substitutions}
+
+Substitute.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        Integrand & Substitute \\
+        \hline
+        $\sqrt{1 - x^{2}}$ & $\sin\theta $ \\
+        $\sqrt{x^{2} + 1}$ & $\sinh\theta $ \\
+        $\sqrt{x^{2} - 1}$ & $\cosh\theta $ \\
+        $1 + x^{2}$ & $\tan\theta $ \\
+        $1 - x^{2}$ & $\tanh\theta $ \\
+    \end{tabular}
+\end{table}
+
+\subsubsection*{Integration by parts}
+
+Recalling the product rule, we have $(uv)'=u'v + uv'$, 
+rearranging and adding integral signs yields
+\[
+\int uv'dx = uv - \int u'v dx.
+\]
+\section{Partial Differentiation}
+\subsection{Functions of Several Variables}
+
+Differentiating \emph{multivariate functions}.
+
+% Contour plot:
+% \begin{center}
+%     \begin{tikzpicture}
+%         \draw[->] (-3, -3) -- (3, -3) node [right] {$x$};
+%         \draw[->] (-3, -3) -- (-3, 3) node [right] {$y$};
+%         \foreach \x in {0.5, 1.0, 1.4, 1.7}
+%         \draw (0, 0) ellipse ({1.5*\x cm} and \x cm);
+%     \end{tikzpicture}
+% \end{center}
+
+\subsection{Partial Derivatives}
+
+\begin{definition}
+    Given a function of several variables, say $f(x,y)$,
+    the \emph{partial derivative} of $f$ wrt $x$ at fixed $y$ is
+    \[
+        \left.\diffp{f}{x}\right|_{y} 
+            = \lim_{\delta x \to 0} \frac{f(x+\delta x,y) - f(x,y)}{\delta x}.
+    \]
+\end{definition}
+Note that this can be interpreted as
+the slope of $f$ when moving in the $+x$ direction.
+
+We also shorten many things, like
+\[
+    f_x \equiv \diffp f x
+\]
+or
+\[
+    f_{xy} \equiv \diffp f{yx}
+\]
+Note that if $f$ has continuous second derivatives then
+\[
+    \diffp f{xy} = \diffp f{yx}
+\]
+This is known as Schwarz's theorem.
+
+\subsection{Multivariate Chain Rule}
+
+Given path $x(t),y(t)$ and $f(x,y)$,
+what is $\diff ft$ along the path?
+
+Consider a small change in $f$, under $(x,y) \mapsto (x + \delta x, y+\delta y)$.
+\begin{align*}
+    \delta f &= f(x + \delta x, y + \delta y) - f(x,y)\\
+             &= f(x + \delta x, y + \delta y) - f(x + \delta x,y)\\
+             &+ f(x + \delta x, y)  - f(x,y)
+\end{align*}
+By Taylor's theorem, $f(x+\delta x,y) - f(x,y) = f_x(x,y)\delta x + o(\delta x)$.\\
+For the other half, we have, 
+\begin{align*}
+    f(x+\delta x,y + \delta y) - f(x,y + \delta y) 
+    &= f_y(x + \delta x,y)\delta y + o(\delta y)\\
+    &= \biggl(f_y(x,y) + f_{yx}(x, y)\delta x + o(\delta x)\biggr)\delta y + o(\delta y)
+\end{align*}
+Substituting, we have
+\[
+    \delta f = \biggl(f_y(x,y) + f_{yx}(x,y)\delta x + o(\delta x)\biggr)\delta y
+    + f_x(x,y)\delta x + o(\delta y) + o(\delta x)
+\]
+Taking the limit when $\delta x \to 0$ and $\delta y \to 0$, we have
+\[
+    \mathrm{d} f = \diffp f x \mathrm{d} x + \diffp f y \mathrm{d} y
+\]
+For the final answer, we have
+\begin{align*}
+    \diff{}t f(x(t),y(t)) 
+    &= \lim_{\delta x,\delta y,\delta t\to 0} 
+    \left(\diffp f x \frac{\delta x}{\delta t} + \diffp f y \frac{\delta y}{\delta t}\right)\\
+    &= \diffp f x \diff x t + \diffp f y \diff y t
+\end{align*}
+If we ask for $\diff f x$ instead, we have
+\begin{align*}
+    \diff fx &= \diffp f x \diff x x + \diff fy \diff yx\\
+             &= \diffp fx + \diff fy \diff yx
+\end{align*}
+
+\subsubsection*{Integral form of chain rule}
+
+For the change in $f$ between two end points, denoted $\Delta f$, we have
+\[
+    \Delta f = \int \di f = \int \diffp fx \di x + \int \diffp fy \di y
+\]
+which is trivial from substituting $\diff ft$.
+
+\subsection{Applications of the Multivariate Chain Rule}
+
+
+\appendix
+
+\newpage
+\section{Notation}
+
+\subsection{Limits}
+
+For left and right limits, we may write $\lim\limits_{h \to 0^{-}}$ and $\lim\limits_{h \to 0^{+}}.$ 
+
+\subsection{Derivatives}
+
+For derivatives, we may write
+\[
+    \diff f x = f'(x) = \dot f(x).
+\]
+Similarly, we have, for a second derivative,
+\[
+    \diff {}x \diff f x = \diff[2] f x = f''(x) = \ddot f(x).
+\]
+And for an arbitrary $n$th derivative, we may write
+\[
+    \diff[n] f x = f^{(n)}(x).
+\]
+
+\subsection{Order parameters}
+
+Some may write $f(x) = O(g(x))$ when $f(x)$ is $O(g(x))$.
+Some say it is better to write $f(x) \sim O(g(x))$.
+It is up to the reader to decide which one is better.
+
+\subsection{Integration}
+
+Indefinite integrals have two notations: $\int f(x)dx$, or $\int^x f(t)dt$.
+It has no specified lower limit so the an integration constant appears.
+
+\end{document}
