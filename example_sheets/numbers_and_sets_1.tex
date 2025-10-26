@@ -5,8 +5,8 @@
 \begin{question}
     If $n^{2}$ is a multiple of $3$, must $n$ be a multiple of $3$?
 \end{question}
-\begin{answer}
-    Yes.
+Yes.
+\begin{proof}
     The statement can be rephrased as $3 \mid n^{2} \implies 3 \mid n$.
     We will prove the contrapositive, $3 \nmid n \implies 3 \nmid n^{2}$.
     Let $n$ such that $3 \nmid n$, we have $n = 3k + r$
@@ -20,53 +20,443 @@
     Since $r = 1$ or $r = 2$, we have $r^{2} = 1$ or $r^{2} = 4$,
     neither of which are a multiple of $3$.
     Thus, $n^{2}$ is not a multiple of $3$.
-\end{answer}
+\end{proof}
 
 
 \begin{question}
     Consider the sequence $41,43,47,53,61,\cdots$.
     Are all these numbers prime?
 \end{question}
-\begin{answer}
-    No.
+No.
+\begin{proof}
     If the starting term is $x_{0}$, The sequence is $x_n = n^{2} + n + 41$.
     Thus, $x_{41} = 41^{2} + 41 + 41$ is divisible by $41$.
-\end{answer}
+\end{proof}
 
 \begin{question}
-    
+    There are four primes between 0 and 10,
+    and between 10 and 20.
+    Does it ever happen again that there are 
+    four primes between two consecutive multiples of 10?
 \end{question}
+No
+\begin{proof}
+    $101,103,107,109$.
+\end{proof}
 
 \begin{question}
     Suppose we have some positive integers (not necessarily distinct)
     whos sum is $100$. How large can their product be?
 \end{question}
 
-\begin{answer}
-    If we consider the function
-    \[
-        f(x) = x^{100/x} = \exp(100x^{-1}\ln x),
-    \]
-    then we have
-    \begin{align*}
-        f'(x) &= 100(-x^{-2}\ln x + x^{-2})\exp(100x^{-1}\ln x)\\
-                &= 100x^{-2}(1-\ln x)\exp(100x^{-1}\ln x)
-    \end{align*}
-    Solving for zeros, we have $\ln x = 1$, so $x = e$.
+\begin{proof}
+    We have that
+    \begin{compactenum}[(i)]
+    \item 5 can be replaced with 2,3 since $2 \times 3 = 6 > 5$;
+    \item Anything larger than 5 can be broken up into sums of 5 and a number less than 5;
+    \item 4,4 can be replaced with 2,3,3 since $2 \times 3 \times 3 = 18 > 16 = 4 \times 4$;
+    \item 1 should never exist;
+    \item 2,2,2 can be replaced by 3,3 for $3 \times 3 = 9 > 8 = 2 \times 2 \times 2$;
+    \end{compactenum}
+    Thus, the sequence should contain:
+    \begin{compactenum}[(i)]
+    \item no 1s,
+    \item no more than two 2s,
+    \item no more than one 4,
+    \item no 5s,
+    \item no numbers larger than 5.
+    \end{compactenum}
+    Thus, the optimal sequence is 32 threes and 2 twos,
+    with the product of $4 \times 3^{32}$.
+\end{proof}
 
-    $(k+a)(k-a) = k^{2} - a^{2}$. 
-    For two numbers,
-    the lower their difference $2a$, the higher their product.
+\begin{question}
+    Write down the negation of the following assertions:
+    \begin{compactenum}[(i)]
+        \item $\forall m\ \exists n\ \forall a\ \forall b\ (n \ge m) \land [(a = 1) \lor (b = 1) \lor (ab \ne n)]$
+        \item if Bumrah is not a faster bowler than Tait, 
+            then Australia is worse than England in cricket.
+    \end{compactenum}
+\end{question}
 
-    Consider $(k+a)(k+b)(k+c)$ where $a+b+c=0$,
-    we have
-    \begin{align*}
-        (k+a)(k+b)(k+c) &= (k^{2} + (a+b)k + ab)(k + c)\\
-                        &= k^{3} + (a+b+c)k^{2} + (ab + bc + ac)k + abc\\
-                        &= k^{3} + 1/2((a+b+c)^{2} - a^{2} - b^{2} - c^{2})k + abc\\
-                        &= k^{3} - 1/2(a^{2} + b^{2} + c^{2})k + abc
-    \end{align*}
+\begin{answer}\ \\
+    (i)
+    $\exists m\ \forall n\ \exists a\ \exists b\ (n < m) \lor [(a \ne 1) \land (b \ne 1) \land (ab = n)]$
 
+    (ii) 
+    Bumrah is not a faster bowler than Tait and Australia is better or equal to England in cricket.
 \end{answer}
+
+\begin{question}
+    Prove that $A \setminus (B \cup C) = (A \setminus B) \cap (A \setminus C)$.
+\end{question}
+\begin{proof}
+    Let's use indicator functions. We have
+    \[
+        \indic{A \setminus B} = \indic A (1 - \indic B).
+    \]
+    Thus,
+    \begin{align*}
+        \indic{A \setminus (B \cup C)}
+            &= \indic{A} (1 - \indic{B \cup C})\\
+            &= \indic{A} (1 - \indic{B} - \indic{C} + \indic{B \cap C})\\
+            &= \indic{A \cap A} (1 - \indic{B})(1 - \indic{C})\\
+            &= (\indic{A}(1 - \indic{B}))(\indic A(1 - \indic C))\\
+            &= \indic{A \setminus B} \indic{A \setminus C}\\
+            &= \indic{(A \setminus B) \cap (A \setminus C)}
+    \end{align*}
+\end{proof}
+
+\begin{question}
+    Let $A_{1},A_{2},\cdots$ be sets such that
+    for each $n \in \mathbb{N}$, we have $A_{1} \cap \cdots \cap A_n \ne \emptyset$.
+    Can we have $A_{1} \cap A_{2} \cap \cdots = \emptyset$?
+\end{question}
+Yes, we can, by counterexample.
+\begin{proof}
+    We write $S_n$ for $A_{1} \cap \cdots \cap A_n$,
+    and $S_\infty$ for $A_{1} \cap A_{2} \cap \cdots$.
+    We have by definition that 
+    \[
+    S_n = \{x : \forall k \in \{1,\cdots,n\},x \in A_k\}
+    \]
+    and
+    \[
+    S_\infty = \{x : \forall k \in \mathbb{N},x \in A_k\}
+    \]
+    Let $A_n = \{n,n+1,\cdots\}$, or in other words
+    \[
+    A_n = \{x \in \mathbb{N} : x \ge n\}.
+    \]
+    Clearly, $n + 1 \in S_n$.
+    However, no $x \in S_\infty$ exists, since that would require
+    $x \in \mathbb{N}$ such that for all $n \in \mathbb{N}$,
+    we have $x > n$, which is plainly not true by $n = x + 1$.
+\end{proof}
+
+\begin{question}
+    Does $f \circ g$ injective imply $f$ injective?
+    Does it imply $g$ injective?
+    What happens if we replace \lq{}injective\rq{} with \lq{}surjective\rq{}?
+\end{question}
+
+It does not imply that $f$ is injective,
+but it does imply that $g$ is injective.
+
+Assume that $g$ is not injective. Thus, there exists
+$a,b$ such that $g(a) = g(b)$ but $a \ne b$.
+Then, we have $f(g(a)) = f(g(b))$ and $a \ne b$, so $f \circ g$
+isn't injective, which is a contradiction.
+Thus, $g$ is injective.
+
+Alternatively, remember that injectivity
+is equivalent to left-invertibility, so 
+there exists $h$ such that $h \circ f \circ g \equiv \id{}$.
+Then, $(h \circ f) \circ g \equiv \id{}$, so $g$ is left-invertible,
+and thus injective.
+
+For the injectivity of $f$,
+let $g : \{1\} \to \{1,2\}$ be defined by $g(1) = 1$,
+and $f : \{1,2\} \to \{1\}$ be defined by $f(1) = 1$, $f(2) = 1$.
+It is clear that $f$ is not injective, since $f(1) = f(2)$ but $1 \ne 2$.
+However, $f \circ g$ is injective, since its only input is $1$
+with $f \circ g(1) = f(g(1)) = f(1) = 1$.
+
+With surjection, it does imply that $f$ is surjective,
+but not that $g$ is surjective.
+
+$f \circ g$ is surjective means that for any $y$,
+there exists $x$ such that $f \circ g(x) = y$.
+Thus, $f(g(x)) = y$, and $f$ is surjective.
+
+Alternatively, remember that surjectivity
+is equivalent to right-invertibility
+so there exists $h$ such that $f \circ g \circ h \equiv \id{}$.
+Then, $f \circ (g \circ h) \equiv \id{}$, so $g \circ h$ is the
+right identity of $f$, and $f$ is surjective.
+
+For $g$ surjectivity, use the previous example,
+we have $f \circ g$ surjective but $g$ not surjective.
+
+\begin{question}
+    Let $f : X \to Y$. Let $A,B \subset X$ and $C,D \subset Y$.
+    For each of the claims below, give a proof or counterexample.
+    Show that each false claim can be turned true
+    by replacing $=$ with either $\subset$ or $\supset$.
+\end{question}
+
+Note that $\subset$ is equivalent to $\subseteq$
+in this question, and $\subsetneq$ is (un)used for proper subsets.
+
+\begin{claim*}[i]
+\[
+f(A \cup B) = f(A) \cup f(B)
+\]
+\end{claim*}
+\begin{proof}
+    \begin{align*}
+        &y \in f(A \cup B)\\
+        &\iff \exists x \in A \cup B : f(x) = y\\
+        &\iff (\exists x \in A : f(x) = y) \lor (\exists x \in B : f(x) = y)\\
+        &\iff y \in f(A) \lor y \in f(B)\\
+        &\iff y \in f(A) \cup f(B)
+    \end{align*}
+\end{proof}
+
+\begin{claim*}[ii]
+    \[
+    f^{-1}(C \cup D) = f^{-1}(C) \cup f^{-1}(D)
+    \]
+\end{claim*}
+\begin{proof}
+    If $f^{-1}$ is a function itself,
+    then this statement is trivial from the last claim.
+    Otherwise, let $f^{-1}(C)$ be the preimage of $C$, i.e.
+    $f^{-1}(C) = \{x \in X : f(x) \in C\}$. Then
+    \begin{align*}
+        &x \in f^{-1}(C \cup D)\\
+        &\iff f(x) \in C \cup D\\
+        &\iff f(x) \in C \lor f(x) \in D\\
+        &\iff x \in f^{-1}(C) \cup f^{-1}(D)
+    \end{align*}
+\end{proof}
+
+\begin{claim*}[iii]
+    \[
+    f(A \cap B) = f(A) \cap f(B)
+    \]
+\end{claim*}
+
+This claim is false, but can be made true
+by writing $\subseteq$.
+
+\begin{proof}
+    By counterexample,
+    let $f(x) = 1$, and $A = \{1\}$, $B = \{2\}$.
+    Then, $f(A \cap B) = f(\emptyset) = \emptyset$.
+    On the RHS, $f(A) = \{1\} = f(B)$, so $f(A) \cap f(B) = \{1\} \ne \emptyset$.
+    After replacement by $\subseteq$, we have
+    \begin{align*}
+        &y \in f(A \cap B)\\
+        &\iff \exists x \in A \cap B : f(x) = y\\
+        &\implies (\exists x \in A : f(x) = y) \land (\exists x \in B : f(x) = y)\\
+        &\iff y \in f(A) \land y \in f(B)\\
+        &\iff y \in f(A) \cap f(B)
+    \end{align*}
+    Thus we have $f(A \cap B) \subseteq f(A) \cap f(B)$.
+\end{proof}
+The core reason of why this claim is false is that
+$f(A) \cap f(B)$ requires $a,b$ such that $f(a) = f(b) = y$,
+but $f(A \cap B)$ requires $a = b$ on top of that.
+
+\begin{claim*}[iv]
+    \[
+    f^{-1}(C \cap D) = f^{-1}(C) \cap f^{-1}(D)
+    \]
+\end{claim*}
+\begin{proof}
+    \begin{align*}
+        &x \in f^{-1}(C \cap D)\\
+        &\iff f(x) \in C \cap D\\
+        &\iff f(x) \in C \land f(x) \in D\\
+        &\iff x \in f(C) \cap f(D)
+    \end{align*}
+\end{proof}
+This claim is interesting, because it holds
+even under the inverse function definition,
+despite the fact that $f^{-1}$ is itself a function.
+The core lies in that $f^{-1}$ is always injective.
+
+\begin{claim*}[v]
+    \[
+    f^{-1}(f(A)) = A
+    \]
+\end{claim*}
+
+This claim is true if $f^{-1} : B \to A$ is the inverse function,
+and false if $f^{-1} : \mathcal{P}(B) \to \mathcal{P}(A)$ is the preimage function.
+But it is true in all cases if replaced with $\supseteq$.
+
+\begin{proof}
+    If $f^{-1}$ is the inverse function, by the definition of the inverse,
+    we have $f^{-1} \circ f \equiv \id X$, and $\id X(A) = A$.
+
+    If $f^{-1}$ is the preimage, then by counterexample,
+    let $f : \mathbb{N} \to \mathbb{N}$. with $f(x) = 1$, and $A = \{1\}$.
+    then $f^{-1}(f(A)) = f^{-1}(\{1\}) = \mathbb{N} \ne A$.
+
+    However, recall that $x \in f^{-1}(f(A))$ iff
+    $f(x) \in f(A)$. If $x \in A$, then
+    $f(x) \in f(A)$. Thus $f^{-1}(f(A)) \supseteq A$.
+\end{proof}
+
+\begin{claim*}[vi]
+    \[
+    f(f^{-1}(C)) = C
+    \]
+\end{claim*}
+\begin{proof}
+    \begin{align*}
+        &y \in f(f^{-1}(C))\\
+        &\iff \exists x \in X : f(x) \in C \land f(x) = y\\
+        &\iff y \in C
+    \end{align*}
+\end{proof}
+
+\begin{question}
+    Define a relation $R$ on $\mathbb{N}$ by
+    setting $aRb$ if $a$ divides $b$ or $b$ divides $a$.
+    Is $R$ an equivalence relation?
+\end{question}
+
+No, $R$ isn't.
+\begin{proof}
+    $R$ is not transitive by counterexample. 
+    We have $2 R 6$, since $2 \times 3 = 6$,
+    and $3 R 6$, since $3 \times 2 = 6$,
+    but we do not have $2 R 3$, since both are prime.
+\end{proof}
+
+\begin{question}
+    The relation $S$ contains the relation $R$
+    if $aSb$ whenever $aRb$.
+    Let $R$ be the relation on $\mathbb{Z}$
+    given by $aRb$ if $b = a+3$.
+    How many equivalence relations on $\mathbb{Z}$ contain $R$?
+\end{question}
+
+% TODO reverse the proof a little.
+
+\begin{proof}
+    If an equivalence relation $\sim$ contains $R$,
+    thus it must have $a \sim a + 3$.
+    By symmetry, it must have $a + 3 \sim a$ or equivalently $a \sim a - 3$.
+    By reflexivity. It must have $a \sim a$.
+
+    Noticing that $a \sim a + 3 \sim a + 6 \sim \cdots$ and similarly
+    $a \sim a - 3 \sim a - 6 \sim \cdots$, we have that
+    $a \sim b$ if $a - b = 3n$, for some $n \in \mathbb{Z}$.
+
+    Besides that, no other constraints are required.
+    Consider the sets $A_0,A_1,A_2$, given by $A_n = \{x \in \mathbb{Z} : x \equiv n \mod 3\}$.
+    It is clear that for any $a,b \in A_n$, we have $a \sim b$.
+    However, relations between the sets are not given,
+    but if any $a \in A_i$ and $b \in A_j$ has $a \sim b$,
+    then by transitivity all $x \in A_i$ and $y \in A_j$ has $x \sim y$.
+    In this case, we write $A_i \sim A_j$.
+
+    Thus, there are five cases:
+    \begin{compactenum}
+    \item $A_0 \sim A_1 \sim A_2$.
+    \item $A_0 \sim A_1$ and $A_0,A_1 \nsim A_2$.
+    \item $A_0 \sim A_2$ and $A_0,A_2 \nsim A_1$.
+    \item $A_1 \sim A_2$ and $A_1,A_2 \nsim A_0$.
+    \item $A_i \nsim A_j$ if $i \ne j$.
+    \end{compactenum}
+\end{proof}
+
+\begin{question}
+    We are given an operation $*$ on the positive integers, satisfying
+    \begin{compactenum}[(i)]
+    \item $1 * n = n + 1$ for all $n$;
+    \item $m * 1 = (m - 1) * 2$ for all $m > 1$;
+    \item $m * n = (m - 1) * (m * (n - 1))$ for all $m,n > 1$.
+    \end{compactenum}
+    Find the value of $5 * 5$.
+\end{question}
+
+Let us define $*$ to be right associative,
+as in $a * b * c = a * (b * c)$.
+Note this defines the lack of brackets
+to be bracketing from the right, and is
+not a statement of associativity.
+
+We can then write
+\begin{align*}
+    m * n &= (m - 1) * m * (n - 1)\\
+          &= (m - 1) * (m - 1) * m * (n - 2)\\
+          &= (m - 1) * \cdots * m * 1\\
+          &= (m - 1) * \cdots * (m - 1) * 2
+\end{align*}
+where the number of $(m - 1)$ terms in the
+final expression is equal to $n$.
+
+We need new notation. 
+Let the above expression be written $(m - 1) *^{n} 2$.
+Note that this continues to be right-associative,
+and the power on the $*$ applies to the argument on the left.
+Thus, we have the identity $m * n = (m - 1) *^{n} 2$.
+
+The smallest nontrivial equation is $2 * 2 = 1 *^{2} 2 = 4$.
+We can consider $2 * 3 = 2 *^{3} 2 = 2 *^{2} 4 =$
+
+We have then:
+\begin{align*}
+    1 *^{m} n &= n + m\\
+    2 * n &= 1 *^{n} 2\\
+          &= n + 2\\
+    2 *^{m} n &= 2 *^{m - 1} (2 * n) = 2 *^{m - 1} n + 2\\
+        &= 2 *^{m - 2} n + 4\\
+        &= n + 2m\\
+    3 * n &= 2 *^{n} 2\\
+          &= 2(n + 1)\\
+    3 *^{m} n &= 3 *^{m - 1} (3 * n)\\
+              &= 3 *^{m-1} 2n + 2\\
+              &= 3 *^{m-2} 4n + 4 + 2\\
+              &= 3 *^{m-3} 8n + 8 + 4 + 2\\
+              % &= 3 *^{m-4} 16n + 16 + 8 + 4 + 2\\
+              &= 2^{m}n + 2(2^{m} - 1)\\
+    4 * n &= 3 *^{n} 2\\
+          &= 2^{n+1} + 2(2^{n} - 1)\\
+          &= 2^{n+2} - 2\\
+    4 *^{m} n &= 4 *^{m - 1} 2^{n+2} - 2\\
+              &= 4 *^{m - 2} 2^{2^{n+2} - 2 + 2} - 2 = 4 *^{m - 2} 2^{2^{n+2}} - 2\\
+              &= 4 *^{m-3} 2^{2^{2^{n+2}}} - 2\\
+              &= 2^{2^{\cdots^{n+2}}} - 2
+\end{align*}
+where the number of $2$s in the main power tower is equal to $m$.
+
+We have then that
+\begin{align*}
+    5 * 5 &= 4 *^{4} * 2\\
+          &= 2^{2^{2^{2^{2+2}}}} - 2\\
+          &= 2^{2^{2^{16}}} - 2\\
+          &= 2^{2^{65536}} - 2
+\end{align*}
+The exact value of which is too large to calculate.
+The number $2^{65536}$ has 19729 digits.
+If the entire number was to be stored,
+we would need roughly $\log_2(2^{2^{65536}}) = 2^{65536}$ bits,
+or roughly $2 \times 10^{19728}$ bits,
+though that would be useless since the bit pattern
+is trivial due to its derivation from powers of two.
+
+\begin{question}
+    The \emph{symmetric difference} $A \symmdif B$ of two sets $A$ and $B$
+    is the set of elements that belong to exactly one of $A$ and $B$.
+    Express this in terms of $\cup$, $\cap$, and $\setminus$.
+    Prove that $\symmdif$ is associative.
+\end{question}
+
+We have $A \symmdif B = (A \cup B) \setminus (A \cap B)$.
+
+\begin{proof}
+    We know $x \in (A \symmdif B) \symmdif C$ has
+    exactly one of $x \in A \symmdif B$ and $x \in C$,
+    and if $x \in A \symmdif B$ then we have
+    exactly one of $x \in A$ or $x \in B$.
+    Thus, exactly one of $x \in A$, $x \in B$, and $x \in C$ is true.
+    Thus, the expression is permutation invariant.
+    Combining this with commutativity gives
+    \begin{align*}
+        (A \symmdif B) \symmdif C &= C \symmdif (A \symmdif B)\\
+                                  &= A \symmdif (B \symmdif C)
+    \end{align*}
+    Thus, associativity is shown.
+\end{proof}
+
+\begin{question}
+    hah kill me.
+\end{question}
 
 \end{document}

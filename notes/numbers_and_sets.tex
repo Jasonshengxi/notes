@@ -367,11 +367,460 @@ It has the following properties:
 \item $\indic{X\setminus A} = 1 - \indic A$.
 \item $\indic {A\cup B} = \indic A + \indic B - \indic {A \cap B}$.
 \end{compactenum}
-
+
+Given $f: A \to B$ and $g : B \to C$,
+the composition is $g \circ f: A \to C$, defined by
+$a \mapsto g(f(a))$.
+In general, it is not commutative,
+but it is associative.
+Using this definition, $f: A\to B$ is \emph{invertible}
+if there exists $g : B \to A$ such that $g \circ f = \id A$ and $f \circ g = \id A$.
+
+Note that the condition on both sides is important,
+take for example $f : \mathbb{N} \to \mathbb{N}$ defined by $x \mapsto x+1$
+and $g : \mathbb{N} \to \mathbb{N}$ defined by $x \mapsto x-1$ if $x > 1$, and otherwise $1 \mapsto 1$.
+We have $g \circ f = \id{\mathbb{N}}$ but $f \circ g \ne \id{\mathbb{N}}$
+since $f \circ g(1) = f(1) = 2 \ne 1$.
+
+\begin{lemma}
+    A function $f : A \to B$ is left invertible
+    iff it is injective.
+\end{lemma}
+
+\begin{proof}
+    Given that $f : A \to B$ is left invertible,
+    there exists $g : B \to A$ such that $g \circ f = \id A$.
+    In this case, consider $a_{1},a_{2} \in A$ such that $f(a_{1}) = f(a_{2})$.
+    Taking $g$ on both sides, we have $g(f(a_{1})) = g(f(a_{2}))$,
+    but by definition we have $a_{1} = a_{2}$.
+    Thus, a left invertible map is always injective.
+    In particular, an invertible map is injective.
+
+    Converly, let $f : A \to B$ an injective map.
+    We can find $g : B \to A$ such that $g \circ f = \id A$.
+    We consider the image of $A$ under $f$, $f(A)$.
+    Any $b \in f(A)$ is trivially invertible
+    by taking $g(b)$ to be the unique element $a \in A$
+    that has $f(A) = b$, whose existence is guaranteed by $b \in f(A)$.
+    For any $c \in B \setminus f(A)$, we can select any value to be $g(c)$,
+    since $g(f(a))$ will never output the value $g(c)$.
+\end{proof}
+
+\begin{lemma}
+    A function $f$ is right invertible iff 
+    it is surjective.
+\end{lemma}
+
+\begin{proof}
+    Given $f: A \to B$ is right invertible,
+    there exists $g : B \to A$ such that $f \circ g = \id A$.
+    we need $f(g(B)) = B$, so $f$ must be surjective.
+
+    Conversley, if $f$ is surjective, we can find $g : B \to A$
+    with $f \circ g = \id B$ by taking $g(b) = a$
+    for each $b$ by taking any $a \in A$ such that $f(a) = b$,
+    whose existence is guaranteed by surjectivity.
+\end{proof}
+
+\begin{corollary}
+    A function $f$ is invertible if and only if it is bijective.
+\end{corollary}
+
+We write $f^{-1} : B \to A$ for the inverse of $f$ if it exists.
+
+\subsection{Relations}
+\begin{definition}
+    A relation on a set $X$ is a subset $R \subseteq X \times X$.
+    We write $aRb$ if $(a,b) \in R$.
+\end{definition}
+
+\begin{definition}
+    A relation is \emph{reflexive} if $xRx$ holds true for all $x \in X$.
+\end{definition}
+\begin{definition}
+    A relation is \emph{symmetric} if $xRy \implies yRx$ holds true for all $x,y \in X$.
+\end{definition}
+\begin{definition}
+    A relation is \emph{transitive} if $xRy \land yRz \implies xRz$ for all $x,y,z \in X$.
+\end{definition}
+
+\begin{definition}
+    A relation $R$ is an equivalence relation if it is
+    reflexive, symmetric, and transitive.
+    Equivalence relations are often denoted $a \sim b$.
+\end{definition}
+
+If $\sim$ is an equivalence relation on $X$, then 
+the \emph{equivalence class} of $x \in X$ is
+defined by $[x] = \{y \in X : y \sim x\}$.
+
+Given a set $X$, a \emph{partition} of $X$ is
+a collection of pairwise disjoint subsets
+whose union is $X$.
+
+\begin{theorem}
+    Let $\sim$ be an equivalence relation on $X$.
+    Then the equivalence classes of $\sim$ form a partition of $X$.
+\end{theorem}
+\begin{proof}
+    Since $\sim$ is reflexive, we have $x \in [x]$ for all $x \in X$.
+    Thus,
+    \[
+        \bigcup_{x \in X}[x] = X
+    \]
+    It remains to prove that either $[x] \cap [y] = \emptyset$ or $[x] = [y]$,
+    for any $x,y \in X$.
+
+    Suppose $[x] \cap [y] \ne \emptyset$, then pick $z \in [x] \cap [y]$.
+    Then we have $z \sim x$ and $z \sim y$, so by symmetry and transitivity
+    we have $x \sim z \sim y$, so $x \sim y$.
+
+    Then, for any $a \in [x]$, we have $a \sim x \sim y$, so $a \sim y$,
+    thus $a \in [y]$, and $[x] \subseteq [y]$. By symmetry,
+    we also have $[y] \subseteq [x]$ so $[x] = [y]$.
+
+    Thus, if $[x] \cap [y] \ne \emptyset$, then $[x] = [y]$.
+\end{proof}
+
+Conversely, given a partition of $X$,
+there is an equivalence relation $R$ whose
+equivalence classes are precisely 
+the parts of the partition.
+
+It can be trivially constructed by defining $aRb$ if
+$a,b$ lie in the same part. Alternatively, let $A_i$
+be the parts of the partition, then
+\[
+R = \{(a,b) \in X \times X : \exists i\ a \in A_i \land b \in A_i\}
+\]
+
+Given an equivalence relation $R$ on a set $X$,
+the \emph{quotient of $X$ by $R$}, denoted $X/R$, is 
+the set of equivalence classes:
+\[
+    X/R = \{[x] : x \in X\}
+\]
+The map $q : X \to X/R$ defined by $q(x) = [x]$ is
+the \emph{quotient map} or the projection map.
+
+On $\mathbb{Z} \times \mathbb{N}$ define $(a,b)\mathbb{R}(c,d)$ if
+$ad = bc$. Note that if you consider $(a,b)$ as a notation of $a/b$, then
+\[
+\frac{a}{b} = \frac{c}{d} \iff ad = bc
+\]
+so $(\mathbb{Z} \times \mathbb{N})/R$ is equivalent to $\mathbb{Q}$.
+
+\subsection{Binary Operations}
+
+\begin{definition}
+    A \emph{binary operation} $*$ on a set A is a function $A \times A \to A$.
+\end{definition}
+
+\begin{definition}
+    We say $*$ is \emph{commutative} if $x * y = y * x$.
+\end{definition}
+
+\begin{definition}
+    We say $*$ is \emph{associative} if $(x * y) * z = x * (y * z)$.
+\end{definition}
+
+\begin{definition}
+    Let $\odot$ binary operation on $A$, we say that
+    $*$ is distributive over $\odot$ if
+    \begin{align*}
+        x * (y \odot z) &= (x * y) \odot (x * z)\\
+        (y \odot z) * x &= (y * x) \odot (z * x)
+    \end{align*}
+\end{definition}
 
 \section{Integers and Counting}
 
+The natural numbers $\mathbb{N}$ is a set containing
+a special element ``1'', together with a map
+$S: \mathbb{N} \to \mathbb{N}$ that maps $n$ to its successor such that
+\begin{compactenum}[(i)]
+\item $S(n) \ne 1$ for all $n \in \mathbb{N}$.
+\item $S$ is injective, i.e. $S(m) = S(n) \implies m = n$ for all $m,n \in \mathbb{N}$.
+\item Let $A$ be a subset of $\mathbb{N}$ st $1 \in A$ and 
+    $n \in A \implies S(n) \in A$ for all $n \in \mathbb{N}$,
+    then $A = \mathbb{N}$.
+\end{compactenum}
+These are called the \emph{Peano Axioms}.
+We call axiom (iii) the axiom of induction.
+We can now define $2$ to be $S(1)$, $3$ to be $S(2)$, etc.
+We can also define addition by defining
+\begin{compactitem}
+\item $n+1 = S(n)$,
+\item $n + S(m) = S(n + m)$.
+\end{compactitem}
+Similarly for multiplication, we have
+\begin{compactitem}
+\item $n \times 1 = n$,
+\item $n \times S(m) = n \times m + n$.
+\end{compactitem}
+
+We can show by induction that these definitions
+satisfy the usual rules of arithmetic.
+
+We can also define an ordering $m < n$ if $m + k = n$
+for some $k \in \mathbb{N}$. It is transitive.
+A key feature of $<$ is that for $m \ne n$,
+exactly one of $m < n$ or $n < m$ holds.
+This makes it a total order.
+
+The axiom of induction (axiom (iii))
+is also known as the \emph{weak principle of induction} (WPI).
+It states that \\
+``if $P(1)$ holds, and $\forall n \in \mathbb{N} \quad P(n) \implies P(n+1)$,
+then $P(n)$ holds for all $n \in \mathbb{N}$''
+
+A different form of induction based on the ordering
+is the \emph{strong principle of induction} (SPI). It states that\\
+``if $P(1)$ holds and ($\forall n \in \mathbb{N}$, if
+$P(m)$ holds for all $m < n$, then $P(n+1)$ holds),
+then $P(n)$ holds for all $n \in \mathbb{N}$.''
+
+The two principles are equivalent.
+SPI implies WPI trivially,
+and SPI implies WPI by taking $P(n)$ to be
+``$Q(m)$ holds for all $m < n$''.
+
+The above ordering of $\mathbb{N}$ satisifes
+a special property called the \emph{well-ordering principle} (WOP):
+every nonempty subset of $\mathbb{N}$ has a minimal element.\\
+i.e. if $P(n)$ holds for $n \in A \subset \mathbb{N}$ with $A \ne \emptyset$,
+then there exists a least $m \in A$ s.t. $P(m)$ holds.
+
+\begin{theorem}
+    SPI $\implies$ WOP
+\end{theorem}
+\begin{proof}
+    Suppose, for contradiction, that
+    there is no least $n \in \mathbb{N}$ s.t. $P(n)$ holds.
+    Consider $Q(n) = \neg P(n).$
+    Certainly $P(1)$ is false, else $1$ would be the minimal element.
+    Thus $Q(1)$ holds true.
+    
+    Given $n \in \mathbb{N}$, suppose that $Q(k)$ is true
+    for all $k < n$.
+    Then, $P(k)$ is false for all $k < n$.
+    So $P(n)$ is false as otherwise $n$ would
+    be the minimal element.
+    Thus, $Q(n)$ holds.
+
+    We invoke SPI, yielding that $Q(n) = \neg P(n)$
+    holds for all $n \in \mathbb{N}$.
+    This contradicts with the assumption that
+    $P(n)$ holds for some $n \in A$.
+\end{proof}
+
+Interestingly, $WOP \centernot\implies SPI$.
+
+\begin{theorem}[Half of the Fundamental Theorem of Arithmetic]
+    Any natural number $n > 1$ can be written as a product of primes.
+\end{theorem}
+\begin{proof}
+    Let $C$ be the set of natural numbers
+    greater than one that cannot be written as a product of primes.
+
+    We assume $C \ne \emptyset$ and derive a contradiction.
+    By the WOP, $C$ has a least element, say $m$.
+    Clearly $m$ cannot be prime, since then it would
+    be the product of itself,
+    so $m = ab$ with $1 < a,b < m$. At least
+    one of $a$ or $b$ cannot have a prime factorization,
+    since if both did then $m$ would have one.
+    However $a < m$ must then have $a \in C$,
+    so $m$ is not the minimum element. 
+    Thus, a contradiction arises.
+\end{proof}
+
+\subsection{Finite Sets}
+Recall a set $A$ has size $n$ if
+we can write $A = \{a_{1},a_{2},\cdots,a_n\}$ 
+with the elements $a_i$ pairwise distinct.
+We write $|A| = n$ or $\#A = n$.
+We say $A$ is finite if there exists $n \in \mathbb{N}_0$
+such that $|A| = n$, and $A$ is infinite otherwise.
+
+\begin{prop}
+    A set of size $n$ has exactly $2^{n}$ subsets.
+\end{prop}
+\begin{proof}
+    We will prove by induction on $n$.
+    Clearly empty sets have one subset, the empty set,
+    so it is true for $n=0$.
+
+    Given $n > 0$ and $T \subseteq \{1,2,\cdots,n-1\}$,
+    how many $S \subseteq \{1,2,\cdots,n\}$ are there
+    s.t. $S \cap \{1,2,\cdots,n-1\} = T$?
+    There are exactly two, namely $T$ and $T \cup \{n\}$.
+    Hence the number of subsets of $\{1,2,\cdots,n\}$
+    is equal to twice the number of different $T$,
+    which is $2 \times 2^{n-1} = 2^{n}$.
+\end{proof}
+
+This proposition can also be written $|\mathcal{P}(A)| = 2^{|A|}$.
+
+Given $n \in \mathbb{N}_0$ and $0 \le k \le n$, we write $\binom nk$
+for the number of subsets of an $n$-element set
+that are of size $k$. $\binom nk$ is
+called a \emph{binomial coefficient}. In other words,
+\[
+\binom nk = \biggl|\{S \subseteq \{1,2,\cdots,n\}: |S| = k\}\biggr|
+\]
+From this, we can see that $\sum_{k=0}^{n}\binom nk = |\mathcal{P}(\{1,2,\cdots,n\})| = 2^{n}$.
+
+Recall that
+\[
+    \binom nk = \binom{n-1}{k-1}+\binom{n-1}k
+\]
+Indeed the nunber of subsets
+of $\{1,2,\cdots,n\}$ of size $k$ that does not include
+$n$ is $\binom{n-1}k$, while the number of subsets of $\{1,2,\cdots,n\}$ of
+size $k$ that do not include $n$ is $\binom{n-1}{k-1}$.
+
+The \emph{Pascal's Triangle} is obtained from this.
+I'm not writing the rest of it down.
+
+\begin{prop}
+    \begin{align*}
+        \binom nk 
+        &= \frac{n(n-1)(n-1)\dots(n-k+1)}{k(k-1)(k-2)\cdots(2)(1)}\\
+        &= \frac{n!}{k!(n-k)!}
+    \end{align*}
+\end{prop}
+\begin{proof}
+    Given a set of size $n$, there
+    are $n$ ways to pick the first element,
+    $n-1$ ways to pick the second element,
+    and so on. Thus,
+    there are $n(n-1)(n-1)\dots(n-k+1)$ ways of picking $k$ elements,
+    in order, one-by-one.
+
+    However, every subset of size $k$ is
+    picked $k!$ times due to different permutations,
+    so the number of subsets is exactly the ratio in the proposition.
+\end{proof}
+
+Note that the formula tells as that
+\begin{align*}
+    \binom n 2 &= \frac{n(n-1)}{2} \approx \frac{n^{2}}{2}\\
+    \binom n 3 &= \frac{n(n-1)(n-2)}{6} \approx \frac{n^{3}}{6}
+\end{align*}
+for really large $n$.
+
+\begin{theorem}[Binomial Theorem]
+    For all $a,b \in \mathbb{R}, n \in \mathbb{N}$,
+    we have
+    \begin{align*}
+        (a+b)^{n} &= \binom n 0 a^{n} + \binom n 1 a^{n-1}b + \cdots 
+               + \binom n{n-1}ab^{n-1} + \binom nn b^{n}\\
+               &= \sum_{r=0}^{n}\binom nr a^{n-r}b^{r}
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    When we expand $(a+b)^{n} = (a+b)(a+b)\cdots(a+b)$,
+    we obtain terms of the form $a^{n-k}b^{k}$ where $0 \le k \le n$,
+    and the number of terms of this form is exactly $\binom nk$
+    since we are selecting from $n$ factors of the form $a+b$
+    $k$ terms of the form $b$.
+\end{proof}
+
+For example,
+\[
+    (1+x)^{n} = \sum_{r=0}^{n}\binom nr x^{r}
+\]
+which is useful since $x^{r}$ vanishes with large $r$
+when $x \ll 1$.
+
+What can we say about the relationship
+between sizes of unions and intersections
+of finite sets?
+
+For example,
+\[
+    \abs{A \cup B} = \abs{A} + \abs{B} - \abs{A \cap B}.
+\]
+Intuitively, $\abs{A} + \abs{B}$ certainly counts
+all the elements in $A \cup B$, but it double counts
+elements in both, so we subtract $\abs{A \cap B}$ to compensate.
+
+Also,
+\[
+\abs{A \cup B \cup C} = \abs{A} + \abs{B} + \abs{C}
+- \abs{A \cap B} - \abs{A \cap C} - \abs{B \cap C} + \abs{A \cap B \cap C}.
+\]
+It can be obtained through very similar reasoning.
+
+\begin{theorem}[Inclusion Exclusion Principle]
+    Let $S_{1},S_{2},\cdots,S_n$ be finite sets. Then
+    \[
+        \abs{S_{1}\cup S_{2}\cup \cdots \cup S_n} =
+        \sum_{\abs{A}=1}\abs{S_A} - \sum_{\abs{A}=2}\abs{S_A}
+        +\sum_{\abs{A}=3}\abs{S_A} - \cdots + (-1)^{n+1}\sum_{\abs{A}=n}\abs{S_A}
+    \]
+    where $S_A = \bigcap_{i \in A} S_i$ and $\sum\limits_{\abs{A}=k}$
+    sums over all sets $A \subseteq \{1,\cdots,n\}$ of size $k$.
+\end{theorem}
+
+Equivalently,
+\[
+    \abs{\bigcup_{i=1}^{n} S_i} 
+    = \sum_{r=1}^{n}(-1)^{r+1} \sum_{
+        \substack{A\subseteq\{1,\cdots,n\}\\\abs{A}=r}
+    } \abs{\bigcap_{i\in A} S_i}.
+\]
+\begin{proof}
+    Let $x \in S_{1}\cup S_{2}\cup\cdots S_n$,
+    say $x \in S_i$ for $k$ of the $S_i$.
+    We want $x$ to be counted exactly once in the RHS.
+    We have
+    \begin{align*}
+        \abs{\{A : \abs{A}=1 \text{ with } x \in S_A\}} &= k\\
+        \abs{\{A : \abs{A}=2 \text{ with } x \in S_A\}} &= \binom k 2,
+    \end{align*}
+    and in general,
+    \[
+        \abs{\{A : \abs{A}=r \text{ with } x \in S_A\}} = \binom k r.
+    \]
+    Note that if $r > k$, then the expression is $0$.
+    Thus the number of times that $x$ is counted
+    on the RHS is exactly
+    \begin{align*}
+        &k - \binom k 2 + \binom k 3 - \cdots + (-1)^{k+1} \binom k k\\
+        &= 1 - \biggl(
+            1 - k + \binom k 2 - \binom k 3 + \cdots + (-1)^{k} \binom k k
+        \biggr)\\
+        &= 1 - (1 + (-1))^{k} = 1 - 0 = 1
+    \end{align*}
+    Thus $x$ is counted exactly once.
+\end{proof}
+
 \section{Elementary Number Theory}
+
+\subsection{Primes}
+
+Given $a,b \in \mathbb{Z}$, we say ``$a$ divides $b$'' if
+there exists $c \in \mathbb{Z}$ such that $b = ac$.
+We might also say ``$a$ is a divisor of $b$''
+or ``$a$ is a factor of $b$'' or ``$b$ is a multiple of $a$''.
+We also write $a \mid b$.
+
+From this, we can notice that $\pm 1$ and $\pm b$
+always divide $b$. We call all other
+factors \emph{proper} (or non-trivial).
+
+\begin{definition}
+    A natural number $n \ge 2$
+    is \emph{prime} if its only factors
+    are trivial factors.
+    Otherwise, it is composite.
+\end{definition}
+
+Note that only numbers $n \ge 2$ can be prime or composite.
+For example, $1$ is neither.
+
 \section{Real Numbers}
 \section{(Un)Countability}
 

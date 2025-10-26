@@ -406,6 +406,7 @@ it is an element of the symmetric group $\Sym(X)$.
 \end{definition}
 
 \begin{theorem}
+    \label{thm:size_of_d2n}
     $|D_{2n}| = 2n$
 \end{theorem}
 
@@ -473,10 +474,412 @@ it is an element of the symmetric group $\Sym(X)$.
 This lemma can be generalized to the $n+1$-point lemma,
 applicable in $\mathbb{R}^{n}$.
 
+Now, we prove \autoref{thm:size_of_d2n}. To recall,
+\begin{theorem*}
+    $|D_{2n}| = 2n$
+\end{theorem*}
+
+\begin{proof}
+    We define two elements of $\Isom(\mathbb{C})$ that we claim to be in $D_{2n}$:
+    \begin{align*}
+        r(z) &= e^{2\pi i / n} z,\\
+        s(z) &= \bar z.
+    \end{align*}
+    Note that $r$ is a single step rotation
+    and $s$ is a reflection along the $x$-axis.
+    Under these definitions, we claim that there are $2n$
+    elements in $D_{2n}$, and they are
+    \[
+    D_{2n} = \{e,r,\cdots,r^{n-1},s,rs,\cdots,r^{n-1}s\}.
+    \]
+    In particular, $\{r,s\}$ generates $D_{2n}$.
+
+    First, we show that $r,s \in D_{2n}$.
+    let $x,y \in \mathbb{C}$, then
+    \begin{align*}
+    |r(x) - r(y)| &= |e^{2\pi i/n}x - e^{2\pi i/n}y|\\
+                  &= |e^{2\pi i/n}||x - y|\\
+                  &= |x - y|
+    \end{align*}
+    So $r$ is indeed an isometry. Now consider the
+    application of $r$ to $X_n$ (the vertices of the regular $n$-gon).
+    \[
+    r(e^{2\pi i k / n}) = e^{2 \pi i / n (k + 1)}
+    \]
+    which shows that $r$ sends vertices of $X_n$ to vertices,
+    so $r \in D_{2n}$. Similarly,
+    \[
+        |s(x) - s(y)| = |\bar x - \bar y| = |\bar{x - y}| = |x - y|
+    \]
+    Thus $s$ is also an isometry, and similarly
+    \[
+    s(e^{2\pi i k / n}) = e^{-2\pi i k / n} = e^{2\pi i / n (n - k)}
+    \]
+    so $s \in D_{2n}$. Thus, we have $\{r,s\} \subseteq D_{2n}$.
+    Thus, by induction and properties of groups,
+    \[
+    \{e,r,\cdots,r^{n-1},s,rs,\cdots,r^{n-1}s\} \subseteq D_{2n}
+    \]
+    To prove that those compose all elements of $D_{2n}$, 
+    consider $f \in D_{2n}$. We aim to prove that $f \in \{e,r,\cdots,r^{n-1},s,rs,\cdots,r^{n-1}s\}$.
+    Let $x = 1$, $y = e^{2\pi i / n}$, and $z = e^{-2\pi i/n}$, all
+    vertices of the regular $n$-gon, we consider the behavior of $f$ on $x,y,z$.
+    Since $f \in D_{2n}$, $f(x)$ must remain a vertex of the regular $n$-gon. Thus
+    \[
+    f(x) = e^{2\pi i k/n}
+    \]
+    for some $k \in \{0,\cdots,n-1\}$. Therefore,
+    \[
+    r^{-k}\circ f(x) = e^{-2\pi i k/n} e^{2\pi i k/n} = 1 = x.
+    \]
+    We have that $r^{-k} \circ f \in D_{2n}$ by group closure. We have
+    \[
+    |r^{-k}\circ f(y) - x| = |r^{-k}\circ f(y) - r^{-k}\circ f(x)| = |y - x|
+    \]
+    So $y$ must stay the same distance from $x$ after $r^{-k}\circ f$.
+    The only two vertices with that property are $z$ and $y$ itself.
+    Similarly, $z$ must also be transformed to either $y$ or $z$.
+    Since isometries are bijections, $y,z$ must either be flipped
+    or stay the same. 
+
+    If $y,z$ stay the same after $r^{-k}\circ f$,
+    then it fixes all $x,y,z$ non-colinear and by the 3-point lemma
+    \[
+        r^{-k} \circ f = e
+    \]
+    so we have
+    \[
+        f = r^{k} \in \{e,r,\cdots,r^{n-1}\} \subseteq \{e,r,\cdots,r^{n-1},s,rs,\cdots,r^{n-1}s\}
+    \]
+
+    If $y,z$ are flipped after $r^{-k} \circ f$, we have
+    \begin{align*}
+        r^{-k}\circ f(x) &= x = s(x)\\
+        r^{-k}\circ f(y) &= z = s(y)\\
+        r^{-k}\circ f(z) &= y = s(z)
+    \end{align*}
+    Thus, taking left-composition by $s^{-1}$ on the left,
+    we have that $s^{-1} \circ r^{-k} \circ f$ fixes $x,y,z$,
+    so we can apply the 3-point lemma again, yielding
+    \[
+        s^{-1} \circ r^{-k} \circ f = e
+    \]
+    which means that
+    \[
+        f = r^{k}s \in \{s,rs,\cdots,r^{n-1}s\} \subseteq \{e,r,\cdots,r^{n-1},s,rs,\cdots,r^{n-1}s\} 
+    \]
+    Thus, $D_{2n} = \{e,r,\cdots,r^{n-1},s,rs,\cdots,r^{n-1}s\}$.
+    Finally, we must confirm that all $2n$ elements are distinct.
+
+    Let $p \ne q$ with $p,q \in \{0,\cdots,n-1\}$, 
+    we have trivially that $r^{p} \ne r^{q}$ by
+    \[
+    r^{p}(1) = e^{2\pi pi/n} \ne e^{2 \pi qi/n} = r^{q}(1)
+    \]
+    Now if $r^{p}s = r^{q}s$, right multiplying by $s^{-1}$ would
+    yield $r^{p} = r^{q}$, which is false. Thus $r^{p}s \ne r^{q}s$.
+
+    If $r^{k} = s$ for some $k$ then
+    \[
+        r^{k}(1) = e^{2\pi ik/n} = s(1) = 1
+    \]
+    so $k = 0$ and $s = r^{0} = \id{}$.
+    However, $s(z) = y \ne \id{}(z)$, so $r^{k} \ne s$.
+
+    Finally, if $r^{p} = r^{q}s$, then
+    left multiplying by $r^{-p}$ yields $s = r^{p-q}$, which is false.
+    Thus, $r^{p} \ne r^{q}s$, and all elements are in fact distinct.
+\end{proof}
+
+Note that this proof uses multiple times
+the 3-point lemma, in the form of $f^{-1} \circ g (z) = z$,
+which is equivalent to $g(z) = f(z)$
+for 3 non-colinear $z$, yielding $f = g$.
+From here on, this will also be referred to as the 3-point lemma.
+
+We now know what the elements of $D_{2n}$ are,
+so it remains to know the group operation.
+
+\begin{lemma}[Dihedral Relation]
+    For $r,s \in D_{2n}$ as above, we have $sr = r^{-1}s$.
+\end{lemma}
+\begin{proof}
+    Let $x,y,z$ as above, then
+    \[
+        \begin{array}{l l l}
+            sr(x) =& \bar{e^{2\pi i/n}} = e^{-2\pi i/n} = r^{-1}(x) &= r^{-1}s(x)\\
+            sr(y) =& \bar{e^{4\pi i/n}} = e^{-4\pi i/n} = r^{-1}(z) &= r^{-1}s(y)\\
+            sr(z) =& \bar{1} = 1 = r^{-1}(y) &= r^{-1}s(z)\\
+        \end{array}
+    \]
+    Thus, $sr = r^{-1}s$.
+\end{proof}
+
+\subsection{Homomorphisms}
+
+Some groups are not literally equal
+but nontheless have the same structure.
+For example, $\Sym(\{1,2\})$ and $\Sym(\{2,3\})$.
+
+\begin{definition}
+     A map between groups $\phi : G \to H$ is called
+     a \emph{homomorphism} if
+     \[
+         \phi(g \cdot g') = \phi(g)\cdot\phi(g')
+     \]
+     for all $g,g' \in G$.
+\end{definition}
+
+Examples:
+\begin{compactenum}[(i)]
+\item For any groups $G,H$, the map $\phi : G \to H$ defined by $g \mapsto e_H$
+    is the \emph{trivial homomorphism}.
+\item If $H \le G$, then the map $i : H \to G$ defined by $h \mapsto h$
+    is the \emph{inclusion homomorphism}.
+\item Recall $C_n = \{z \in \mathbb{C} : z^{n} = 1\}$.
+    If $n \mid m$, then $\phi : C_m \to C_n$
+    defined by $z \mapsto z^{m/n}$ is a homomorphism. (Exercise: prove)
+\item Since $\det(AB) = \det(A)\det(B)$,
+    the function $\det : GL_2(\mathbb{R}) \to (\mathbb{R} \setminus \{0\}, \times)$
+    is a homomorphism.
+\end{compactenum}
+
+\begin{lemma}
+    If $\phi : G \to H$ is a homomorphism, then
+    \begin{compactenum}
+    \item $\phi(e_G) = e_H$,
+    \item $\phi(g^{-1}) = \phi(g)^{-1}$.
+    \end{compactenum}
+\end{lemma}
+\begin{proof}
+    $\phi(e_G) = \phi(e_G)\phi(e_G)\phi(e_G)^{-1} = \phi(e_Ge_G)\phi(e_G)^{-1} = \phi(e_G)\phi(e_G)^{-1} = e_H$.\\
+    $\phi(g^{-1}) = \phi(g^{-1})\phi(g)\phi(g)^{-1} = \phi(g^{-1}g)\phi(g^{-1}) = \phi(e_G)\phi(g)^{-1} = e_H\phi(g)^{-1} = \phi(g)^{-1}$.
+\end{proof}
+
+\begin{definition}
+    If $\phi : G \to H$ is a homomorphism and a bijection, then $\phi$ is a isomorphism,
+    and we write $G \cong H$, or $G$ is isomorphic to $H$.
+\end{definition}
+
+From the perspective of group theory, $G \cong H$ satisfies
+what we wanted, in that they are pretty much the same.
+
+For example, take $C_n$ and $\mathbb{Z}_n$. We have $C_n \cong \mathbb{Z}_n$.
+\begin{proof}
+    Let $\phi : \mathbb{Z}_n \to C_n$ defined by $k \mapsto \exp(2\pi ik/n)$.
+    Clearly, $\phi$ is bijective. 
+    Furthermore, for any $k,l \in \mathbb{Z}_n$, we have
+    $k + l = np + (k +_n l)$, for some $p \in \mathbb{Z}$ such that $0 \le k +_n l < n$.
+    \begin{align*}
+        \phi(k +_n l) 
+        &= \exp\left(\frac{2\pi i}{n} (k +_n l)\right)\\
+        &= \exp\left(\frac{2\pi i}{n} np\right)\exp\left(\frac{2\pi i}{n} (k +_n l)\right)\\
+        &= \exp\left(\frac{2\pi i}{n} (np + (k +_n l))\right)\\
+        &= \exp\left(\frac{2\pi i}{n} (k + l)\right)\\
+        &= \exp\left(\frac{2\pi i}{n} k\right) + \exp\left(\frac{2\pi i}{n}l\right)\\
+        &= \phi(k) \phi(l)
+    \end{align*}
+    So $\phi$ is indeed a homomorphism,
+    hence an isomorphism. Thus $\mathbb{Z}_n \cong C_n$ for all $n$.
+\end{proof}
+
+For another example, take $(\mathbb{R},+,0)$ and $(\mathbb{R}_{>0},\times,1)$.
+The map $\exp : \mathbb{R} \to \mathbb{R}_{>0}$ 
+is a homomorphism since $\exp(a + b) = \exp(a)\exp(b)$,
+and a bijection, so $\exp$
+is an isomorphism, and $\mathbb{R}^{+} \cong \mathbb{R}^{\times}_{>0}$.
+
+The next lemma justifies the claim that
+we may think of isomorphic groups as the same.
+
+\begin{lemma}
+    We have the following:
+    \begin{compactenum}[(i)]
+    \item If $\phi : G \to H$ is an isomorphism, so is $\phi ^{-1}$.
+    \item If we have homomorphisms $G \stackrel{\phi}{\to} H \stackrel{\psi}{\to} K$,
+        then $\psi\circ\phi$ is also a homomorphism.
+    \item $\cong$ is an equivalence relation.
+    \end{compactenum}
+\end{lemma}
+This proof is left as an exercise.
+
+We saw earlier that every subgroup 
+leads to an inclusion homomorphism.
+The converse is also true, homomorphisms
+lead to subgroups.
+
+\begin{definition}[Image \& Kernel]
+    Let $\phi : G \to H$ be a homomorphism.
+    \begin{compactenum}[(i)]
+    \item The \emph{image} of $\phi$ is $\im\phi = \{ h \in H : \exists g \in G, \phi(g) = h\}$
+    \item The \emph{kernel} of $\phi$ is $\ker\phi = \{g \in G : \phi(g) = e_H\}$
+    \end{compactenum}
+\end{definition}
+
+\begin{prop}
+    If $\phi : G \to H$ is a homomorphism,
+    then $\im\phi \le H$ and $\ker\phi \le G$.
+\end{prop}
+\begin{proof}
+    For the image, we have the identity $e_H = \phi(e_G) \in \im\phi$.
+    For closure, $\phi(g_{1})\cdot\phi(g_{2}) = \phi(g_{1}g_{2}) \in \im\phi$.
+    For inverse, $\phi(g)^{-1} = \phi(g^{-1}) \in \im\phi$.
+
+    For the kernel, we have that $\phi(e_G) = e_H$, so $e_G \in \ker\phi$.
+    For closure, $\phi(g_{1}g_{2}) = \phi(g_{1})\phi(g_{2}) = e_He_H = e_H$, so $g_{1}g_{2} \in \ker\phi$.
+    For inverse, $\phi(g^{-1}) = \phi(g)^{-1} = e_H^{-1} = e_H$, so $g^{-1} \in \ker\phi$.
+\end{proof}
+
+Let $\phi : G \to H$ be a homomorphism. We have:
+\begin{compactenum}[(i)]
+\item $\phi$ is surjective iff $\im\phi = H$. (by definition)
+\item $\phi$ is injective iff $\ker\phi = \{e_G\}$.
+\end{compactenum}
+\begin{proof}
+    The surjective part is trivial.
+    If $\phi$ is injective, then if $g \in \ker\phi$,
+    we have $\phi(g) = e_H = \phi(e_G)$, so $g = e_G$ by injectivity.
+    Thus, $\ker\phi = \{e_G\}$.
+
+    If $\ker\phi = \{e_G\}$, then for contradiction
+    let $a,b \in G$ such that $f(a) = f(b)$.
+    Then, $\phi(a)\phi(b)^{-1} = e_H$, so 
+    $\phi(a)\phi(b)^{-1} = \phi(a)\phi(b^{-1}) = \phi(ab^{-1}) = e_H$.
+    Since $\ker\phi = \{e_G\}$, $e_G$ is the only element
+    that maps to $e_H$, so $ab^{-1} = e_G$, $a = b$.
+    Thus, $\phi$ is injective.
+\end{proof}
+Of course, combining the two means that
+$\phi$ is a homomorphism with $\im\phi = H$ and $\ker\phi = \{e_G\}$
+iff $\phi$ is an isomorphism.
+
+\subsection*{Cyclic Groups}
+
+\begin{definition}
+    A group $G$ is cyclic if there is $g \in G$
+    such that $G = \{g^k : k \in \mathbb{Z}\}$.
+\end{definition}
+Or equivalently, $\{g\}$ generates $G$.
+In this case, $g$ is a generator of $G$.
+
+For example: 
+\begin{compactenum}[(i)]
+\item $C_n$ is cyclic with generator $e^{2\pi i/n}$.
+\item $\mathbb{Z}$ is cyclic with generator $1$ or $-1$.
+\item $\mathbb{Z}_n$ is cyclic since $C_n \cong \mathbb{Z}_n$, but also generator $1$.
+\end{compactenum}
+
+\begin{theorem}
+    If $G$ is cyclic then either
+    $G \cong \mathbb{Z}_n \cong C_n$ or $G \cong \mathbb{Z}$.
+\end{theorem}
+\begin{proof}
+    Let $G$ be a cyclic group with generator $g$.
+    Let $S = \{k \in \mathbb{Z}_{>0} : g^k = e\}$,
+    and let $n = \min S$ if $S \ne \emptyset$,
+    and otherwise $n = \infty$.
+
+    If $n = \infty$, then define
+    $\phi : \mathbb{Z} \to G$ by $k \mapsto g^{k}$.
+    It is a homomorphism since $\phi(k)\phi(l) = g^{k}g^{l} = g^{k+l} = \phi(k+l)$.
+    It is surjective since $G$ is cyclic.
+    Since $n = \infty$, no positive $k$ has $\phi(k) = e$,
+    and $\phi(-k) = e$ implies that $\phi(k) = \phi(-(-k)) = \phi(-k)^{-1} = e^{-1} = e$,
+    which cannot happen. By definition, $\phi(0) = g^{0} = e$,
+    so $\ker\phi = \{0\}$, so $\phi$ is a injection
+    and therefore an isomorphism. Thus $G \cong \mathbb{Z}$.
+
+    If $n < \infty$, then define
+    $\phi : \mathbb{Z}_n \to G$ by $k \mapsto g^k$.
+    We have $\phi(k)\phi(l) = g^kg^l = g^{k+l} = g^{qn + (k+_nl)} = (g^n)^q g^{k+_nl} = g^{k+_nl} = \phi(k+_nl)$,
+    so $\phi$ is a homomorphism. 
+
+    To prove surjectivity, since $G$ is cyclic, every element
+    can be written as $g^{k}$ for some $k \in \mathbb{Z}$.
+    Take integer division by $n$, we have $k = qn + r$,
+    where $0 \le r < n$ so $r \in \mathbb{Z}_n$. Then
+    $g^k = g^{qn+r} = (g^n)^q g^r = g^r$, so $g^k \in \im\phi$.
+    Thus, $\phi$ is surjective.
+
+    To prove injectivity, suppose that $\phi(k)=e$, 
+    so $k\in\ker\phi$, for some $k\in\mathbb{Z}_n$.
+    Thus, if $k \ne 0$, $k \in S$ by definition of $S$.
+    However, $k \in \mathbb{Z}_n$ implies $k < n$,
+    so $k < n = \min S$, which is a contradiction.
+    Thus, $k = 0$, so $\ker\phi = \{0\}$.
+    Thus, $\phi$ is injective.
+
+    Hence, $\phi$ is an isomorphism and $G \cong \mathbb{Z}_n \cong C_n$.
+\end{proof}
+
+Note that for any finite length, there is unique $\mathbb{Z}_n$ of that size,
+and $\mathbb{Z}$ is of infinite size, the isomorphism of cyclic group $G$
+can be determined by its size.
+For convenience, we let $\mathbb{Z}_\infty = \mathbb{Z}$.
+
+\begin{definition}
+    For any group $G$ and element $g \in G$,
+    we have $\gen{g} = \{g^k : k \in \mathbb{Z}\} \le G$,
+    which is a cyclic group and is thus isomorphic to $\mathbb{Z}_n$ where $n \in \mathbb{N}\cup\{\infty\}$.
+    We say that $n$ is the \emph{order} of $g$, denoted $o(g)$ or $|g|$.
+\end{definition}
+
+\subsubsection*{Dihedral Groups Revisited}
+
+Whenever $x,y \in G$ satisfy the dihedral relation
+$xy = yx^{-1}$, we have
+\[
+yx^{-l} = (yx^{-1})x^{1-l} = xyx^{1-l} = \cdots = x^{l}y
+\]
+by induction on $l$, so $l \ge 0$.
+If $y^{2} = e$ we also have
+\[
+yx^{l} = yx^{l}yy = yyx^{-l}y = x^{-l}y
+\]
+In summary, if $y^{2} = e$ then $yx^{l} = x^{-l}y$ for any $l \in \mathbb{Z}$.
+
+\begin{lemma}
+    Let a group $G$ and $a,b \in G$ such that
+    \begin{compactenum}[(i)]
+    \item $a^{n} = e$ for some $n \ge 3$,
+    \item $b^{2} = e$,
+    \item $ab = ba^{-1}$.
+    \end{compactenum}
+    We have $\phi : D_{2n} \to G$ defined by $\phi(r^{k}) = a^{k}$, $\phi(r^{k}s) = a^{k}b$
+    is an isomorphism.
+\end{lemma}
+\begin{proof}
+    We need to check four case:
+    \begin{compactenum}
+    \item $\phi(r^{k})\phi(r^{l}) = a^{k}a^{l} = a^{k+l} = a^{k+_nl} = \phi(r^{k+l})$
+    \item $\phi(r^{k})\phi(r^{l}s) = a^{k}a^{l}b = a^{k+_nl}b = \phi(r^{k+l}s) = \phi(r^{k}r^{l}s)$
+    \item $\phi(r^{k}s)\phi(r^{l}) = a^{k}ba^{l} = a^{k}a^{-l}b = \phi(r^{k}r^{-l}s)= \phi(r^{k}br^{l})$
+    \item $\phi(r^{k}s)\phi(r^{l}s) = a^{k}ba^{l}b = a^{k}a^{-l}bb = \phi(r^{k}r^{-l})= \phi(r^{k}sr^{l}s)$
+    \end{compactenum}
+    So $\phi$ is a homomorphism.
+\end{proof}
+
+\begin{prop}
+    Suppose group $G$ is generated by $\{a,b\}$ such that
+    \begin{compactenum}[(i)]
+    \item $a^{n} = e$ for some $n \ge 3$,
+    \item $b^{2} = e$,
+    \item $ab = ba^{-1}$.
+    \item $|G| = 2n$.
+    \end{compactenum}
+    Then $G \cong D_{2n}$.
+\end{prop}
+\begin{proof}
+    By the lemma there is $\phi$ is an homomorphism.
+    $\phi$ is surjective since $\{a,b\}$ generates,
+    but $|D_{2n}| = |G|$ so $\phi$ is a bijection
+    and an isomorphism.
+\end{proof}
+
 \appendix
 \newpage
 
-\section{Notation}
+\section{Appendix: Notation}
 Let $X$ a set, then we denote the identity map on $X$,
 $\id X : X \to X$, defined by $\id X(x) = x$.
 
@@ -489,7 +892,7 @@ for a group, we will abuse notation and simply write $G$ for the group.
 We will then write $e_{G}$ and $\cdot_{G}$ for the operations of the group
 if it is important that they correspond to the group $G$.
 
-\section{Proof of \autoref{thm:right_is_left}}
+\section{Appendix: Proof of \autoref{thm:right_is_left}}
 \label{sec:proof_of_right_is_left}
 \begin{proof}
     (i)

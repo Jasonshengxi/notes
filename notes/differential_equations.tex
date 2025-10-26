@@ -497,6 +497,466 @@ which is trivial from substituting $\diff ft$.
 
 \subsection{Applications of the Multivariate Chain Rule}
 
+\subsubsection*{Change of Coordinates}
+
+Is it often useful to rewrite differential equations
+in a different coordinate system.
+For example converting cartesian $(x,y)$ to 
+polar $(r,\theta )$ in order to exploit circular symmetry.
+
+To rewrite a function $f(x,y)$ into $(r,\theta)$,
+consider functions $x(r,\theta)$ and $y(r,\theta)$
+which specify the method of coordinate change.
+substitute those to produce $f(x(r,\theta),y(r,\theta ))$.
+differentiate this using the multivariate chain rule,
+we have
+\[
+    \left.\diffp{f}{r}\right|_{\theta } = \left.\diffp{f}{x}\right|_{y}\left.\diffp{x}{r}\right|_{\theta }
+                + \left.\diffp{f}{y}\right|_{x}\left.\diffp{y}{r}\right|_{\theta }
+\]
+Similarly,
+\[
+    \left.\diffp{f}{\theta }\right|_{r} = \left.\diffp{f}{x}\right|_{y}\left.\diffp{x}{\theta }\right|_{r}
+                + \left.\diffp{f}{y}\right|_{x}\left.\diffp{y}{\theta }\right|_{r}
+\]
+
+\subsubsection*{Implicit Differentiation}
+
+For $f(x,y,z)$,
+\[
+\di f = \left.\diffp{f}{x}\right|_{y,z} \di x + \left.\diffp{f}{y}\right|_{x,z} \di y + \left.\diffp{f}{z}\right|_{x,y} \di z
+\]
+Consider the equation $f(x,y,z) = \text{const}$,
+which defines a surface in 3D space.
+This implicitly defines functions
+$z = z(x,y)$, $x = x(y,z)$, $y = y(x,z)$,
+which are solutions of the surface.
+It may be considerably difficult to find those functions however.
+Implicit differentiation can be used to find the
+derivatives of those functions with comparably
+little effort.
+
+For example, take $f(x,y,z) = xy + y^{2}z+ z^{5}$, and $f(x,y,z) = 1$.
+\[
+    \left.\diffp{f}{x}\right|_{y} = y + y^{2}\left.\diffp{z}{x}\right|_{y} + 5z^{4}\left.\diffp{z}{x}\right|_{y} = 0
+\]
+Notice that in this case, $z$ is not held constant in the partial derivative.
+Rearranging yields
+\[
+\left.\diffp{z}{x}\right|_{y} = -\frac{y}{y^{2} + 5z^{4}}
+\]
+In general, for $f(x,y,z) = \text{const}$, we have
+\[
+    0 = \di f = \left.\diffp{f}{x}\right|_{y,z}\di x + \left.\diffp{f}{y}\right|_{x,z}\di y + \left.\diffp{f}{z}\right|_{x,y}\di z
+\]
+which shows a dependence between $\di x, \di y, \di z$.
+Thus, in general, we can differentiate wrt $x$ holding $y$ constant to get
+\[
+0 = \left.\diffp{f}{x}\right|_{y} = \left.\diffp{f}{x}\right|_{y,z}\left.\diffp{x}{x}\right|_{y}
+            + \left.\diffp{f}{y}\right|_{x,z}\left.\diffp{y}{x}\right|_{y}
+                    +\left.\diffp{f}{z}\right|_{x,y}\left.\diffp{z}{x}\right|_{y}
+\]
+Simplifying terms, we have
+\[
+0 = \left.\diffp{f}{x}\right|_{y} = \left.\diffp{f}{x}\right|_{y,z}
+                    +\left.\diffp{f}{z}\right|_{x,y}\left.\diffp{z}{x}\right|_{y}
+\]
+Thus,
+\[
+    \diffpc{z}{x}{y} = -\frac{\diffpc{f}{x}{y,z}}{\diffpc{f}{z}{x,y}}
+\]
+Notice that using this equation for $\diffpc{x}{y}{z}$ and $\diffpc{y}{z}{x}$
+yields
+\[
+\diffpc{x}{y}{z}\diffpc{y}{z}{x}\diffpc{z}{x}{y} = -1
+\]
+
+\subsubsection*{Reciprocal Rule}
+
+Consider the reciprocal rule:
+\[
+\diff yx = \left(\diff xy\right)^{-1}
+\]
+In partial derivatives, it applies if the same variables are held fixed.
+\[
+\diffpc{x}{z}{y} = -\frac{\diffpc{f}{z}{x,y}}{\diffpc{f}{x}{y,z}}.
+\]
+Similarly,
+\[
+\diffpc{z}{x}{y} = -\frac{\diffpc{f}{x}{y,z}}{\diffpc{f}{z}{x,y}}.
+\]
+Thus,
+\[
+\diffpc{z}{x}{y} = \frac{1}{\diffpc{x}{z}{y}}.
+\]
+
+\subsection{Differentiating integrals wrt a parameter}
+
+Consider a family of functions $f(x;c)$. Define
+\[
+    I(c) = \int_{a(c)}^{b(c)} f(x;c) \di x
+\]
+and now we wish to compute $\diff Ic$.
+We claim
+\begin{theorem}
+    \[
+    \diff Ic = 
+    \int_{a(c)}^{b(c)}\diffp fc (x;c) \di x
+    + f(b(c);c)\diff bc
+    - f(a(c);c)\diff ac
+    \]
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        \diff Ic 
+        &= \lim_{\delta c \to 0}\frac{1}{\delta c}
+        \left[
+            \int_{a(c+\delta c}^{b(c+\delta c)} f(x;c+\delta c) \di x
+        - \int_{a(c)}^{b(c)} f(x;c) \di x
+        \right]\\
+        &= \lim_{\delta c \to 0}\frac{1}{\delta c}
+        \left[
+            \int_{a(c)}^{b(c)} f(x;c+\delta c) \di x
+            +\int_{b(c)}^{b(c+\delta c)} \cdots \di x
+            -\int_{a(c)}^{a(c+\delta c)} \cdots \di x
+            - \int_{a(c)}^{b(c)} f(x;c) \di x
+        \right]\\
+        &= \lim_{\delta c \to 0}\frac{1}{\delta c}
+        \left[
+            \int_{a(c)}^{b(c)} f(x;c+\delta c)
+            - f(x;c) \di x
+            +\int_{b(c)}^{b(c+\delta c)} \cdots \di x
+            -\int_{a(c)}^{a(c+\delta c)} \cdots \di x
+        \right]\\
+        &= 
+            \int_{a(c)}^{b(c)} \diffp fc (x;c) \di x
+        + \lim_{\delta c \to 0}\frac{1}{\delta c}
+        \left[
+            \int_{b(c)}^{b(c+\delta c)} f(x;c+\delta c) \di x
+            -\int_{a(c)}^{a(c+\delta c)} f(x;c+\delta c) \di x
+        \right]\\
+        &= 
+        \cdots
+        + \lim_{\delta c \to 0}\frac{1}{\delta c}
+        \left[
+            \biggl(b(c+\delta c) - b(c)\biggr)f(\bar x ; c + \delta c)
+            -\int_{a(c)}^{a(c+\delta c)} f(x;c+\delta c) \di x
+        \right]\\
+        &= 
+        \int_{a(c)}^{b(c)} \diffp fc (x;c) \di x
+        + \diff bc f(b(c); c)
+        - \lim_{\delta c \to 0}\frac{1}{\delta c}
+        \left[
+            \int_{a(c)}^{a(c+\delta c)} f(x;c+\delta c) \di x
+        \right]\\
+        &= 
+        \int_{a(c)}^{b(c)} \diffp fc (x;c) \di x
+        + \diff bc f(b(c); c)
+        - \diff ac f(a(c); c)
+    \end{align*}
+    where $\bar x$ denotes a value
+    obtained from the mean value theorem, with $b(c) \le \bar x \le b(c + \delta c)$.
+    another usage of similar variable has been ommitted.
+\end{proof}
+
+This theorem can be used as a trick to evaluate certain expressions. Let
+\[
+I(\lambda ) = \int_{0}^{\lambda }e^{-\lambda x^{2}}\di x,
+\]
+then we have
+\[
+\diff I\lambda = \int_{0}^{\lambda }-x^{2}e^{-\lambda x^{2}}\di x + e^{-\lambda ^{3}}
+\]
+For a more useful expression, consider $J_n = \displaystyle\int_{0}^{\infty}x^{n}e^{-x}\di x$.
+Let
+\[
+I(\lambda ) = \int_{0}^{\infty}e^{-\lambda x}\di x = \frac{1}{\lambda }.
+\]
+Then we have
+\[
+    \diff[n]I\lambda = \int_{0}^{\infty} (-x)^{n}e^{-\lambda x}\di x 
+    = \frac{(-1)^{n} n!}{\lambda ^{n+1}}
+\]
+If we set $\lambda =1$, then
+\begin{align*}
+    (-1)^{n}J_n &= (-1)^{n} n!\\
+    J_n &= n!
+\end{align*}
+which one may notice gives a continuous definition of the factorial.
+
+\section{First Order Linear Differential Equations}
+
+Terminology:
+\begin{compactenum}[(i)]
+\item An $n$th order differential equation has highest order derivative $n$.
+\item A \emph{linear} differential equation has dependent variable appearing linearly.
+\item \emph{Ordinary} differential equations only involve functions of one variable.
+\end{compactenum}
+
+\subsection{Prelude : Exponential Function}
+
+\begin{definition}
+    The exponential function is defined by
+    \[
+    \exp(x) = \sum_{n=0}^{\infty} \frac{1}{n!}x^{n}
+    \]
+\end{definition}
+Note that it can be equivalently written,
+\[
+\exp(x) = \lim_{k\to\infty}\left(1+\frac{x}{k}\right)^{k}
+\]
+by the binomial theorem.
+
+From the definition, it is trivially true that $\diff {}x \exp(x) = \exp(x)$.
+In fact, it is equivalent to define $\exp$ by the unique function such that
+\[
+\diff fx = f
+\]
+with boundary condition $f(0) = 1$.
+Under these definitions, we have $\exp(x_{1})\exp(x_{2}) = \exp(x_{1}+x_{2})$.
+With this property, it is more reasonable to write $e^{x} = \exp(x)$.
+
+We define the inverse function $\ln$ by $\exp(\ln x) = x$.
+It follows that $a^{x} = (e^{\ln a})^{x} = \exp(x\ln a)$,
+which makes it easy to differentiate exponentials.
+
+\begin{definition}
+    An \emph{eigenfunction} of the derivative operator
+    is a function that is unchanged, up to multiplicative
+    scaling by the \emph{eigenvalue}, under the action of operator.
+\end{definition}
+
+In other words, If $f$ is an eigenfunction of the derivative operator,
+\[
+    \diff{}x f(x) = \lambda f(x)
+\]
+and $\lambda$ is the eigenvalue.
+
+This, we have $\exp(\lambda x)$ as eigenfunctions of the derivative operator.
+
+\subsection{First-order Linear ODEs}
+
+We have that any $n$th order linear ODE has $n$
+linearly independent solutions. 
+This will not be proven here.
+
+A homogeneous ODE is one in which
+all terms involve the dependent variable
+or its derivative.
+This implies that $y=0$ is a trivial solution.
+
+\subsubsection{Homogeneous Linear ODEs with constant coefficients}
+
+Constant coefficients are coefficients where the independent variables
+(often $x$ or $t$) does not appear explicitly.
+
+Solutions of linear homogeneous ODEs with constant coefficients
+for any order are of the form $e^{\lambda x}$.
+
+For example, consider
+\[
+5\diff yx - 3y = 0
+\]
+This has constant coeffs since $5$ and $3$ do not involve $x$.
+We can simply let $y = Ae^{\lambda x}$, with $y=A\lambda e^{\lambda x}$,
+\[
+5\lambda Ae^{\lambda x} - 3A e^{\lambda x} = 0
+\]
+Since $e^{\lambda x}$ is non-zero and $A=0$ yields
+the trivial solution, we have $5\lambda - 3 = 0$, so $\lambda = 3/5$.
+Thus,
+\[
+y = Ae^{3x/5}
+\]
+We call this the general solution, 
+and we call $5\lambda - 3 = 0$ the \emph{characteristic equation}.
+
+To generate a unique solution we require boundary conditions
+or initial conditions.
+In general, $n$ of these conditions are needed for $n$th order ODEs.
+
+\subsubsection*{Discrete Equations}
+
+It is sometimes useful to consider functions
+evaluated at discrete points.
+
+Consider again $5y' - 3y = 0$, where $y(0) = y_{0}$.
+We can approximate the equation by discrete form at $\{x_n\}$
+where $x_n = nh$.
+\[
+    \diffc yx{x_n} \approx \frac{y_{n+1}-y_n}{h}
+\]
+Where $y_n = f(x_n)$. This is known as the \emph{Forward Euler scheme}.
+If we simply substitute this into the equation, we have
+\begin{align*}
+    5\left(\frac{y_{n+1}-y_n}{h}\right) - 3y_n &= 0\\
+    y_{n+1} &= \left(1 + \frac{3}{5} h\right)y_n
+\end{align*}
+This is a recurrence relation for $y_n$.
+In this case, we can notice that every step multiplies
+by a constant $1 + 3h/5$, so
+\[
+y_n = \left(1 + \frac{3}{5}h\right)^{n} y_0
+\]
+We know that $h = x_n/n$, so
+\[
+y_n = \left(1 + \frac{3x_n}{5n}\right)^{n} y_0
+\]
+Now take $x_n = x$ as $n \to \infty$. We have
+\begin{align*}
+\lim_{n\to\infty} y_n 
+&= \lim_{n\to\infty} y_{0}\left(1+ \frac{3x}{5} \frac{1}{n}\right)^{n}\\
+&= y_{0}\exp(3x/5)
+\end{align*}
+Which agrees with our original result.
+
+\subsubsection*{Series Solutions}
+
+We will look for a solution in the form of a power series,
+\[
+y(x) = \sum_{n=0}^{\infty} a_n x^{n}.
+\]
+Let's examine $5y' - 3y = 0$ again. We have that
+\begin{align*}
+    y'(x) &= \sum_{n=0}^{\infty}a_n n x^{n-1} = \sum_{n=1}^{\infty}a_n n x^{n-1}\\
+    xy'(x) &= \sum_{n=1}^{\infty} a_n n x^{n}\\
+    xy(x) &= \sum_{n=0}^{\infty} a_n x^{n+1} = \sum_{n=1}^{\infty} a_{n-1} x^{n}
+\end{align*}
+Multiplying our equation by $x$, we have
+\begin{align*}
+    5xy' - 3xy &= 0\\
+    \sum_{n=1}^{\infty}(5na_n - 3a_{n-1})x^{n}&=0\\
+    5na_n - 3a_{n-1} &= 0\\
+    a_n = \frac{3}{5n}a_{n-1}
+\end{align*}
+Which is a recurrence relation where $n\ge1$.
+In this case, it solves to
+\[
+a_n = \left(\frac{3}{5}\right)^{n} \frac{a_0}{n!}
+\]
+Which yields
+\begin{align*}
+    y(x) 
+    &= \sum_{n=0}^{\infty} \frac{a_0}{n!} \left(\frac{3x}{5}\right)^{n}\\
+    &= a_0 \exp(3x/5)
+\end{align*}
+which is indeed the same solution.
+
+\subsubsection{Forced (Non-Homogeneous) ODEs}
+
+Recall that homogeneous means all terms involve 
+the dependent variable or its derivative,
+a forced ODE has terms with no dependence on 
+the dependent variable or its derivatives.
+Thus, $y=0$ is no longer a trivial solution.
+
+To solve a forced ODE, do the whole
+particular integral complementary function thing.
+The method is general for \emph{linear} forced ODEs.
+
+\subsubsection*{Constant Forcing}
+
+A forced ODE is constant forced if it only
+has constant terms making it forced.
+Those terms are called ``constant forcing terms''.
+Take
+\[
+5y'-3y=10.
+\]
+Then, $10$ is the constant forcing term.
+These equations are easy since $y_p = -10/3$ and $y_c = A\exp(3x/5)$ so
+\[
+y(x) = Ae^{3x/5} - \frac{10}{3}
+\]
+Note that the initial conditions must be considered
+after the combination.
+
+\subsubsection*{Eigenfunction Forcing}
+
+The forcing term is an eigenfunction of the
+derivative operator, i.e. the exponential family.
+
+For example, consider three elements
+decaying $A \to B \to C$, with
+amounts $a(t),b(t),c(t)$ respectively,
+and let their decay rates be $k_a,k_b$.
+Then, specifically for $a$, we have
+\[
+\diff at = -k_a a
+\]
+so $a(t) = a_0 e^{-k_a t}$. Then
+\begin{align*}
+    \diff bt 
+    &= k_a a - k_b b\\
+    &= k_a a_0 e^{-k_a t} - k_b b\\
+    \diff bt + k_b b
+    &= \mathcolor{blue}{(k_a a_{0}) e^{-k_a t}}
+\end{align*}
+This ODE is an eigenfunction forced equation,
+and the term in blue is the eigenfunction forcing term.
+Solve this by guessing the correct function (an exponential).
+
+In this case, we get
+\[
+b_p(t) = \frac{k_a a_{0}}{k_b - k_a} e^{-k_a t}
+\]
+Note that $k_a \ne k_b$. Combining with the complementary function, we have
+\[
+b(t) = De^{-k_b t} + \frac{k_a}{k_b - k_a} a_{0} e^{-k_a t}
+\]
+To demonstrate an initial condition, let $b(0) = 0$. Then
+\[
+b(t) = \frac{k_a a_{0}}{k_b - k_a}\left(e^{-k_a t}-e^{-k_b t}\right)
+\]
+The $k_a = k_b$ case requires a different $b_p$.
+
+\subsubsection{Non-Constant Coefficients}
+
+The general form of the first order linear form may look like 
+\[
+    a(x) \diff yx + b(x) y = c(x).
+\]
+The standard form is
+\[
+\diff yx + p(x) y = f(x).
+\]
+This is of course solved with the integrating factor.
+We simply let $\mu(x)$, then multiply by $\mu$, giving
+\[
+\mu y' + (\mu p) y = \mu f
+\]
+So if $\mu' = \mu p$, then $\mu y' + \mu p y = \mu y' + \mu' y = (\mu y)' = \mu f$,
+and that becomes solvable. Thus, we solve for
+\begin{align*}
+    \frac{1}{\mu}\diff \mu x &= p\\
+    \ln\mu &= \int p \di x\\
+    \mu &= \exp\left(\int p \di x\right)
+\end{align*}
+Then we have
+\[
+y = \frac{1}{\mu}\int \mu f \di x.
+\]
+Armed with this, we can go back to the radioactive decay,
+whose core is this equation:
+\[
+\diff bt + k_b b = k_a a_{0}e^{-k_a t}
+\]
+The integrating factor is $\mu = e^{k_b t}$, so
+\[
+    \diff{}t \left(e^{k_b t}b\right) = k_a a_{0} e^{(k_b - k_a)t}
+\]
+The reveals more clearly the difference when $k_a = k_b$. If so, then
+\begin{align*}
+    \diff{}t (e^{k_b t}b) &= k_a a_{0}\\
+    e^{k_b t}b &= k_a a_{0}t + C\\
+\end{align*}
+Thus we have
+\[
+b(t) = k_a a_{0} t e^{-k_b t} + C e^{-k_b t}
+\]
+The difference being that the particular integral
+has an extra $t$.
+
 
 \appendix
 

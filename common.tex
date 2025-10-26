@@ -1,4 +1,5 @@
 \usepackage[left = 1in, right = 1in, top = 1in, bottom = 1in]{geometry}
+\usepackage{mathtools}
 \usepackage{textcomp}
 \usepackage{gensymb}
 \usepackage{paralist}
@@ -13,6 +14,7 @@
 \usepackage{parskip}
 \usepackage{accents}
 \usepackage{xcolor}
+\usepackage{centernot}
 
 \usetikzlibrary{arrows.meta,positioning}
 
@@ -27,14 +29,16 @@
   {} % Theorem head spec
 \theoremstyle{customstyle}
 \newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
 \newtheorem{exercise}{Exercise}[section]
 \newtheorem{claim}[theorem]{Claim}
+\newtheorem*{claim*}{Claim}
 \newtheorem{prop}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{question}{Question}
-\newtheorem{subquestion}{Part}[question]
+\newtheorem{subquestion}{Question}[question]
 
 \def\definitionautorefname{Definition}
 \def\corollaryautorefname{Corollary}
@@ -43,26 +47,43 @@
 
 \def\contra{\tikz[baseline, x=0.22em, y=0.22em, line width=0.032em]\draw (0,2.83)--(2.83,0) (0.71,3.54)--(3.54,0.71) (0,0.71)--(2.83,3.54) (0.71,0)--(3.54,2.83);}
 \newenvironment{answer}{\par\noindent\textit{Answer.}}{\par}
+% \newcommand{\answer}{\par\noindent\textit{Answer.}}
 
 \renewcommand{\CancelColor}{\color{red}}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
-\renewcommand{\bar}{\overline}
+% \renewcommand{\bar}{\overline}
 % \renewcommand{\vec}[1]{\undertilde{\mathrm{#1}}}
 % \renewcommand{\vec}[1]{\undertilde{#1}}
 % \renewcommand{\vec}[1]{\underline{#1}}
 \renewcommand{\vec}[1]{\mathbf{#1}}
 \newcommand{\unitvec}[1]{\hat{\vec{#1}}}
 \newcommand{\sol}{$\operatorname{sol}^{\simeq}$}
-\newcommand{\Arg}{\operatorname{Arg}}
-\newcommand{\Log}{\operatorname{Log}}
-\newcommand{\vecspan}{\operatorname{span}}
 \newcommand{\id}[1]{\operatorname{id}_{#1}}
-\newcommand{\indic}[1]{i_{#1}}
-\newcommand{\Sym}{\operatorname{Sym}}
-\newcommand{\Isom}{\operatorname{Isom}}
-\newcommand{\di}{\mathrm{d}}
+% \newcommand{\indic}[1]{i_{#1}}
+\newcommand{\indic}[1]{i[#1]}
+\newcommand{\di}{\ \mathrm{d}}
 \newcommand{\gen}[1]{\langle{#1}\rangle}
+\newcommand{\diffpc}[3]{\left.\diffp{#1}{#2}\right|_{#3}}
+\newcommand{\diffc}[3]{\left.\diff{#1}{#2}\right|_{#3}}
+\newcommand{\symmdif}{\mathbin{\triangle}}
+% \renewcommand{\not}{\centernot}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\vecof}[1]{\overrightarrow{#1}}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\inner}[2]{\left( #1 , #2 \right)}
+
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\Ln}{Ln}
+\DeclareMathOperator{\Arg}{Arg}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\vecspan}{span}
+\DeclareMathOperator{\im}{im}
+
+\DeclareMathOperator{\csch}{csch}
 
 \definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
 \definecolor{ufogreen}{rgb}{0.24, 0.82, 0.44}

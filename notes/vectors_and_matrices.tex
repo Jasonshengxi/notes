@@ -530,4 +530,532 @@ vector area of the parallelogram defined by
 $\vec{0}$, $\vec{a}$, $\vec{a}+\vec{b}$, and $\vec{b}$,
 since $|\vec{a}\times\vec{b}| = |\vec{a}||\vec{b}|\sin\theta $.
 
+Note that in the special case of $\vec{a}$ and $\vec{x}$ such that
+$\vec{a} \perp \vec{x}$, $\vec{a} \times \vec{x}$
+yields a vector that has length $|\vec{x}||\vec{a}|$ and
+is the rotation of $\vec{x}$ by $\pi/2$ in the plane 
+defined by $\vec{a}$.
+
+We have that $\vec{e}_i \times \vec{e}_j = x\vec{e}_k$ where $x = \epsilon_{ijk}$.
+Note that suffix notation here is not being used for summation.
+Under these definitions and the fact that
+cross product is linear, we can show that
+\begin{align*}
+    \vec{a} \times \vec{b} &= (a_{2}b_{3} - a_{3}b_{2})\vec{e}_1 \\
+                           &+ (a_{3}b_{1} - a_{1}b_{3})\vec{e}_2 \\
+                           &+ (a_{1}b_{2} - a_{2}b_{1})\vec{e}_3
+\end{align*}
+which is the algebraic definition of cross product in $\mathbb{R}^{3}$.
+An equivalent formulation is
+\[
+\vec{a} \times \vec{b} = \left|\begin{matrix}
+    \vec{i} & \vec{j} & \vec{k}\\
+    a_{1} & a_{2} & a_{3}\\
+    b_{1} & b_{2} & b_{3}
+\end{matrix}\right|
+\]
+\subsection{Triple Products}
+
+\subsubsection{Scalar Triple Product}
+
+Define the scalar triple product by 
+$[\vec{a},\vec{b},\vec{c}] = \vec{a} \cdot (\vec{b} \times \vec{c})$.
+Note that because of the use of the cross product, 
+this only applies in $\mathbb{R}^{3}$.
+The value of the scalar triple product is invariant under
+a cyclic permutation and negates under an anticyclic permutation.
+
+Note that this product can be interpreted
+as the signed volume of parallelepiped formed by the three vectors
+$\vec{a},\vec{b},\vec{c}$.
+The sign is determined by the handedness of the vector set.
+By convention, if $\vec{a},\vec{b},\vec{c}$ are right-handed,
+we have $[\vec{a},\vec{b},\vec{c}] > 0$.
+
+Also, $[\vec{a},\vec{b},\vec{c}] = 0$ iff $\vec{a},\vec{b},\vec{c}$
+are coplanar.
+
+\subsubsection{Vector Triple Product}
+
+We define the vector triple product to be $\vec{a}\times(\vec{b}\times\vec{c})$.
+Note that since the cross product is not associative, the brackets matter.
+
+We have that 
+$\vec{a} \times (\vec{b} \times \vec{c}) = 
+(\vec{a} \cdot \vec{c})\vec{b} - (\vec{a} \cdot \vec{b})\vec{c}$.
+
+\subsection{Lines, Planes, and Vector Equations}
+
+\subsubsection{Lines}
+
+Any point on a line through $\vec{a}$ with direction $\vec{u} \ne 0$ has position vector
+\[
+    \vec{r} = \vec{a} + \lambda \vec{u}
+\]
+where $\lambda \in \mathbb{R}$.
+Without parameters, we can also write
+\[
+\vec{u} \times (\vec{r} - \vec{a}) = \vec{0}
+\]
+or
+\[
+\vec{u} \times \vec{r} = \vec{u} \times \vec{a}
+\]
+
+\subsubsection{Planes}
+
+Any point on a plane through $\vec{a}$
+defined by directions $\vec{u}$ and $\vec{v}$ has position vector
+\[
+\vec{r} = \vec{a} + \lambda \vec{u} + \mu \vec{v}
+\]
+where $\lambda ,\mu \in \mathbb{R}$. In this case, we can also write
+\[
+\vec{r} \cdot (\vec{u} \times \vec{v}) = \vec{a} \cdot (\vec{u} \times \vec{v})
+\]
+
+\subsubsection*{Shortest Distance Between Two Lines}
+Consider two lines
+\begin{align*}
+    l_{1} : \vec{u}_1 \times (\vec{r} - \vec{a}_1) &= \vec{0}\\
+    l_{2} : \vec{u}_2 \times (\vec{r} - \vec{a}_2) &= \vec{0}
+\end{align*}
+The shortest distance between $l_{1}$ and $l_{2}$ is
+obtained at a line perpendicular to both of them.
+Thus, it must be parallel to $l_{1} \times l_{2}$.
+
+The shortest distance is then computed by projecting
+$\vec{a}_1 - \vec{a}_2$ onto $\vec{u}_1 \times \vec{u}_2$, namely
+\[
+s = \left|(\vec{a}_1 - \vec{a}_2) \cdot \frac{\vec{u}_1 \times \vec{u}_2}{|\vec{u}_1 \times \vec{u}_2|}\right|
+\]
+\subsubsection{Vector Equations}
+
+If we wish to solve equations of the form
+\begin{equation}
+\vec{r} + \vec{a} \times (\vec{b} \times \vec{r}) = \vec{c}
+\end{equation}
+for $\vec{r}$ given vectors $\vec{a},\vec{b},\vec{c}$.
+We can apply the identity $\vec{a} \times (\vec{b} \times \vec{r}) 
+= (\vec{a} \cdot \vec{r}) \vec{b} - (\vec{a} \cdot \vec{b})\vec{r}$ to (1), yielding
+\begin{equation}
+\vec{r} + (\vec{a} \cdot \vec{r}) \vec{b} - (\vec{a} \cdot \vec{b}) \vec{r} = \vec{c}.
+\end{equation}
+Taking the product of (2) with $\vec{a}$,
+\[
+\vec{a} \cdot \vec{r} + (\vec{a} \cdot \vec{r})(\vec{a} \cdot \vec{b}) 
+- (\vec{a} \cdot \vec{b})(\vec{a} \cdot \vec{r}) = \vec{a} \cdot \vec{c}.
+\]
+noticing the duplicate term we have
+\[
+\vec{a}\cdot\vec{r} = \vec{a}\cdot\vec{c}
+\]
+so we can substitute this back into (2) to yield
+\begin{align*}
+    \vec{r} + (\vec{a}\cdot\vec{c})\vec{b} - (\vec{a}\cdot\vec{b})\vec{r} &= \vec{c}\\
+    \vec{r}(1 - (\vec{a} \cdot \vec{b})) &= \vec{c} - (\vec{a} \cdot \vec{c})\vec{b}
+\end{align*}
+We wish to divide, so casework must be done. If $\vec{a} \cdot \vec{b} \ne 1$, then
+\[
+\vec{r} = \frac{\vec{c} - (\vec{a}\cdot\vec{c})\vec{b}}{1 - \vec{a}\cdot\vec{b}}.
+\]
+Otherwise, $\vec{a} \cdot \vec{b} = 1$, then we have
+\[
+    \vec{0} = \vec{c} - (\vec{a}\cdot\vec{c})\vec{b}
+\]
+so if $\vec{c} - (\vec{a}\cdot\vec{c})\vec{b} \ne \vec{0}$ then there are no solutions,
+and otherwise we require $\vec{a}\cdot\vec{r} = \vec{a}\cdot\vec{c}$,
+which is a plane with $\vec{a}$ as a normal vector.
+
+\subsection{Index Notation \& Summation Notation}
+
+Consider an orthonormal right-handed basis $\{\vec{e}_1,\vec{e}_2,\vec{e}_3\}$.
+We write vectors in terms of coordinates in this basis.
+
+We let $i,j,k$ be indices with values from $1,2,3$.
+
+\subsubsection*{Kronecker Delta}
+
+\begin{definition}
+    We define the Kronecker delta by
+    \[
+        \delta_{ij} = \begin{cases}
+            1 & \text{if } i = j\\
+            0 & \text{if } i \ne j\\
+        \end{cases}
+    \]
+\end{definition}
+
+Note that it is symmetric, as in $\delta_{ij} = \delta_{ji}$. Now we can write
+\[
+    \vec{e}_i \cdot \vec{e}_j = \delta_{ij}
+\]
+since $\{\vec{e}_1, \vec{e}_2, \vec{e}_3\}$ are orthonormal bases.
+
+\subsubsection*{Levi-Civita Epsilon}
+\begin{definition}
+    We define the Levi-Civita epsilon by
+    \[
+        \varepsilon_{ijk} = \begin{cases}
+            1 & \text{if } (i,j,k) \text{ is an even permutation of } (1,2,3)\\
+            -1 & \text{if } (i,j,k) \text{ is an odd permutation of } (1,2,3)\\
+            0 & \text{otherwise}
+        \end{cases}
+    \]
+\end{definition}
+In this case (3D), even permutations are cyclic permutations,
+and odd permutations are anticyclic permutations. So we have:
+\begin{align*}
+    \varepsilon_{123} = \varepsilon_{231} = \varepsilon_{312} = 1\\
+    \varepsilon_{321} = \varepsilon_{213} = \varepsilon_{132} = -1\\
+\end{align*}
+Note that it is antisymmetric between any two parameters. 
+Its significance appears in a definition of the cross product:
+\[
+    \vec{e}_i \times \vec{e}_j = \sum_{k=1}^{3}\varepsilon _{ijk} \vec{e}_k
+\]
+Thus, by decomposing vectors into components along the bases, we have
+\[
+    \vec{a} \times \vec{b} = \sum_{i,j,k=1}^{3}\varepsilon _{ijk} a_i b_j \vec{e}_k
+\]
+
+\subsubsection*{Einstein Summation Notation}
+
+Indices that appear exactly twice in a term are
+summed over all possible values, ommitting the sum.
+
+Examples:
+\begin{compactenum}[(i)]
+\item $a_i \delta_{ij} = a_j$
+\item $\vec{a} \cdot \vec{b} = a_i b_i$
+\item $(a \times b)_i = \varepsilon_{ijk}a_jb_k$
+\item $\vec{a} \cdot (\vec{b} \times \vec{c}) = \varepsilon _{ijk}a_ib_jc_k$
+\item $\delta _{ii} = \sum_{i=1}^{3}\delta_{ii} = 3$
+\end{compactenum}
+
+Rules:
+\begin{compactitem}
+\item If an index appears exactly once, it is a ``free index'',
+    since the value of the term depends on the value of the index.
+    We have that the same free indices must appear on 
+    both sides of the expression.
+\item If an index appears twice, then it is summed over. 
+    It is a ``contracted index''.
+\item No index appears more than twice in the same term.
+\end{compactitem}
+
+With this, we can now write down some identities:
+\begin{compactenum}[(i)]
+\item \begin{align*}
+        \varepsilon _{ijk}\varepsilon _{pqr} &= \delta_{ip}(\delta_{jq}\delta_{kr} - \delta_{jr}\delta_{kq})\\
+                                             &+ \delta_{iq}(\delta_{jr}\delta_{kp} - \delta_{jp}\delta_{kr})\\
+                                             &+ \delta_{ir}(\delta_{jp}\delta_{kq} - \delta_{jq}\delta_{kp})\\
+    \end{align*}
+\item in particular, $\varepsilon_{ijk}\varepsilon_{pqk} = \delta_{ip}\delta_{jq} - \delta _{iq}\delta _{jp}$
+\item in particular, $\varepsilon _{ijk}\varepsilon _{pjk} = 2\delta_{ip}$
+\item in particular, $\varepsilon_{ijk}\varepsilon_{ijk} = 6$.
+\end{compactenum}
+
+Now we have the machinary to prove the following:
+\[
+\vec{a} \times (\vec{b} \times \vec{c}) = (\vec{a} \cdot \vec{c})\vec{b} - (\vec{a} \cdot \vec{b})\vec{c}.
+\]
+\begin{proof}
+    \begin{align*}
+        [\vec{a} \times (\vec{b}\times\vec{c})]_i 
+        &= \varepsilon _{ijk}a_j(b \times c)_k\\
+        &= \varepsilon _{ijk} a_j \varepsilon _{kpq} b_p c_q\\
+        &= \varepsilon _{ijk}\varepsilon _{pqk} a_j b_p c_q\\
+        &= (\delta _{ip}\delta _{jq} - \delta _{iq}\delta _{jp}) a_j b_p c_q\\
+        &= \delta _{ip}\delta _{jq} a_j b_p c_q - \delta _{iq}\delta _{jp} a_j b_p c_q\\
+        &= a_j c_j b_i - a_j b_j c_i\\
+        [\vec{a} \times (\vec{b}\times\vec{c})]_i 
+        &= (\vec{a}\cdot\vec{c})b_i - (\vec{a}\cdot\vec{b})c_i\\
+        \vec{a} \times (\vec{b}\times\vec{c})
+        &= (\vec{a}\cdot\vec{c})\vec{b} - (\vec{a}\cdot\vec{b})\vec{c}
+    \end{align*}
+\end{proof}
+
+This can also be used for spherical trigonometry.
+
+\begin{prop}
+    $\vec{a},\vec{b},\vec{c} \in \mathbb{R}^{3}$, then
+    \[
+        (\vec{a}\times\vec{b})\cdot(\vec{b}\times\vec{c})
+        = (\vec{a}\cdot\vec{b})(\vec{b}\cdot\vec{c})
+        - (\vec{a}\cdot\vec{c})|\vec{b}|^{2}
+    \]
+\end{prop}
+\begin{proof}
+    \begin{align*}
+        (\vec{a}\times\vec{b})_i (\vec{b}\times\vec{c})_i
+        &= \varepsilon_{ijk}a_jb_k \varepsilon_{ipq}b_pc_q\\
+        &= \varepsilon_{ijk}\varepsilon_{ipq} a_jb_k b_pc_q\\
+        &= (\delta_{jp}\delta_{kq} - \delta_{jq}\delta_{pk}) a_jb_k b_pc_q\\
+        &= \delta_{jp}\delta_{kq}a_jb_k b_pc_q - \delta_{jq}\delta_{pk} a_jb_k b_pc_q\\
+        &= a_jb_kb_jc_k - a_jb_kb_kc_j\\
+        &= (a_jb_j)(b_kc_k) - (a_jc_j)(b_kb_k)\\
+        &= (\vec{a}\cdot\vec{b})(\vec{b}\cdot\vec{c}) - (\vec{a}\cdot\vec{c})|\vec{b}|^{2}
+    \end{align*}
+\end{proof}
+
+Let a unit sphere centered at the origin,
+and $A,B,C$ on the surface with position vectors $\vec{a},\vec{b},\vec{c}$.
+We define distance $\delta(A,B)$ to be the length of the
+shortest arc between $A$ and $B$.
+We let $\alpha = \angle BAC$ formed by these
+shortest length arcs.
+
+Since the sphere is unit, $\delta(A,B) = \angle AOB$ in radians,
+so we have $\vec{a}\cdot\vec{b} = \cos\delta(A,B)$.
+In the same way, $|\vec{a}\times\vec{b}| = \sin\delta(A,B)$.
+Now, we have
+\begin{align*}
+    \cos\alpha 
+    &= \frac{(\vec{a}\times\vec{b})\cdot(\vec{a}\times\vec{c})}{|\vec{a}\times\vec{b}||\vec{a}\times\vec{c}|}\\
+    &= \frac{(\vec{b}\cdot\vec{c})|\vec{a}|^{2} - (\vec{b}\cdot\vec{a})(\vec{a}\cdot\vec{c})}
+    {|\vec{a}\times\vec{b}||\vec{a}\times\vec{c}|}\\
+    \cos\alpha \sin\delta(A,B) \sin\delta(A,C)
+    &= \cos\delta(B,C) - \cos\delta(B,A)\cos\delta(A,C)\\
+    \cos\alpha
+    &= \frac{\cos a - \cos c \cos b}{\sin c \sin b}
+\end{align*}
+Which is cosine rule on a sphere.
+
+\subsubsection*{Spheres}
+
+A sphere in $\mathbb{R}^{3}$ with center $\vec{0}$ and radius $r > 0$
+is given by
+\[
+\Sigma = \{\vec{x} \in \mathbb{R}^{3} : |\vec{x}| = r\}.
+\]
+More generally, a hypersphere in $\mathbb{R}^{n}$ with center $\vec{a}$
+and radius $r > 0$ is given by
+\[
+\Sigma = \{\vec{x} \in \mathbb{R}^{n} : |\vec{x} - \vec{a}| = r\}.
+\]
+\subsection[R n]{$\mathbb{R}^{n}$}
+\[
+\mathbb{R}^{n} = \{\vec{x} = (x_{1},x_{2},\cdots,x_n) : x_i \in \mathbb{R}\}
+\]
+Addition and scalar multiplication are both by component.
+
+Things:
+\begin{compactenum}[(i)]
+\item The standard canonical basis is $(\vec{e}_i)_j = \delta_{ij}$.
+\item The inner product is defined by $\vec{x}\cdot\vec{y} = x_iy_i$.
+\item $\vec{e}_i \cdot \vec{e}_j = \delta_{ij}$
+\item $x_i = \vec{e}_i \cdot x$
+\item $\vec{x}\cdot\vec{y} = \delta_{ij}x_iy_j = x_iy_i$
+\item We can define an additional scalar product $[\vec{a},\vec{b}] = \varepsilon_{ij}a_ib_j = a_{1}b_{2}-a_{2}b_{1}$.
+    It represents the signed area of a parallelogram.
+    Comparably, the scalar triple product calculate the signed volume
+    of a parallelepiped.
+\end{compactenum}
+
+\subsection[C n]{$\mathbb{C}^{n}$}
+\[
+\mathbb{C}^{n} = \{\vec{z} = (z_{1},z_{2},\cdots,z_n) : z_j \in \mathbb{C}\}
+\]
+Addition and scalar multiplication are both by component.
+However, depending on the choice of scalar,
+the space can be different.
+
+If we select $\mathbb{R}$ as the scalar space,
+we generate $\mathbb{C}^{n}$ the real vector space.
+If we select $\mathbb{C}$ as the scalar space,
+then $\mathbb{C}^{n}$ is a complex vector space.
+
+The real vector space $\mathbb{C}^{n}$ standard
+canonical basis is composed of two parts:
+$(\vec{e}_j)_k = \delta_{jk}$ and 
+$(\vec{f}_j)_k = i\delta_{jk}$. 
+The basis is formed by the union of those two sets.
+Now, each $\vec{z}$ has coordinates $x_j,y_j$ such that
+\[
+\vec{z} = x_j \vec{e}_j + y_k \vec{f}_k.
+\]
+Thus, real vector space $\mathbb{C}^{n}$ is a $2n$ dimensional vector space
+
+The complex vector space $\mathbb{C}^{n}$
+no longer has $\vec{f}_j$ as part of its basis,
+since $\vec{f}_j = i \vec{e}_j$,
+and thus we have $\vec{z} = z_j \vec{e}_j$,
+and the space is $n$ dimensional.
+
+The inner product on $\mathbb{C}^{n}$ is defined by
+\[
+    (\vec{z},\vec{w}) = \conj z_j w_j
+\]
+Properties of the inner product:
+\begin{compactenum}[(i)]
+\item Hermitian: $(\vec{z},\vec{w}) = \conj{(\vec{w},\vec{z})}$.
+\item Linear / Anti-linear:
+    \begin{align*}
+        (\vec{z},\lambda\vec{w} + \lambda'\vec{w'}) 
+        &= \lambda(\vec{z},\vec{w}) + \lambda'(\vec{z},\vec{w'})\\
+        (\mu\vec{z}+\mu'\vec{z'},\vec{w}) 
+        &= \conj\mu(\vec{z},\vec{w}) + \conj\mu'(\vec{z'},\vec{w})
+    \end{align*}
+\item Positive definite: $(\vec{z},\vec{z}) = \conj z_j z_j \ge 0$.
+\item $(\vec{z},\vec{z}) = 0$ iff $\vec{z} = \vec{0}$.
+\end{compactenum}
+Thus, the norm $\abs{\vec{z}}^{2} = (\vec{z},\vec{z})$ is defined.
+Now we can also defined orthogonality in that $(\vec{z},\vec{w})=0$.
+Under these definitions, the standard basis for complex
+vector space $\mathbb{C}^{n}$ is orthonormal, since $(\vec{e}_j, \vec{e}_k) = \delta_{jk}$.
+
+\subsubsection{From complex to real inner products}
+
+For $n=1$, $z,w \in \mathbb{C}$, $(z,w) = \conj z w$.
+Now, we can write $z=a_{1}+ia_{2}$ and $w=b_{1}+ib_{2}$,
+and $\vec{a}=(a_{1},a_{2})$ and $\vec{b}=(b_{1},b_{2})$ are vectors in $\mathbb{R}^{2}$.
+Then, $(z,w) = \conj z w = \vec{a} \cdot \vec{b} + i[\vec{a},\vec{b}]$,
+where $[\vec{a},\vec{b}]$ is the alternative scalar product,
+given by the Levi-Civita epsilon.
+
+\subsection{Vector Spaces}
+
+\begin{definition}
+    Let $F$ a field, then
+    a \emph{vector space over $F$} is a collection of vectors $V$
+    with two operations: vector addition $V \times V \to V$ 
+    and scalar multiplication $F \times V \to V$,
+    satisfying the following axioms:
+    \begin{compactenum}
+    \item $V$ forms an abelian group under vector addition.
+    \item scalar multiplication distributes over vector addition on the left and the right.
+    \item $\lambda(\mu)\vec{a} = (\lambda\mu)\vec{a}$.
+    \item Let $1$ be the multiplicative identity in $F$. Then, $1\vec{a} = \vec{a}$.
+    \end{compactenum}
+\end{definition}
+
+A real vector space is a vector space over $\mathbb{R}$
+and a complex vector space is one over $\mathbb{C}$.
+
+\begin{definition}
+    Given a real vector space $\mathcal{V}$ and 
+    $\vec{v}_1,\cdots,\vec{v}_r \in V$,
+    we can write a \emph{linear combination}:
+    \[
+    \lambda_1 \vec{v}_1 + \cdots + \lambda_r \vec{v}_r \in \mathcal{V}
+    \]
+    for any $\lambda_i \in \mathbb{R}$.
+\end{definition}
+
+\begin{definition}
+    The \emph{span} of $\{\vec{v}_1,\cdots,\vec{v}_r\}$ is
+    the set of all the possible linear combinations
+    of $\{\vec{v}_1,\cdots,\vec{v}_r\}$.
+\end{definition}
+
+\begin{definition}
+    A \emph{subspace} of $\mathcal{V}$ is a $V' \subseteq V$ that forms
+    a vector space under the same field,
+    vector addition and scalar multiplication.
+\end{definition}
+
+Equivalently, a non-empty subset of $\mathcal{U} \subseteq \mathcal{V}$
+is a subspace if it satisfies that
+for every $\vec{v},\vec{w} \in \mathcal{U}$, 
+their linear combination is also in $\mathcal{U}$.
+In particular, for any $\vec{v}_{1},\cdots,\vec{v}_r \in \mathcal{V}$,
+their span is a subspace.
+
+We call the subspaces $\{\vec{0}\}$ and $\mathcal{V}$ of a vector
+space $\mathcal{V}$ the trivial subspaces.
+
+\subsubsection{Linear Independence and Dependence}
+
+Let $\mathcal{V}$ a real or complex vector space, and $\vec{v}_1,\cdots,\vec{v}_n \in \mathcal{V}$.
+Consider a linear combination $\lambda_i \vec{v}_i$.
+where $\lambda_i \in F$.
+
+\begin{definition}
+    A collection of vectors $\vec{v}_1,\cdots,\vec{v}_n \in \mathcal{V}$
+    are said to be \emph{linearly independent}
+    if $\lambda_i \vec{v}_i = \vec{0}$ implies that $\lambda_i = 0$ for all $i$.
+    Otherwise, they are said to be \emph{linearly dependent}.
+\end{definition}
+
+Examples:
+\begin{compactenum}[(i)]
+\item For example, $(0,1)$ and $(0,2)$ in $\mathbb{R}^{2}$ is linearly
+    dependent since $2\lambda (0,1) - \lambda (0,2) = \vec{0}$ for all $\lambda \in \mathbb{R}$.
+\item The canonical basis of $\mathbb{R}^{n}$ are linearly independent.
+\item Any set containing $\vec{0}$ is linearly dependent,
+    since the coefficient in front of $\vec{0}$ does not affect the result.
+\item In $\mathbb{R}^{3}$, $\vec{a},\vec{b},\vec{c}$ are linearly independent
+    iff $\vec{a}\cdot(\vec{b}\times\vec{c}) \ne 0$.
+\end{compactenum}
+
+\subsubsection{Inner Products}
+
+The inner product is a binary operation $V \times V \to F$.
+For $\vec{v},\vec{w} \in \mathcal{V}$, we denote their
+inner product by $\vec{v}\cdot\vec{w}$ or $(\vec{v},\vec{w})$.
+It must satisfy the following:
+\begin{compactenum}[(i)]
+\item Hermitian: $(\vec{v},\vec{w}) = \conj{(\vec{w},\vec{v})}$.\\
+    (Note that this becomes commutativity if $\mathcal{V}$ is a real vector space.)
+\item Linear / Anti-linear:
+    \begin{align*}
+        (\vec{z},\lambda\vec{w} + \lambda'\vec{w'}) 
+        &= \lambda(\vec{z},\vec{w}) + \lambda'(\vec{z},\vec{w'})\\
+        (\mu\vec{z}+\mu'\vec{z'},\vec{w}) 
+        &= \conj\mu(\vec{z},\vec{w}) + \conj\mu'(\vec{z'},\vec{w})
+    \end{align*}
+    (Note again that this becomes linearity on both sides if $\mathcal{V}$ is real.)
+\item Positive Definite: $(\vec{v},\vec{v}) \ge 0$, and equality iff $\vec{v} = \vec{0}$.
+\end{compactenum}
+
+From here, we can define a norm $\abs{\vec{v}}^{2} = (\vec{v},\vec{v})$, and
+orthogonality by $\vec{v}\cdot\vec{w} = 0$.
+
+\begin{prop}
+    If $\vec{v}_1,\cdots,\vec{v}_n$ are non-zero and orthogonal,
+    then they are linearly independent.
+\end{prop}
+\begin{proof}
+    Let $\alpha_i \vec{v}_i = \vec{0}$. Then,
+    \begin{align*}
+        \vec{0} = \inner{\vec{v}_j}{\alpha_i \vec{v}_i}
+        &= \alpha_i\inner{\vec{v}_j}{\vec{v}_i}\\
+        &= \alpha_i\inner{\vec{v}_i}{\vec{v}_i}\\
+        &= \alpha_i\abs{\vec{v}_i}^{2} = \vec{0}
+    \end{align*}
+    Thus, since $\vec{v}_i$ is non-zero, $\alpha_i = 0$.
+\end{proof}
+
+\subsubsection{Bases and Dimensions}
+
+Given a vector space $\mathcal{V}$, a basis is a set 
+$\mathcal{B} = \{\vec{e}_1,\cdots,\vec{e}_n\}$
+such that $\mathcal{B}$ spans $\mathcal{V}$, i.e. $\vecspan \mathcal{B} = \mathcal{V}$,
+and $\mathcal{B}$ is linearly independent.
+
+This implies that there is a unique way $v_i$
+to decompose $\vec{v} = v_i \vec{e}_i$.
+$v_i$ is called the \emph{components} of $\vec{v}$ wrt $\mathcal{B}$.
+
+\begin{theorem}
+    If $\{\vec{e}_1,\cdots,\vec{e}_n\}$ and $\{\vec{f}_i,\cdots,\vec{f}_m\}$
+    are bases for $\mathcal{V}$, then $n=m$.
+\end{theorem}
+
+This means that all bases for a given vector space
+have the same size, so we call this size $n$ the \emph{dimension} of the vector space.
+
+\begin{prop}
+    If $\mathcal{V}$ is a vector space of dimension $n$, then
+    \begin{compactenum}[(i)]
+    \item If $\mathcal{Y} = \{\vec{w}_1,\cdots,\vec{w}_m\}$ spans $\mathcal{V}$ and $m \ge n$,
+        we can remove vectors from $\mathcal{Y}$ to get a basis.
+    \item If $\mathcal{Z} = \{\vec{u}_1,\cdots,\vec{u}_k\}$ is linearly independent
+        then $k \le n$. In particular, if $k < n$,
+        vectors can be added to obtain a basis.
+    \end{compactenum}
+\end{prop}
+
 \end{document}
+
